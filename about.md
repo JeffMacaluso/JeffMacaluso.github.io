@@ -8,7 +8,7 @@ Welcome to my personal projects and thoughts - I hope you enjoy reading through 
 
 I focus on machine learning, statistics, data analysis, data visualization, and so on.  E.g. data science.  Python is my preferred language, but I also do a few things in R and sometimes play around in Julia.
 
-I'm an Austin native, I spend a lot of time with my dogs, and I like solving problems with data.
+I'm an Austin native, I spend a lot of time with my wife and dogs, and I like solving problems with data.
 
 Since this jekyll theme doesn't support other social media options in the footer, here's my [LinkedIn](https://linkedin.com/in/macalusojeff) profile.
 
