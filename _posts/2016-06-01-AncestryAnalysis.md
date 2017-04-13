@@ -4,7 +4,7 @@ title:  "Ancestry Analysis"
 date:   2016-06-01 21:04:11 -0500
 categories: jekyll update
 ---
-**Note**: Some images of this notebook did not render properly, so see the my [github post](https://github.com/JeffMacaluso/Blog/blob/master/AncestryAnalysis.ipynb) for the complete version.
+**Note**: Some images of this notebook did not render properly, so see the my [github post](http://nbviewer.jupyter.org/github/JeffMacaluso/Blog/blob/master/AncestryAnalysis.ipynb) for the complete version.
 
 # Introduction
 My wife and I are both interested in our genealogy and genealogical record, and subsequently have an [Ancestry account](www.ancestry.com). We both have family that reaches *really* far back (...in American terms), and have put in a lot of time into tracking and researching our ancestral records.  
