@@ -208,7 +208,7 @@ resPhos
 
 
 
-![TitleOfPicture](C:/Users/JeffM/Documents/GitHub/JeffMacaluso.github.io/_posts/LakePropertyVisualizations_files/LakePropertyVisualizations_7_1.png){:class="img-responsive"}
+![TitleOfPicture](https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/_posts/LakePropertyVisualizations_files/LakePropertyVisualizations_11_1.png){:class="img-responsive"}
 
 
 Examinining the remaining properties.  Beginning with setting up the other four categories for the "facet grid" by creating ggplot objects:
