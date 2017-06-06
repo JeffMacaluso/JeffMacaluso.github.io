@@ -4,7 +4,8 @@ title:  "Streaming Manhattan Traffic with Spark"
 date:   2017-01-05 21:04:11 -0500
 categories: jekyll update
 ---
-**Note**: Some images of this notebook did not render properly, so see the my [github post](http://nbviewer.jupyter.org/github/JeffMacaluso/Blog/blob/master/StreamingNYC/StreamingManhattanTraffic.ipynb) for the complete version.
+
+[Github link](http://github.com/JeffMacaluso/Blog/blob/master/StreamingNYC/StreamingManhattanTraffic.ipynb)
 
 # Introduction
 
