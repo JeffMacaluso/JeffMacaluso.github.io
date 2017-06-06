@@ -154,14 +154,14 @@ fig2 = ox.plot_graph(manhattan_projected, fig_height=4.5, node_size=0,
     Non-projected:
     
 
-
+<img src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/_posts/StreamingManhattanTraffic_files/StreamingManhattanTraffic_11_1.png?raw=true">
 ![png](StreamingManhattanTraffic_files/StreamingManhattanTraffic_11_1.png)
 
 
     Projected:
     
 
-
+<img src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/_posts/StreamingManhattanTraffic_files/StreamingManhattanTraffic_11_3.png?raw=true">
 ![png](StreamingManhattanTraffic_files/StreamingManhattanTraffic_11_3.png)
 
 
@@ -393,7 +393,7 @@ while True:
      16:10:15 EST
     
 
-
+<img src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/_posts/StreamingManhattanTraffic_files/StreamingManhattanTraffic_17_1.png?raw=true">
 ![png](StreamingManhattanTraffic_files/StreamingManhattanTraffic_17_1.png)
 
 
