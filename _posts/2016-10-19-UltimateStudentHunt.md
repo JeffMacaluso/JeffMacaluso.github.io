@@ -4,7 +4,7 @@ title:  "Competition: The Ultimate Student Hunt"
 date:   2016-10-19 20:04:11 -0500
 categories: jekyll update
 ---
-**Note**: Some images of this notebook did not render properly, so see the my [github post](http://nbviewer.jupyter.org/github/JeffMacaluso/Competitions/blob/master/Hackathon%20-%20The%20Ultimate%20Student%20Hunt.ipynb) for the complete version.
+[Github link to notebook](http:github.com/JeffMacaluso/Competitions/blob/master/Hackathon%20-%20The%20Ultimate%20Student%20Hunt.ipynb)
 
 # Hackathon - The Ultimate Student Hunt
 
@@ -436,8 +436,7 @@ sns.boxplot(data=df_box)
 
 
 
-
-![png](Hackathon_files/Hackathon_8_1.png)
+<img src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/_posts/Hackathon_files/Hackathon_8_1.png?raw=true">
 
 
 Var1 seems to potentially have outliers, but since it is undefined, it is difficult to determine if these are anomalies or noisy/incorrect data.  We'll leave them for now.
@@ -457,8 +456,7 @@ sns.boxplot(data=df_box)
 
 
 
-
-![png](Hackathon_files/Hackathon_10_1.png)
+<img src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/_posts/Hackathon_files/Hackathon_10_1.png?raw=true">
 
 
 Max atmospheric pressure (and by result, average atmospheric pressure) have a few non-contiguous values, but they don't seem egregious enough to deal with for the time being.
@@ -530,8 +528,7 @@ df_full[df_full['Min_Breeze_Speed'].isnull() == True]['Park_ID'].hist()
 
 
 
-
-![png](Hackathon_files/Hackathon_16_1.png)
+<img src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/_posts/Hackathon_files/Hackathon_16_1.png?raw=true">
 
 
 
@@ -547,8 +544,7 @@ plt.title('Var1 Missing Park IDs')
 
 
 
-
-![png](Hackathon_files/Hackathon_17_1.png)
+<img src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/_posts/Hackathon_files/Hackathon_17_1.png?raw=true">
 
 
 
@@ -568,8 +564,7 @@ df_full[df_full['Min_Atmospheric_Pressure'].isnull() == True]['Park_ID'].hist()
 
 
 
-
-![png](Hackathon_files/Hackathon_18_1.png)
+<img src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/_posts/Hackathon_files/Hackathon_18_1.png?raw=true">
 
 
 
@@ -587,8 +582,7 @@ df_full[df_full['Min_Ambient_Pollution'].isnull() == True]['Park_ID'].hist()
 
 
 
-
-![png](Hackathon_files/Hackathon_19_1.png)
+<img src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/_posts/Hackathon_files/Hackathon_19_1.png?raw=true">
 
 
 We can see here that most missing values are re-occurring in the same parks.  This means we can't interpolate our missing values, and filling with the mean/median/mode is to over-generalized, so we should build models to predict our missing values.
@@ -601,8 +595,7 @@ Msno has a heatmap that shows the co-occurrance of missing values, which will be
 msno.heatmap(df)
 ```
 
-
-![png](Hackathon_files/Hackathon_21_0.png)
+<img src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/_posts/Hackathon_files/Hackathon_21_0.png?raw=true">
 
 
 ## Feature Engineering
@@ -1963,8 +1956,7 @@ df_missing_check = df_missing_check.sort_values(['Date', 'Park_ID'], ascending=[
 msno.matrix(df_missing_check)
 ```
 
-
-![png](Hackathon_files/Hackathon_98_0.png)
+<img src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/_posts/Hackathon_files/Hackathon_98_0.png?raw=true">
 
 
 ## Model Building
@@ -2114,8 +2106,7 @@ error_plot.plot(figsize = (20,10))
 
 
 
-
-![png](Hackathon_files/Hackathon_106_1.png)
+<img src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/_posts/Hackathon_files/Hackathon_106_1.png?raw=true">
 
 
 
@@ -2473,8 +2464,7 @@ plt.title('Variable Importance')
 plt.show()
 ```
 
-
-![png](Hackathon_files/Hackathon_110_0.png)
+<img src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/_posts/Hackathon_files/Hackathon_110_0.png?raw=true">
 
 
 ## Outputting Predictions
