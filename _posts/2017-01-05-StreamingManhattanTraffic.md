@@ -5,7 +5,7 @@ date:   2017-01-05 21:04:11 -0500
 categories: jekyll update
 ---
 
-[Github repo link](http://github.com/JeffMacaluso/Blog/blob/master/StreamingNYC/StreamingManhattanTraffic.ipynb)
+[Github link to notebook](http://github.com/JeffMacaluso/Blog/blob/master/StreamingNYC/StreamingManhattanTraffic.ipynb)
 
 # Introduction
 
