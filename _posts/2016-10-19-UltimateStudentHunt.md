@@ -504,8 +504,7 @@ df_full = df_full.sort_values(['Date', 'Park_ID'], ascending=[1, 1])
 msno.matrix(df_full)
 ```
 
-
-![png](Hackathon_files/Hackathon_15_0.png)
+<img src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/_posts/Hackathon_files/Hackathon_15_0.png?raw=true">
 
 
 
