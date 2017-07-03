@@ -9,7 +9,7 @@ categories: jekyll update
 
 In this project, I extracted restaurant ratings and reviews from [Foursquare](https://foursquare.com/) and used distance (one of the main ideas behind recommender systems) to generate recommendations for restaurants in one city that have similar reviews to restaurants in another city.  This post is the abridged version, but check out [my github post](https://github.com/JeffMacaluso/Blog/blob/master/Restaurant%20Recommender.ipynb) for all of the code if you are curious or want to use it.
 
-#### Motivation
+### Motivation
 
 I grew up in Austin, Texas, and moved to Minneapolis, Minnesota for my wife's work a few years ago. My wife and I are people who love food, and loved the food culture in Austin. After our move, we wanted to find new restaurants to replace our favorites from back home.  However, most decently rated places in Minneapolis we went to just didn't quite live up to our Austin expectations.  These restaurants usually came at the recommendations of locals, acquaintances, or from Google ratings, but the food was often bland and overpriced.  It took us one deep dive into the actual reviews to figure it out.  
 
@@ -19,7 +19,7 @@ In order to better illustrate our problem, below are recent reviews from three r
 
 I highlighted the main points to stand out against the small font. Service, atmosphere, and apparently eggrolls were the most common and unifying factors. You see very little discussion on the quality of the actual food,  and you can even see an instance where a reviewer rates the pizza place as 5/5 even after saying that it is expensive. I began to notice a disconnect in how I evaluate restaurants versus how the people of Minneapolis evaluate restaurants. If you have previously worked with recommender systems, you already know where I'm going with this. If not, here is a primer:
 
-#### Recommender Systems Overview
+### Recommender Systems Overview
 
 Before getting into the overview of recommender systems, I wanted to point out that I won't actually be building a legitimate recommender system in this notebook.  There are some [great](https://turi.com/learn/userguide/recommender/introduction.html) [packages](https://github.com/lyst/lightfm) for doing so, but I'm going to stick with one of the main ideas behind recommender systems.  This is for two reasons:
 
@@ -50,7 +50,7 @@ Those are the three main types, but there is one additional type that you may fi
 - **[Knowledge-Based](https://en.wikipedia.org/wiki/Knowledge-based_recommender_system)**: This is is the most rare type mainly because it requires explicit domain knowledge. It is often used for products that have a low number of available ratings, such as high luxury goods like hypercars. We won't delve any further into this type, but I recommend reading more about it if you're interested in the concept.
 
 
-#### Methodology
+### Methodology
 
 Let's return to our problem. The previous way of selecting restaurants at the recommendation of locals and acquaintances (collaborative filtering) wasn't always successful, so we are going to use the idea behind content-based recommender systems to evaluate our options.  However, we don't have a lot of content about the restaurants available, so we are going to primarily use the reviews people left for them.  More specifically, we are going to determine similarity between restaurants based off of the similarity of the reviews that people have written for them.  
 
@@ -147,7 +147,7 @@ If you're still with us after all of that, let's get started!
 
 We'll be using standard libraries for this project (pandas, nltk, and scikit-learn), but one additional thing we need for this project are credentials to access the Foursquare API.  I'm not keen on sharing mine, but you can get your own by [signing up](https://developer.foursquare.com/).  
 
-## The Data
+### The Data
 
 Foursquare works similarly to Yelp where users will review restaurants.  They can either leave a rating (1-10), or write a review for the restaurant.  The reviews are what we're interested in here since I established above that the rating has less meaning due to the way people rate restaurants differently between the two cities.
 
@@ -2343,7 +2343,7 @@ I'm not actually going to run our similarity function for this part because the 
 
 <img src="https://media-cdn.tripadvisor.com/media/photo-s/06/a6/13/44/el-burrito-mercado.jpg">
 
-#### Indian
+#### **Indian**
 
 Next up is the the [Clay Pit](https://www.claypit.com/), a contemporary Indian restaurant in Austin.  They focus mostly on curry dishes with naan, though some of my friends from grad school can tell you that India has way more cuisine diversity than curry dishes.
 
