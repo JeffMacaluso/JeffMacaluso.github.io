@@ -380,7 +380,7 @@ For example:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"central texas barbecue is the best smoked and the only barbecue that matters"
 </div>
 
-The benefit in this is that it vastly reduces our feature space.  Our pre-processed example would have created an additional ~10 features from someone who doesn't know how to type like a regular human being.
+The benefit in this is that it vastly reduces our feature space.  Our pre-processed example would have created an additional two features if someone else used the words 'central' and 'texas' in their review.
 
 
 ```python
@@ -471,7 +471,7 @@ df['tokens'] = filtered_words
 
 ### 4) Lemmatizing (Stemming)
 
-Stemming removes variations at the end of a word to revert words to their root in order to reduce our overall feature space (e.x. running $\rightarrow$ run).  This has the possibility to adversely impact our performance when the root word is different (e.x. university $\rightarrow$ universe), but the net positives typically outweigh the net negatives.
+Stemming removes variations at the end of a word to revert words to their root in order to reduce our overall feature space (e.x. running --> run).  This has the possibility to adversely impact our performance when the root word is different (e.x. university --> universe), but the net positives typically outweigh the net negatives.
 
 For example:
 
@@ -493,7 +493,7 @@ One very important thing to note here is that we're actually doing something cal
 
 Lemmatization seeks to get the *lemma*, or the base dictionary form of the word.  In our example above, that would be "graduate".  It does this by using vocabulary and a morphological analysis of the words, rather than just chopping off the variations (the "verb forms" in the example above) like a traditional stemmer would.
 
-The advantage of lemmatization here is that we don't run into issues like our other example of *university* $\rightarrow$ *universe* that can happen in conventional stemmers.  It is also relatively quick on this data set!
+The advantage of lemmatization here is that we don't run into issues like our other example of *university* --> *universe* that can happen in conventional stemmers.  It is also relatively quick on this data set!
 
 The disadvantage is that it is not able to infer if the word is a noun/verb/adjective/etc., so we have to specify which type it is.  Since we're looking at, well, everything, we're going to lemmatize for nouns, verbs, and adjectives.
 
@@ -1302,7 +1302,7 @@ print('Max:', np.max(tfidf_df.max()), '\n',
 
 The dummy variables for the restaurant type are quite a bit higher than the average word, but I'm comfortable with this since I think it has a benefit.
 
-# "Recommender System"
+## "Recommender System"
 
 As a reminder, we are not using a conventional recommender system.  Instead, we are using recommender system theory by calculating the cosine distance between comments in order to find restaurants with the most similar comments.  
 
