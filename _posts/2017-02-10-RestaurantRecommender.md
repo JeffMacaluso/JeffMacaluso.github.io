@@ -301,15 +301,21 @@ Let's look at a few charts for exploratory analysis to get a better idea of our 
 
 <img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/RestaurantRecommender_files/Restaurant%20Recommender_12_0.png">
 
+
 One thing to note is that I’m currently limited to 30 comments per restaurant ID since I’m using a free developer key, so this will impact the quality of the analysis to a degree.
+
 
 Next, let's look at the number of restaurants per city:
 
+
 <img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/RestaurantRecommender_files/Restaurant%20Recommender_13_0.png">
+
 
 These appear to be even, so let's look at the breakdown of restaurant categories between the two cities:
 
+
 <img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/RestaurantRecommender_files/Restaurant%20Recommender_14_0.png">
+
 
 To summarize this chart:
 

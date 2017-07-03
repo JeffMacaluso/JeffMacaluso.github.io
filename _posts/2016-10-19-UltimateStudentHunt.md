@@ -2067,62 +2067,6 @@ np.mean(cross_val_score(gbr, X_test, y_test, n_jobs = 3))
 k_fold = KFold(len(y), n_folds=10, shuffle=True, random_state=0)
 cross_val_score(gbr, X, y, cv=k_fold, n_jobs=3)
 ```
-
-    C:\Anaconda3\lib\site-packages\sklearn\externals\joblib\hashing.py:197: DeprecationWarning: Changing the shape of non-C contiguous array by
-    descriptor assignment is deprecated. To maintain
-    the Fortran contiguity of a multidimensional Fortran
-    array, use 'a.T.view(...).T' instead
-      obj_bytes_view = obj.view(self.np.uint8)
-    C:\Anaconda3\lib\site-packages\sklearn\externals\joblib\hashing.py:197: DeprecationWarning: Changing the shape of non-C contiguous array by
-    descriptor assignment is deprecated. To maintain
-    the Fortran contiguity of a multidimensional Fortran
-    array, use 'a.T.view(...).T' instead
-      obj_bytes_view = obj.view(self.np.uint8)
-    C:\Anaconda3\lib\site-packages\sklearn\externals\joblib\hashing.py:197: DeprecationWarning: Changing the shape of non-C contiguous array by
-    descriptor assignment is deprecated. To maintain
-    the Fortran contiguity of a multidimensional Fortran
-    array, use 'a.T.view(...).T' instead
-      obj_bytes_view = obj.view(self.np.uint8)
-    C:\Anaconda3\lib\site-packages\sklearn\externals\joblib\hashing.py:197: DeprecationWarning: Changing the shape of non-C contiguous array by
-    descriptor assignment is deprecated. To maintain
-    the Fortran contiguity of a multidimensional Fortran
-    array, use 'a.T.view(...).T' instead
-      obj_bytes_view = obj.view(self.np.uint8)
-    C:\Anaconda3\lib\site-packages\sklearn\externals\joblib\hashing.py:197: DeprecationWarning: Changing the shape of non-C contiguous array by
-    descriptor assignment is deprecated. To maintain
-    the Fortran contiguity of a multidimensional Fortran
-    array, use 'a.T.view(...).T' instead
-      obj_bytes_view = obj.view(self.np.uint8)
-    C:\Anaconda3\lib\site-packages\sklearn\externals\joblib\hashing.py:197: DeprecationWarning: Changing the shape of non-C contiguous array by
-    descriptor assignment is deprecated. To maintain
-    the Fortran contiguity of a multidimensional Fortran
-    array, use 'a.T.view(...).T' instead
-      obj_bytes_view = obj.view(self.np.uint8)
-    C:\Anaconda3\lib\site-packages\sklearn\externals\joblib\hashing.py:197: DeprecationWarning: Changing the shape of non-C contiguous array by
-    descriptor assignment is deprecated. To maintain
-    the Fortran contiguity of a multidimensional Fortran
-    array, use 'a.T.view(...).T' instead
-      obj_bytes_view = obj.view(self.np.uint8)
-    C:\Anaconda3\lib\site-packages\sklearn\externals\joblib\hashing.py:197: DeprecationWarning: Changing the shape of non-C contiguous array by
-    descriptor assignment is deprecated. To maintain
-    the Fortran contiguity of a multidimensional Fortran
-    array, use 'a.T.view(...).T' instead
-      obj_bytes_view = obj.view(self.np.uint8)
-    C:\Anaconda3\lib\site-packages\sklearn\externals\joblib\hashing.py:197: DeprecationWarning: Changing the shape of non-C contiguous array by
-    descriptor assignment is deprecated. To maintain
-    the Fortran contiguity of a multidimensional Fortran
-    array, use 'a.T.view(...).T' instead
-      obj_bytes_view = obj.view(self.np.uint8)
-    C:\Anaconda3\lib\site-packages\sklearn\externals\joblib\hashing.py:197: DeprecationWarning: Changing the shape of non-C contiguous array by
-    descriptor assignment is deprecated. To maintain
-    the Fortran contiguity of a multidimensional Fortran
-    array, use 'a.T.view(...).T' instead
-      obj_bytes_view = obj.view(self.np.uint8)
-    
-
-
-
-
     array([ 0.96254909,  0.96338802,  0.96328219,  0.96139247,  0.96212329,
             0.9647377 ,  0.96253464,  0.96374171,  0.96351884,  0.96228093])
 
