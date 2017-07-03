@@ -60,7 +60,7 @@ Let's return to our problem. The previous way of selecting restaurants at the re
 
 We're going to use cosine similarity since it's generally accepted as producing better results in item-to-item filtering:
 
-<img hspace="20" src="http://mathurl.com/ybv72jfa.png">
+<img hspace="40" src="http://mathurl.com/ybv72jfa.png">
 
 Before calculating this, we need to perform a couple of pre-processing steps on our reviews in order to make the data  usable for our cosine similarity calculation.  These will be common NLP (**n**atural **l**anguage **p**rocessing) techniques that you should be familiar with if you have worked with text before.  These are the steps I took, but I am open to feedback and improvement if you have recommendations on other methods that may yield better results.
 
@@ -106,11 +106,11 @@ becomes
 
 **5) Term Frequency-Inverse Document Frequency (TF-IDF)**: This technique determines how important a word is to a document (which is a review in this case) within a corpus (the collection documents, or all reviews).  This doesn't necessarily help establish context within our reviews themselves (for example, 'this Pad Kee Mao is bad ass' is technically a good thing, which wouldn't be accounted for unless we did [n-grams](https://en.wikipedia.org/wiki/N-gram) (which will give my laptop a much more difficult time)), but it does help with establishing the importance of the word.
 
-<img hspace="20" src="http://mathurl.com/ya3r3wkx.png">
+<img hspace="40" src="http://mathurl.com/ya3r3wkx.png">
 
-<img hspace="20" src="http://mathurl.com/yazeemgy.png">
+<img hspace="40" src="http://mathurl.com/yazeemgy.png">
 
-<img hspace="20" src="http://mathurl.com/y82lttkz.png">
+<img hspace="40" src="http://mathurl.com/y82lttkz.png">
 
 On a side note, sarcasm, slang, misspellings, emoticons, and context are common problems in NLP, but we will be ignoring these due to time limitations.  
 
@@ -210,8 +210,6 @@ plt.title('# Comments per Restaurant Distribution')
 sns.despine()
 ```
 
-
-![png](Restaurant%20Recommender_files/Restaurant%20Recommender_12_0.png)
 <img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/RestaurantRecommender_files/Restaurant%20Recommender_12_0.png">
 
 <img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/RestaurantRecommender_files/Restaurant%20Recommender_13_0.png">
@@ -283,6 +281,65 @@ dfRest = dfRest.dropna().drop_duplicates()
 dfRest.head()
 ```
 
+<div>
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+
+<table>
+  <tr>
+    <th>Company</th>
+    <th>Contact</th>
+    <th>Country</th>
+  </tr>
+  <tr>
+    <td>Alfreds Futterkiste</td>
+    <td>Maria Anders</td>
+    <td>Germany</td>
+  </tr>
+  <tr>
+    <td>Centro comercial Moctezuma</td>
+    <td>Francisco Chang</td>
+    <td>Mexico</td>
+  </tr>
+  <tr>
+    <td>Ernst Handel</td>
+    <td>Roland Mendel</td>
+    <td>Austria</td>
+  </tr>
+  <tr>
+    <td>Island Trading</td>
+    <td>Helen Bennett</td>
+    <td>UK</td>
+  </tr>
+  <tr>
+    <td>Laughing Bacchus Winecellars</td>
+    <td>Yoshi Tannamuri</td>
+    <td>Canada</td>
+  </tr>
+  <tr>
+    <td>Magazzini Alimentari Riuniti</td>
+    <td>Giovanni Rovelli</td>
+    <td>Italy</td>
+  </tr>
+</table>
+</div>
 
 
 
@@ -885,11 +942,11 @@ stemmed_sentences[np.random.randint(len(stemmed_sentences))]
 
 This determines how important a word is to a document (which is a review in this case) within a corpus (the collection documents). It is a number resulting from the following formula: 
 
-<img hspace="20" src="http://mathurl.com/ya3r3wkx.png">
+<img hspace="40" src="http://mathurl.com/ya3r3wkx.png">
 
-<img hspace="20" src="http://mathurl.com/yazeemgy.png">
+<img hspace="40" src="http://mathurl.com/yazeemgy.png">
 
-<img hspace="20" src="http://mathurl.com/y82lttkz.png">
+<img hspace="40" src="http://mathurl.com/y82lttkz.png">
 
 Scikit-learn has an [excellent function](http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html) that is able to transform our processed text into a TF-IDF matrix very quickly.  We'll convert it back to a data frame, and join it to our original data frame by the indexes.
 
