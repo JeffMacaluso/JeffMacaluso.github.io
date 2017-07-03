@@ -63,7 +63,7 @@ Before calculating this, we need to perform a couple of pre-processing steps on 
 **1) Normalizing**: This step converts our words into lower case so that when we map to our feature space, we don't end up with redundant features for the same words.  For example:
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0;">
-"Central Texas barbecue is the best smoked and the only barbecue that matters"
+  "Central Texas barbecue is the best smoked and the only barbecue that matters"
 </div>
 
 becomes
@@ -76,6 +76,7 @@ becomes
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0;">
 'Central Texas barbecue is the best smoked and the only barbecue that matters'
+</div>
 
 becomes
 
