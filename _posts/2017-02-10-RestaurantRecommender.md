@@ -65,55 +65,55 @@ Before calculating this, we need to perform a couple of pre-processing steps on 
 &nbsp;&nbsp;&nbsp;&nbsp;**Before:**
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0;">
-&nbsp;&nbsp;"Central Texas barbecue is the best smoked and the only barbecue that matters"
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Central Texas barbecue is the best smoked and the only barbecue that matters"
 </div>
 
 &nbsp;&nbsp;&nbsp;&nbsp;**After:**
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0;">
-"central texas barbecue is the best smoked and the only barbecue that matters"
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"central texas barbecue is the best smoked and the only barbecue that matters"
 </div>
 
 **2) Tokenizing**: This step breaks up a sentence into individual words, essentially turning our reviews into [bags of words](https://en.wikipedia.org/wiki/Bag-of-words_model), which makes it easier to perform other operations.  Though we are going to perform many other preprocessing operations, this is more or less the beginning of mapping our reviews into the feature space.
 
-**Before:**
+&nbsp;&nbsp;&nbsp;&nbsp;**Before:**
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0;">
-'Central Texas barbecue is the best smoked and the only barbecue that matters'
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'Central Texas barbecue is the best smoked and the only barbecue that matters'
 </div>
 
-**After:**
+&nbsp;&nbsp;&nbsp;&nbsp;**After:**
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0;">
-['Central', 'Texas', 'barbecue', 'is', 'the', 'best', 'smoked', 'and', 'the', 'only', 'barbecue', 'that', 'matters']
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;['Central', 'Texas', 'barbecue', 'is', 'the', 'best', 'smoked', 'and', 'the', 'only', 'barbecue', 'that', 'matters']
 </div>
 
 **3) Removing Stopwords and Punctuation**: This step removes unnecessary words and punctuation often used in language that computers don't need such as *as*, *the*, *and*, and *of*.
 
-**Before:**
+&nbsp;&nbsp;&nbsp;&nbsp;**Before:**
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0;">
-['central', 'texas', 'barbecue', 'is', 'the', 'best', 'smoked', 'and', 'the', 'only', 'barbecue', 'that', 'matters']
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;['central', 'texas', 'barbecue', 'is', 'the', 'best', 'smoked', 'and', 'the', 'only', 'barbecue', 'that', 'matters']
 </div>
 
-**After:**
+&nbsp;&nbsp;&nbsp;&nbsp;**After:**
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0;">
-['central', 'texas', 'barbecue', 'best', 'smoked', 'only', 'barbecue', 'matters']
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;['central', 'texas', 'barbecue', 'best', 'smoked', 'only', 'barbecue', 'matters']
 </div>
 
 **4) Lemmatizing (Stemming)**: Lemmatizing (which is very similar to stemming) removes variations at the end of a word to revert words to their root word.
 
-**Before:**
+&nbsp;&nbsp;&nbsp;&nbsp;**Before:**
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0;">
-['central', 'texas', 'barbecue', 'best', 'smoked', 'only', 'barbecue', 'matters']
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;['central', 'texas', 'barbecue', 'best', 'smoked', 'only', 'barbecue', 'matters']
 </div>
 
-**After:**
+&nbsp;&nbsp;&nbsp;&nbsp;**After:**
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0;">
-['central', 'texas', 'barbecue', 'best', 'smoke', 'only', 'barbecue', 'matter']
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;['central', 'texas', 'barbecue', 'best', 'smoke', 'only', 'barbecue', 'matter']
 </div>
 
 **5) Term Frequency-Inverse Document Frequency (TF-IDF)**: This technique determines how important a word is to a document (which is a review in this case) within a corpus (the collection documents, or all reviews).  This doesn't necessarily help establish context within our reviews themselves (for example, 'this Pad Kee Mao is bad ass' is technically a good thing, which wouldn't be accounted for unless we did [n-grams](https://en.wikipedia.org/wiki/N-gram) (which will give my laptop a much more difficult time)), but it does help with establishing the importance of the word.
