@@ -60,7 +60,7 @@ Let's return to our problem. The previous way of selecting restaurants at the re
 
 We're going to use cosine similarity since it's generally accepted as producing better results in item-to-item filtering:
 
-$\hspace{8cm}sim(A, B) = \cos(\theta) = \frac{A \cdot B}{\|A\|\|B\|}$
+$$\hspace{8cm}sim(A, B) = \cos(\theta) = \frac{A \cdot B}{\|A\|\|B\|}$$
 
 Before calculating this, we need to perform a couple of pre-processing steps on our reviews in order to make the data  usable for our cosine similarity calculation.  These will be common NLP (**n**atural **l**anguage **p**rocessing) techniques that you should be familiar with if you have worked with text before.  These are the steps I took, but I am open to feedback and improvement if you have recommendations on other methods that may yield better results.
 
@@ -78,7 +78,7 @@ $\hspace{1.75cm}$becomes
 
     Ex. 'Central Texas barbecue is the best smoked and the only barbecue that matters'
 
-$\hspace{1.75cm}$becomes
+$$\hspace{1.75cm}$$becomes
 
 ```
     ['Central', 'Texas', 'barbecue', 'is', 'the', 'best', 'smoked', 'and', 'the', 'only', 'barbecue', 'that', 'matters']
@@ -106,13 +106,13 @@ $\hspace{1.75cm}$becomes
 
 **5) Term Frequency-Inverse Document Frequency (TF-IDF)**: This technique determines how important a word is to a document (which is a review in this case) within a corpus (the collection documents, or all reviews).  This doesn't necessarily help establish context within our reviews themselves (for example, 'this Pad Kee Mao is bad ass' is technically a good thing, which wouldn't be accounted for unless we did [n-grams](https://en.wikipedia.org/wiki/N-gram) (which will give my laptop a much more difficult time)), but it does help with establishing the importance of the word.
 
-$\hspace{8cm}TFIDF(t, d) = TF(t, d) \cdot IDF(t)$
+$$\hspace{8cm}TFIDF(t, d) = TF(t, d) \cdot IDF(t)$$
 
-$\hspace{8cm}IDF(t) =  1 + \log\Big(\frac{\#\ Documents}{\#\ Documents\ Containing\ t}\Big)$
+$$\hspace{8cm}IDF(t) =  1 + \log\Big(\frac{\#\ Documents}{\#\ Documents\ Containing\ t}\Big)$$
 
-$\hspace{8cm}t:\ \text{Term}$
+$$\hspace{8cm}t:\ \text{Term}$$
 
-$\hspace{8cm}d:\ \text{Document}$
+$$\hspace{8cm}d:\ \text{Document}$$
 
 On a side note, sarcasm, slang, misspellings, emoticons, and context are common problems in NLP, but we will be ignoring these due to time limitations.  
 
@@ -191,177 +191,9 @@ Before pulling our restaurants, we have to first include a few parameters.  We'l
 Since we're not interested in chains or fast food restaurants, we have to specify which venue category IDs we want.  There are also a few grocery stores (such as Whole Foods and the magnificent [H-E-B](https://www.heb.com/)) that appear under the bakery and deli categories, so excluding this is easier than manually filtering them out.  I left them commented out so there is the full list in case anyone else would like to include them for their own uses.
 
 
-```python
-cities = ['Austin, TX',  # Where I'm from
-          'Minneapolis, MN']  # Where I'm going to grad school  
-
-venueCategoryId = ['503288ae91d4c4b30a586d67'  # Afghan
-                       , '4bf58dd8d48988d1c8941735'  # African
-                       , '4bf58dd8d48988d14e941735'  # American
-                       , '4bf58dd8d48988d142941735'  # Asian.  Includes most Asian countries.
-                       , '4bf58dd8d48988d169941735'  # Australian
-                       , '52e81612bcbc57f1066b7a01'  # Austrian
-                       , '4bf58dd8d48988d1df931735'  # BBQ
-                       , '4bf58dd8d48988d179941735'  # Bagel
-#                        , '4bf58dd8d48988d16a941735'  # Bakery
-                       , '52e81612bcbc57f1066b7a02'  # Belgian
-                       , '52e81612bcbc57f1066b79f1'  # Bistro
-                       , '4bf58dd8d48988d143941735'  # Breakfast
-                       , '52e81612bcbc57f1066b7a0c'  # Bubble Tea
-                       , '4bf58dd8d48988d16c941735'  # Burgers.  Does not include fast food.
-                       , '4bf58dd8d48988d16d941735'  # Cafe
-                       , '4bf58dd8d48988d17a941735'  # Cajun/Creole
-                       , '4bf58dd8d48988d144941735'  # Caribbean
-                       , '5293a7d53cf9994f4e043a45'  # Caucasian
-                       , '4bf58dd8d48988d1e0931735'  # Coffee Shop
-                       , '52e81612bcbc57f1066b7a00'  # Comfort Food
-                       , '52e81612bcbc57f1066b79f2'  # Creperie
-                       , '52f2ae52bcbc57f1066b8b81'  # Czech
-#                        , '4bf58dd8d48988d146941735'  # Deli
-                       , '4bf58dd8d48988d1d0941735'  # Dessert
-                       , '4bf58dd8d48988d147941735'  # Diner
-                       , '4bf58dd8d48988d148941735'  # Donuts
-                       , '5744ccdfe4b0c0459246b4d0'  # Dutch
-                       , '4bf58dd8d48988d109941735'  # Eastern Europe
-                       , '52e81612bcbc57f1066b7a05'  # English
-                       , '4bf58dd8d48988d10b941735'  # Falafel
-                       , '4edd64a0c7ddd24ca188df1a'  # Fish & Chips
-                       , '52e81612bcbc57f1066b7a09'  # Fondue
-                       , '56aa371be4b08b9a8d57350b'  # Food Stand
-                       , '4bf58dd8d48988d1cb941735'  # Food Truck
-                       , '4bf58dd8d48988d10c941735'  # French
-                       , '4bf58dd8d48988d155941735'  # Gastropub
-                       , '4bf58dd8d48988d10d941735'  # German
-                       , '4bf58dd8d48988d10e941735'  # Greek
-                       , '52e81612bcbc57f1066b79ff'  # Halal
-                       , '52e81612bcbc57f1066b79fe'  # Hawaiian
-                       , '52e81612bcbc57f1066b79fa'  # Hungarian
-                       , '4bf58dd8d48988d10f941735'  # Indian
-                       , '52e81612bcbc57f1066b7a06'  # Irish Pub
-                       , '4bf58dd8d48988d110941735'  # Italian
-                       , '52e81612bcbc57f1066b79fd'  # Jewish
-                       , '4bf58dd8d48988d112941735'  # Juice Bar
-                       , '5283c7b4e4b094cb91ec88d7'  # Kebab
-                       , '4bf58dd8d48988d1be941735'  # Latin American
-                       , '4bf58dd8d48988d1c0941735'  # Mediterranean
-                       , '4bf58dd8d48988d1c1941735'  # Mexican
-                       , '4bf58dd8d48988d115941735'  # Middle Eastern
-                       , '52e81612bcbc57f1066b79f9'  # Modern European
-                       , '52e81612bcbc57f1066b79f8'  # Pakistani
-                       , '56aa371be4b08b9a8d573508'  # Pet Cafe
-                       , '4bf58dd8d48988d1ca941735'  # Pizza
-                       , '52e81612bcbc57f1066b7a04'  # Polish
-                       , '4def73e84765ae376e57713a'  # Portuguese
-                       , '5293a7563cf9994f4e043a44'  # Russian
-                       , '4bf58dd8d48988d1bd941735'  # Salad
-                       , '4bf58dd8d48988d1c6941735'  # Scandinavian
-                       , '5744ccdde4b0c0459246b4a3'  # Scottish
-                       , '4bf58dd8d48988d1ce941735'  # Seafood
-                       , '56aa371be4b08b9a8d57355a'  # Slovak
-                       , '4bf58dd8d48988d1dd931735'  # Soup
-                       , '4bf58dd8d48988d14f941735'  # Southern
-                       , '4bf58dd8d48988d150941735'  # Spanish
-                       , '5413605de4b0ae91d18581a9'  # Sri Lankan
-                       , '4bf58dd8d48988d1cc941735'  # Steakhouse
-                       , '4bf58dd8d48988d158941735'  # Swiss
-                       , '4bf58dd8d48988d1dc931735'  # Tea Room
-                       , '56aa371be4b08b9a8d573538'  # Theme Restaurant
-                       , '4f04af1f2fb6e1c99f3db0bb'  # Turkish
-                       , '52e928d0bcbc57f1066b7e96'  # Ukranian
-                       , '4bf58dd8d48988d1d3941735'  # Vegetarian
-                      ]
-venueCategoryIdstr = ','.join(venueCategoryId)  # Converts to string for API call
-```
-
 With those specified, we'll go ahead and pull in the restaurants.  This loop will go through each restaurant category, grab the restaurants that meet our criteria, and puts them into a data frame called dfRest (**d**ata **f**rame of **rest**aurants).
 
 Tasks like these can sometimes take a lot of time, but this fortunately runs in under a minute.
-
-
-```python
-%%time
-
-# Empty data frame to be filled with restaurant information
-dfRest = pd.DataFrame()
-
-for city in cities:
-    
-    # Run the API for each category
-    for category in venueCategoryId:
-        apiCall = client.venues.search(params = 
-                        {'near': city
-                        , 'intent': 'browse'  # Non-user based
-                        , 'limit': '50'  # Max is 50
-                        , 'radius': '56372'  # In meters.  Converts to 35 miles
-                        , 'categoryId': category})['venues']
-        if len(apiCall) == 0:
-            pass
-        else:
-            for restaurant in np.arange(len(apiCall)):
-                
-                # Error handling due to not every restaurant possessing
-                # a value for city/state
-                try:
-                    apiCity = apiCall[restaurant]['location']['city']
-                    apiState = apiCall[restaurant]['location']['state']
-                except:
-                    apiCity = np.NaN
-                    apiState = np.NaN
-                
-                # Appending a temporary data frame to dfRest to prevent overwriting
-                temp = pd.DataFrame({
-                        'name': apiCall[restaurant]['name'],
-                        'id': apiCall[restaurant]['id'],
-                        'category': apiCall[restaurant]['categories'][0]['name'],
-                        'shortCategory': apiCall[restaurant]['categories'][0]['shortName'],
-                        'city': apiCity,
-                        'state': apiState,
-                        'location': city,
-                        'checkinsCount': apiCall[restaurant]['stats']['checkinsCount'],
-                        'commentsCount': apiCall[restaurant]['stats']['tipCount'],
-                        'usersCount': apiCall[restaurant]['stats']['usersCount']
-                    }, index=[0])
-                dfRest = pd.concat([dfRest, temp])
-```
-
-    Wall time: 1min 11s
-    
-
-
-```python
-dfRest.shape
-```
-
-
-
-
-    (3021, 10)
-
-
-
-Now that we have pulled the restaurants, let's clean it up by removing any restaurants with:
-- **Duplicates:** A small handful of these made it through, and we only need one of each.
-- **$<$ 10 reviews:** These won't be too useful for our purposes.
-- **Categories we don't want:** Some of these also got through, and I have no interest in seeing how the Burger King around the corner compares to a Whataburger back home.
-
-
-```python
-# Cleaning the dataset before making more API calls
-dfRest = dfRest.dropna().drop_duplicates()
-dfRest = dfRest[dfRest['commentsCount'] >= 10]
-
-# Removing unwanted categories
-excludeCategories = ['Fast Food', 'Gas Station', 'Golf Course', 'Bowling Alley']
-dfRest = dfRest.loc[~dfRest.category.isin(excludeCategories)]
-```
-
-
-```python
-dfRest.shape
-```
-
-
-
 
     (1362, 10)
 
@@ -382,42 +214,11 @@ sns.despine()
 
 
 ![png](Restaurant%20Recommender_files/Restaurant%20Recommender_12_0.png)
+<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/RestaurantRecommender_files/Restaurant%20Recommender_12_0.png">
 
+<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/RestaurantRecommender_files/Restaurant%20Recommender_13_0.png">
 
-
-```python
-# Number of restaurants per city
-plt.figure(figsize=(8, 5))
-dfRest['id'].groupby(dfRest['location']).count().plot(kind='bar')
-plt.title('# Restaurants per City')
-sns.despine()
-```
-
-
-![png](Restaurant%20Recommender_files/Restaurant%20Recommender_13_0.png)
-
-
-
-```python
-# Breakdown of restaurant type by city
-plt.figure(figsize=(12, 20))
-
-# Grouping by the number of restaurants per category and city
-categoryPlot = dfRest['id'].groupby(
-    (dfRest['shortCategory'], dfRest['location'])).count().sort_values(
-        ascending=False)[:100].reset_index()
-
-# Plotting 
-sns.barplot(x="id", y="shortCategory", hue="location", data=categoryPlot)
-
-# Setting labels and configuring visuals
-plt.xlabel('Count')
-plt.ylabel('Category')
-sns.despine()
-```
-
-
-![png](Restaurant%20Recommender_files/Restaurant%20Recommender_14_0.png)
+<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/RestaurantRecommender_files/Restaurant%20Recommender_14_0.png">
 
 
 So our number of restaurants between each city is basically even, most restaurants have between 10 and 70 reviews, and we see a few interesting things in the breakdown between categories.  To summarize the chart:
