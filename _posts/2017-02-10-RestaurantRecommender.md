@@ -2331,7 +2331,7 @@ I have tried Rusty Taco, and it does seem a lot like Tacodeli. They even sell br
 
 Taco Taxi looks like it could be promising, but they appear to be more of a traditional taqueria (delicious but dissimilar). To be fair, taquerias have had the best tacos I've found up here (though most of them aren't included in this list because they were outside of the search range).
 
-#### Burritos
+### Burritos
 
 I'm not actually going to run our similarity function for this part because the burrito place back home actually disappeared from our data pulling query in between me originally running this and finally having time to annotate everything and write this post. However, I wanted to include it because it was one of my other field tests.
 
@@ -2483,7 +2483,7 @@ This was actually the first place I did a field test on.  When I originally look
 
 <img style="width: 300px;" src="https://s3-media4.fl.yelpcdn.com/bphoto/gueLSLa3LY6LGjYVrGdZkw/o.jpg">
 
-#### French/Bistro
+### French/Bistro
 
 One of our favorite places back home is [Blue Dahlia Bistro](http://www.bluedahliabistro.com/), a European-style bistro specializing in French fusion.  They use a lot of fresh and simple ingredients, and it's a great place for a date night due to its cozy interior and decorated back patio.
 
