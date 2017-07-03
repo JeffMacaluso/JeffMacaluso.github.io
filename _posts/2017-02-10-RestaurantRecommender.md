@@ -64,13 +64,13 @@ Before calculating this, we need to perform a couple of pre-processing steps on 
 
 &nbsp;&nbsp;&nbsp;&nbsp;**Before:**
 
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0;">
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0; font-family:courier;">
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Central Texas barbecue is the best smoked and the only barbecue that matters"
 </div>
 
 &nbsp;&nbsp;&nbsp;&nbsp;**After:**
 
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0;">
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0; font-family:courier;">
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"central texas barbecue is the best smoked and the only barbecue that matters"
 </div>
 
@@ -78,13 +78,13 @@ Before calculating this, we need to perform a couple of pre-processing steps on 
 
 &nbsp;&nbsp;&nbsp;&nbsp;**Before:**
 
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0;">
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0; font-family:courier;">
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'Central Texas barbecue is the best smoked and the only barbecue that matters'
 </div>
 
 &nbsp;&nbsp;&nbsp;&nbsp;**After:**
 
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0;">
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0; font-family:courier;">
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;['Central', 'Texas', 'barbecue', 'is', 'the', 'best', 'smoked', 'and', 'the', 'only', 'barbecue', 'that', 'matters']
 </div>
 
@@ -92,13 +92,13 @@ Before calculating this, we need to perform a couple of pre-processing steps on 
 
 &nbsp;&nbsp;&nbsp;&nbsp;**Before:**
 
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0;">
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0; font-family:courier;">
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;['central', 'texas', 'barbecue', 'is', 'the', 'best', 'smoked', 'and', 'the', 'only', 'barbecue', 'that', 'matters']
 </div>
 
 &nbsp;&nbsp;&nbsp;&nbsp;**After:**
 
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0;">
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0; font-family:courier;">
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;['central', 'texas', 'barbecue', 'best', 'smoked', 'only', 'barbecue', 'matters']
 </div>
 
@@ -106,13 +106,13 @@ Before calculating this, we need to perform a couple of pre-processing steps on 
 
 &nbsp;&nbsp;&nbsp;&nbsp;**Before:**
 
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0;">
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0; font-family:courier;">
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;['central', 'texas', 'barbecue', 'best', 'smoked', 'only', 'barbecue', 'matters']
 </div>
 
 &nbsp;&nbsp;&nbsp;&nbsp;**After:**
 
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0;">
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0; font-family:courier;">
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;['central', 'texas', 'barbecue', 'best', 'smoke', 'only', 'barbecue', 'matter']
 </div>
 
