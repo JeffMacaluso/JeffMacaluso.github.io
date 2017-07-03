@@ -2143,70 +2143,70 @@ retrieve_recommendations(222)
   </thead>
   <tbody>
     <tr>
-      <th>222</th>
+      <th>228</th>
       <td>1.000000</td>
-      <td>Summer Moon Wood-Fired Coffee</td>
-      <td>Austin</td>
+      <td>Round Rock Donuts</td>
+      <td>Round Rock</td>
       <td>TX</td>
       <td>Austin, TX</td>
       <td>Coffee Shop</td>
-      <td>8.9</td>
-      <td>NaN</td>
+      <td>9.4</td>
+      <td>10.0</td>
     </tr>
     <tr>
-      <th>749</th>
-      <td>0.865335</td>
-      <td>Spyhouse Coffee</td>
+      <th>825</th>
+      <td>0.962594</td>
+      <td>Glam Doll Donuts</td>
       <td>Minneapolis</td>
       <td>MN</td>
       <td>Minneapolis, MN</td>
-      <td>Coffee Shop</td>
-      <td>8.1</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>742</th>
-      <td>0.857070</td>
-      <td>Five Watt Coffee</td>
-      <td>Minneapolis</td>
-      <td>MN</td>
-      <td>Minneapolis, MN</td>
-      <td>Coffee Shop</td>
-      <td>8.9</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>745</th>
-      <td>0.848061</td>
-      <td>Spyhouse Coffee</td>
-      <td>Minneapolis</td>
-      <td>MN</td>
-      <td>Minneapolis, MN</td>
-      <td>Coffee Shop</td>
-      <td>8.3</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>747</th>
-      <td>0.843742</td>
-      <td>Dunn Bros Coffee</td>
-      <td>Minneapolis</td>
-      <td>MN</td>
-      <td>Minneapolis, MN</td>
-      <td>Coffee Shop</td>
-      <td>7.9</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>740</th>
-      <td>0.834707</td>
-      <td>Spyhouse Coffee</td>
-      <td>Minneapolis</td>
-      <td>MN</td>
-      <td>Minneapolis, MN</td>
-      <td>Coffee Shop</td>
+      <td>Donut Shop</td>
       <td>9.1</td>
-      <td>6.0</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>670</th>
+      <td>0.873971</td>
+      <td>Granny Donuts</td>
+      <td>West Saint Paul</td>
+      <td>MN</td>
+      <td>Minneapolis, MN</td>
+      <td>Donut Shop</td>
+      <td>7.5</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>827</th>
+      <td>0.866257</td>
+      <td>YoYo Donuts and Coffee Bar</td>
+      <td>Hopkins</td>
+      <td>MN</td>
+      <td>Minneapolis, MN</td>
+      <td>Donut Shop</td>
+      <td>8.4</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>826</th>
+      <td>0.862637</td>
+      <td>Bogart's Doughnut Co.</td>
+      <td>Minneapolis</td>
+      <td>MN</td>
+      <td>Minneapolis, MN</td>
+      <td>Donut Shop</td>
+      <td>7.7</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>830</th>
+      <td>0.847556</td>
+      <td>Mojo Monkey Donuts</td>
+      <td>Saint Paul</td>
+      <td>MN</td>
+      <td>Minneapolis, MN</td>
+      <td>Donut Shop</td>
+      <td>8.3</td>
+      <td>2.0</td>
     </tr>
   </tbody>
 </table>
