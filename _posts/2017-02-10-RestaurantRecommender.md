@@ -62,43 +62,50 @@ Before calculating this, we need to perform a couple of pre-processing steps on 
 
 **1) Normalizing**: This step converts our words into lower case so that when we map to our feature space, we don't end up with redundant features for the same words.  For example:
 
-    "Central Texas barbecue is the best smoked and the only barbecue that matters"
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0;">
+"Central Texas barbecue is the best smoked and the only barbecue that matters"
+</div>
 
 becomes
 
-
-    "central texas barbecue is the best smoked and the only barbecue that matters"
-
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0;">
+"central texas barbecue is the best smoked and the only barbecue that matters"
+</div>
 
 **2) Tokenizing**: This step breaks up a sentence into individual words, essentially turning our reviews into [bags of words](https://en.wikipedia.org/wiki/Bag-of-words_model), which makes it easier to perform other operations.  Though we are going to perform many other preprocessing operations, this is more or less the beginning of mapping our reviews into the feature space.  For example:
 
-    Ex. 'Central Texas barbecue is the best smoked and the only barbecue that matters'
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0;">
+'Central Texas barbecue is the best smoked and the only barbecue that matters'
 
 becomes
 
-
-    ['Central', 'Texas', 'barbecue', 'is', 'the', 'best', 'smoked', 'and', 'the', 'only', 'barbecue', 'that', 'matters']
-
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0;">
+['Central', 'Texas', 'barbecue', 'is', 'the', 'best', 'smoked', 'and', 'the', 'only', 'barbecue', 'that', 'matters']
+</div>
 
 **3) Removing Stopwords and Punctuation**: This step removes unnecessary words and punctuation often used in language that computers don't need such as *as*, *the*, *and*, and *of*.  For example:
 
-    Ex. ['central', 'texas', 'barbecue', 'is', 'the', 'best', 'smoked', 'and', 'the', 'only', 'barbecue', 'that', 'matters']
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0;">
+['central', 'texas', 'barbecue', 'is', 'the', 'best', 'smoked', 'and', 'the', 'only', 'barbecue', 'that', 'matters']
+</div>
 
 becomes
 
-
-    ['central', 'texas', 'barbecue', 'best', 'smoked', 'only', 'barbecue', 'matters']
-
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0;">
+['central', 'texas', 'barbecue', 'best', 'smoked', 'only', 'barbecue', 'matters']
+</div>
 
 **4) Lemmatizing (Stemming)**: Lemmatizing (which is very similar to stemming) removes variations at the end of a word to revert words to their root word.  For example:
 
-    Ex. ['central', 'texas', 'barbecue', 'best', 'smoked', 'only', 'barbecue', 'matters']
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0;">
+['central', 'texas', 'barbecue', 'best', 'smoked', 'only', 'barbecue', 'matters']
+</div>
 
 becomes
 
-
-    ['central', 'texas', 'barbecue', 'best', 'smoke', 'only', 'barbecue', 'matter']
-
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0;">
+['central', 'texas', 'barbecue', 'best', 'smoke', 'only', 'barbecue', 'matter']
+</div>
 
 **5) Term Frequency-Inverse Document Frequency (TF-IDF)**: This technique determines how important a word is to a document (which is a review in this case) within a corpus (the collection documents, or all reviews).  This doesn't necessarily help establish context within our reviews themselves (for example, 'this Pad Kee Mao is bad ass' is technically a good thing, which wouldn't be accounted for unless we did [n-grams](https://en.wikipedia.org/wiki/N-gram) (which will give my laptop a much more difficult time)), but it does help with establishing the importance of the word.
 
@@ -377,19 +384,7 @@ df['comments'] = [re.sub(r'(?:^| )\w(?:$| )', '', row)
 
 # Removing numbers
 df['comments'] = [re.sub(r'\d+', '', row) for row in df['comments']]
-
-df['comments'].head()
 ```
-
-
-
-
-    0    {healthy fresh salad plus baked potatoes, sele...
-    1    {the lunch buffet is wonderful; everything is ...
-    2    {wonderful! spicy lovers: kitfo, was awesome! ...
-    3    {obsessed with this place  one little nugget (...
-    4    {west african fusion reigns at this darling tr...
-    Name: comments, dtype: object
 
     Wall time: 971 ms
 
@@ -415,19 +410,7 @@ Tokenizing a sentence is a way to map our words into a feature space.  This is a
 # Tokenizing comments and putting them into a new column
 tokenizer = nltk.tokenize.RegexpTokenizer(r'\w+')  # by blank space
 df['tokens'] = df['comments'].apply(tokenizer.tokenize)
-
-df['tokens'].head()
 ```
-
-
-
-
-    0    [healthy, fresh, salad, plus, baked, potatoes,...
-    1    [the, lunch, buffet, is, wonderful, everything...
-    2    [wonderful, spicy, lovers, kitfo, was, awesome...
-    3    [obsessed, with, this, place, one, little, nug...
-    4    [west, african, fusion, reigns, at, this, darl...
-    Name: tokens, dtype: object
 
     Wall time: 718ms
 
