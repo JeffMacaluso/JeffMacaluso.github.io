@@ -703,28 +703,8 @@ dfComments.head()
 Now we need to group the comments together so we have one set of comments per restaurant before joining everything together.
 
 
-```python
-# Grouping individual comments by restaurant ID
-groupedComments = dfComments.groupby('id')['comment'].apply(
-    lambda x: "{%s}" % ''.join(x)).reset_index()
-```
 
 This is where we merge everything into one data frame, df, which has a row for each restaurant that includes all of the comments.  We'll also perform an additional sanitation step here by removing non-ASCII characters from the comments.
-
-
-```python
-# Merging everything together into one data frame
-df = pd.merge(dfRest, groupedComments, on='id')
-
-# Removing non-ASCII characters
-df['comments'] = df['comment'].apply(
-    lambda comment: re.sub(r'[^\x00-\x7f]', r'', comment))
-
-df.drop('comment', axis=1, inplace=True)
-
-df.head()
-```
-
 
 
 
