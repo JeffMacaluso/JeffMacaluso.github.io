@@ -132,7 +132,50 @@ Father.tail()
 
 
 <div>
-<table border="1" class="dataframe">
+<style>
+table {
+        margin-left: auto;
+        margin-right: auto;
+        border: none;
+        border-collapse: collapse;
+        border-spacing: 0;
+        color: @rendered_html_border_color;
+        font-size: 12px;
+        table-layout: fixed;
+    }
+    thead {
+        border-bottom: 1px solid @rendered_html_border_color;
+        vertical-align: bottom;
+    }
+    tr, th, td {
+        text-align: right;
+        vertical-align: middle;
+        padding: 0.5em 0.5em;
+        line-height: normal;
+        white-space: normal;
+        max-width: none;
+        border: none;
+    }
+    th {
+        font-weight: bold;
+    }
+    tbody tr:nth-child(odd) {
+        background: #f5f5f5;
+    }
+    tbody tr:hover {
+        background: rgba(66, 165, 245, 0.2);
+    }
+    * + table {margin-top: 1em;}
+
+    p {text-align: left;}
+* + p {margin-top: 1em;}
+
+td, th {
+    text-align: center;
+    padding: 8px;
+}
+</style>
+<table border="0" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -223,7 +266,7 @@ Mother.tail()
 
 
 <div>
-<table border="1" class="dataframe">
+<table border="0" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -354,7 +397,7 @@ df.ix[304:307]
 
 
 <div>
-<table border="1" class="dataframe">
+<table border="0" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -577,7 +620,7 @@ df[df['Given'].str.contains("Keturah") == True]
 
 
 <div>
-<table border="1" class="dataframe">
+<table border="0" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -819,7 +862,7 @@ df[['BirthPlace', 'BirthState', 'DeathPlace', 'DeathState', 'FatherBirthState', 
 
 
 <div>
-<table border="1" class="dataframe">
+<table border="0" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -1099,7 +1142,7 @@ df[['BirthDate', 'BirthYear', 'BirthDecade', 'DeathDate', 'DeathYear']].head()
 
 
 <div>
-<table border="1" class="dataframe">
+<table border="0" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -1488,7 +1531,7 @@ usaMap.head()
 
 
 <div>
-<table border="1" class="dataframe">
+<table border="0" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -1777,7 +1820,7 @@ euroMap
 
 
 <div>
-<table border="1" class="dataframe">
+<table border="0" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -1844,7 +1887,7 @@ euroMap
 
 
 <div>
-<table border="1" class="dataframe">
+<table border="0" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
