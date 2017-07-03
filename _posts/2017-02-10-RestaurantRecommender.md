@@ -5,7 +5,19 @@ date:   2017-02-10 21:04:11 -0500
 categories: jekyll update
 ---
 
-# Introduction
+# One
+
+## Two
+
+### Three
+
+#### Four
+
+##### Five
+
+###### Six
+
+## Introduction
 
 In this project, I extracted restaurant ratings and reviews from [Foursquare](https://foursquare.com/) and used distance (one of the main ideas behind recommender systems) to generate recommendations for restaurants in one city that have similar reviews to restaurants in another city.  This post is the abridged version, but check out [my github post](https://github.com/JeffMacaluso/Blog/blob/master/Restaurant%20Recommender.ipynb) for all of the code if you are curious or want to use it.
 
@@ -450,7 +462,7 @@ For example:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;['central', 'texas', 'barbecue', 'best', 'smoked', 'only', 'barbecue', 'matters']
 </div>
 
-This does take a bit longer to run at ~6 minutes
+This does take a bit longer to run at ~5 minutes
 
 
 ```python
@@ -471,7 +483,7 @@ df['tokens'] = filtered_words
 
 ### 4) Lemmatizing (Stemming)
 
-Stemming removes variations at the end of a word to revert words to their root in order to reduce our overall feature space (e.x. running --> run).  This has the possibility to adversely impact our performance when the root word is different (e.x. university --> universe), but the net positives typically outweigh the net negatives.
+Stemming removes variations at the end of a word to revert words to their root in order to reduce our overall feature space (e.x. *running* --> *run*).  This has the possibility to adversely impact our performance when the root word is different (e.x. *university* --> *universe*), but the net positives typically outweigh the net negatives.
 
 For example:
 
