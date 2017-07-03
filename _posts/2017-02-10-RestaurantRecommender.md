@@ -129,157 +129,14 @@ If you're still with us after all of that, let's get started!
 
 ---
 
-In addition to the library imports, we have to specify our credentials to access the foursquare API.  I'm not keen on sharing mine, but you can get your own by [signing up](https://developer.foursquare.com/).  I stored mine in a text file which is being read in as a variable before making the API calls.
 
-
-```python
-import numpy as np
-import pandas as pd
-import nltk  # Natural Language Processing
-import re  # Regex
-import matplotlib.pyplot as plt
-import seaborn as sns
-
-# Functions for preparing and calculating similarity
-from sklearn.metrics.pairwise import cosine_similarity
-from scipy import sparse
-from sklearn.preprocessing import MinMaxScaler, normalize
-from sklearn.feature_extraction import text as sktext
-
-import foursquare
-
-# Controls aesthetics for plots
-sns.set_context("notebook", font_scale=1.1)
-sns.set_style("ticks")
-%matplotlib inline
-```
-
-
-```python
-# Reading credentials for the API
-with open('foursquareCredentials.txt') as f:
-    lines = [line.split('=')[1] for line in f.readlines()]
-    credentials = [line.replace("'", '').replace('\n', '') for line in lines]
-    f.close()
-
-# Assigning the credentials to an object
-client = foursquare.Foursquare(
-    client_id=credentials[0], 
-    client_secret=credentials[1], 
-    redirect_uri=credentials[2])
-```
+We'll be using standard libraries for this project (pandas, nltk, and scikit-learn), but one additional thing we need for this project are credentials to access the Foursquare API.  I'm not keen on sharing mine, but you can get your own by [signing up](https://developer.foursquare.com/).  
 
 ## The Data
 
-Foursquare works similarly to Yelp where users will review restaurants.  They can either leave a rating (1-10), or write a review for the restaurant.  The review is what we're interested in here since I established above that the rating has less meaning due to the way people rate restaurants differently between the two cities.
+Foursquare works similarly to Yelp where users will review restaurants.  They can either leave a rating (1-10), or write a review for the restaurant.  The reviews are what we're interested in here since I established above that the rating has less meaning due to the way people rate restaurants differently between the two cities.
 
-The [documentation](https://developer.foursquare.com/docs/) was fortunately fairly robust.  I used the [foursquare categoryID tree](https://developer.foursquare.com/categorytree) in order to grab the venue category ID for the different types of restaurants.  The [venue search](https://developer.foursquare.com/docs/venues/search) function grabs the actual restaurants, and the [tips](https://developer.foursquare.com/docs/venues/tips) function returns the reviews (and not what users left for a tip like you'd think).
-
-We're going to use the individual reviews, restaurant category, price tier, and the number of check-ins, reviews, and users.
-
-
-### Restaurants
-
-Before pulling our restaurants, we have to first include a few parameters.  We'll begin with the cities we want to include and the restaurant types we want to include.
-
-Since we're not interested in chains or fast food restaurants, we have to specify which venue category IDs we want.  There are also a few grocery stores (such as Whole Foods and the magnificent [H-E-B](https://www.heb.com/)) that appear under the bakery and deli categories, so excluding this is easier than manually filtering them out.  I left them commented out so there is the full list in case anyone else would like to include them for their own uses.
-
-
-With those specified, we'll go ahead and pull in the restaurants.  This loop will go through each restaurant category, grab the restaurants that meet our criteria, and puts them into a data frame called dfRest (**d**ata **f**rame of **rest**aurants).
-
-Tasks like these can sometimes take a lot of time, but this fortunately runs in under a minute.
-
-    (1362, 10)
-
-
-
-While that removed more than half of our records, ~1,300 restaurants is still plenty enough to work with.  This will also drastically reduce the number of reviews we need to grab, as well.
-
-Moving on, let's look at a few charts for exploratory analysis to see what restaurants we ended up with:
-
-
-```python
-# Number of reviews per restaurant
-plt.figure(figsize=(8, 5))
-sns.kdeplot(dfRest['commentsCount'], legend=False)
-plt.title('# Comments per Restaurant Distribution')
-sns.despine()
-```
-
-<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/RestaurantRecommender_files/Restaurant%20Recommender_12_0.png">
-
-<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/RestaurantRecommender_files/Restaurant%20Recommender_13_0.png">
-
-<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/RestaurantRecommender_files/Restaurant%20Recommender_14_0.png">
-
-
-So our number of restaurants between each city is basically even, most restaurants have between 10 and 70 reviews, and we see a few interesting things in the breakdown between categories.  To summarize the chart:
-
-**Austin:**
-- Significantly more BBQ, tacos, food trucks, donuts, juice bars, and Cajun restaurants (but I could have told you this)
-- Seemingly more diversity in the smaller categories
-
-**Minneapolis:**
-- American is king
-- Significantly more bars, bakeries, middle eastern, cafés, tea rooms, German, and breweries
-
-Our initial pull didn't include the ratings, so we'll go ahead and pull those in along with the price tier.
-
-This loop takes a lot longer (~7 minutes), possibly due to making individual calls for each restaurant (~1,300) instead of just each category (~72).
-
-
-```python
-%%time
-
-ratings = []
-numRatings = []
-priceTiers = []
-
-for restId in dfRest['id']:
-    apiCall = client.venues(restId)['venue']
-    
-    try:
-        rate = apiCall['rating']
-        numRates = apiCall['ratingSignals']
-        tiers = apiCall['attributes']['groups'][0]['items'][0]['priceTier']
-    except:
-        rate = np.NaN
-        numRates = np.NaN
-        tiers = np.NaN
-        
-    ratings.append(rate)
-    numRatings.append(numRates)
-    priceTiers.append(tiers)
-    
-dfRest['rating'] = ratings
-dfRest['numRatings'] = numRatings
-dfRest['priceTier'] = priceTiers
-```
-
-    Wall time: 6min 46s
-    
-
-
-```python
-# Re-ordering the columns since the loop puts them out of order
-dfRest = dfRest.reindex_axis(['id', 'name', 'category', 'shortCategory',
-                              'checkinsCount', 'city','state', 'location',
-                              'commentsCount', 'usersCount', 'priceTier',
-                              'numRatings', 'rating'],
-                             axis=1).reset_index(drop=True)
-```
-
-
-```python
-# Cleaning the dataset by dropping duplicates
-dfRest = dfRest.dropna().drop_duplicates()
-
-dfRest.head()
-```
-
-
-
-
+The [documentation](https://developer.foursquare.com/docs/) was fortunately fairly robust, and you can read about the specific API calls I used in [my github code](https://github.com/JeffMacaluso/Blog/blob/master/Restaurant%20Recommender.ipynb).  I had to perform a few calls in order to get all of the data I needed, but the end result is a data frame with one row for each of the ~1,100 restaurants and a column (comments) that contains all of the reviews:
 
 <div style="overflow-x:auto;">
 <style>
@@ -327,200 +184,6 @@ td, th {
     padding: 8px;
 }
 </style>
-<table border="0" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>name</th>
-      <th>category</th>
-      <th>shortCategory</th>
-      <th>checkinsCount</th>
-      <th>city</th>
-      <th>state</th>
-      <th>location</th>
-      <th>commentsCount</th>
-      <th>usersCount</th>
-      <th>priceTier</th>
-      <th>numRatings</th>
-      <th>rating</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>4e17b348b0fb8567c665ddaf</td>
-      <td>Souper Salad</td>
-      <td>Salad Place</td>
-      <td>Salad</td>
-      <td>1769</td>
-      <td>Austin</td>
-      <td>TX</td>
-      <td>Austin, TX</td>
-      <td>17</td>
-      <td>683</td>
-      <td>1.0</td>
-      <td>41.0</td>
-      <td>6.9</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>4aceefb7f964a52013d220e3</td>
-      <td>Aster's Ethiopian Restaurant</td>
-      <td>Ethiopian Restaurant</td>
-      <td>Ethiopian</td>
-      <td>1463</td>
-      <td>Austin</td>
-      <td>TX</td>
-      <td>Austin, TX</td>
-      <td>34</td>
-      <td>1018</td>
-      <td>2.0</td>
-      <td>93.0</td>
-      <td>8.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>4b591015f964a520c17a28e3</td>
-      <td>Taste Of Ethiopia</td>
-      <td>Ethiopian Restaurant</td>
-      <td>Ethiopian</td>
-      <td>1047</td>
-      <td>Pflugerville</td>
-      <td>TX</td>
-      <td>Austin, TX</td>
-      <td>31</td>
-      <td>672</td>
-      <td>2.0</td>
-      <td>88.0</td>
-      <td>8.3</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>4ead97ba4690615f26a8adfe</td>
-      <td>Wasota African Cuisine</td>
-      <td>African Restaurant</td>
-      <td>African</td>
-      <td>195</td>
-      <td>Austin</td>
-      <td>TX</td>
-      <td>Austin, TX</td>
-      <td>12</td>
-      <td>140</td>
-      <td>2.0</td>
-      <td>10.0</td>
-      <td>6.2</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>4c7efeba2042b1f76cd1c1ad</td>
-      <td>Cazamance</td>
-      <td>African Restaurant</td>
-      <td>African</td>
-      <td>500</td>
-      <td>Austin</td>
-      <td>TX</td>
-      <td>Austin, TX</td>
-      <td>11</td>
-      <td>435</td>
-      <td>1.0</td>
-      <td>15.0</td>
-      <td>8.0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-### Reviews
-
-These are the actual comments people write about the restaurants, and they are what we will be comparing for our "recommender" system.  
-comments
-This loop grabs the actual comments per restaurant, and puts them into the data frame dfComments.  It takes ~10 minutes to run.
-
-Since I'm using a free developer key, I'm currently limited to 30 comments per restaurant ID.  This will impact the quality for some restaurants, but we saw that most of our restaurants had under 30 comments in the earlier chart.
-
-
-```python
-%%time
-
-dfComments = pd.DataFrame()
-
-for rest in dfRest['id']:
-    apiCall = client.venues.tips(rest)['tips']['items']
-    numComments = len(apiCall)
-    
-    for idx in np.arange(numComments):
-        temp = pd.DataFrame({
-                'id': rest,
-                'comment': apiCall[idx]['text']
-            }, index=[0])
-        dfComments = pd.concat([dfComments, temp])
-        
-dfComments = dfComments.reindex_axis(['id', 'comment'], axis = 1).reset_index(drop=True)
-```
-
-    Wall time: 9min 20s
-    
-
-
-```python
-dfComments.head()
-```
-
-
-
-
-<div style="overflow-x:auto;">
-<table border="0" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>comment</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>4e17b348b0fb8567c665ddaf</td>
-      <td>Healthy fresh salad plus baked potatoes, selec...</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>4e17b348b0fb8567c665ddaf</td>
-      <td>Make sure to print out your coupons. These fol...</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>4e17b348b0fb8567c665ddaf</td>
-      <td>First of all, this place uses CANNED chick pea...</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>4e17b348b0fb8567c665ddaf</td>
-      <td>Great healthy food, good prices. Try the ginge...</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>4e17b348b0fb8567c665ddaf</td>
-      <td>Love coming here. Makes getting lunch so easy ...</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-Now we need to group the comments together so we have one set of comments per restaurant before joining everything together.
-
-
-
-This is where we merge everything into one data frame, df, which has a row for each restaurant that includes all of the comments.  We'll also perform an additional sanitation step here by removing non-ASCII characters from the comments.
-
-
-
 <div style="overflow-x:auto;">
 <table border="0" class="dataframe">
   <thead>
@@ -632,17 +295,34 @@ This is where we merge everything into one data frame, df, which has a row for e
 </table>
 </div>
 
+I excluded fast food restaurants and chains from my API call since I'm not interested in them, but a few were included due to having a different category assigned to them.  For example, most of the restaurants under the "coffee" category are Starbucks.
+
+Let's look at a few charts for exploratory analysis to get a better idea of our data, starting with the number of reviews per restaurant:
+
+<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/RestaurantRecommender_files/Restaurant%20Recommender_12_0.png">
+
+One thing to note is that I’m currently limited to 30 comments per restaurant ID since I’m using a free developer key, so this will impact the quality of the analysis to a degree.
+
+Next, let's look at the number of restaurants per city:
+
+<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/RestaurantRecommender_files/Restaurant%20Recommender_13_0.png">
+
+These appear to be even, so let's look at the breakdown of restaurant categories between the two cities:
+
+<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/RestaurantRecommender_files/Restaurant%20Recommender_14_0.png">
+
+To summarize this chart:
+
+**Austin:**
+- Significantly more BBQ, tacos, food trucks, donuts, juice bars, and Cajun restaurants (but I could have told you this)
+- Seemingly more diversity in the smaller categories
+
+**Minneapolis:**
+- American is king
+- Significantly more bars, bakeries, middle eastern, cafés, tea rooms, German, and breweries
 
 
-Here's an example of the comments for one random restaurant to give a better idea of the data we're dealing with:
-
-
-```python
-df['comments'][np.random.randint(df.shape[0])]  # Selects one restaurant at random
-```
-
-
-
+Lastly, here's an example of the comments for one random restaurant to give a better idea of the text that we're dealing with:
 
     '{Make sure you check your steaks, they don\'t cook it the way you ask for them. The Outlaw Ribeye is excellent when cooked to order!Kyle is the best waiter here he should be a trainer or head waiter an train everyone at his level of customer service. I will wait to be seated when he\'s working.Alex is a great waitress very polite and very conscious about refills and service.  I give her 4.5 stars. Not quite a 5 yet.Great place awesome staff....but alas....their is a sign banning Cody G. Sangria is awesome!!!They make good food but if you are taking to go it takes awhile. They say 15 minutes but it\'s like 25-30.  Prepare for that.Lunch specials are great & service is always good.If you don\'t like lemon juice in your water, make sure to ask for it without.The burgers here are awesome! Freshly ground sirloin! Yummy!Try the Wild West Shrimp. Plenty to share. Yum!!!Customer service here is at 110%. Best service of any longhorns that I have been to across Texas.I was enjoying my salad when I bit into something odd.  It turned out to be a shard of clear hard plastic. I called the manager over. He replied, "glad you didn\'t swallow that". Not even an apology.I ordered a pork chop dinner and they brought me ribs. Talk about disorganized, plus I had to wait an hour for the pork chops.This isn\'t Ruth\'s Chris; understanding that is key to having a good time.The Mula drink it\'s excellentI can\'t believe they don\'t have Dr Pepper here; come on, this Texas, it\'s a requirement!!!The broccoli cheese soup was good!The passion/pineapple vodka is yummy!!!!Excelente lugarBuen servicio.This place is trash, save ur money ! Go to Texas road house.... YeaaaahhhhhhhCody G. must live here.Casey spends a lot of time here.TERRIBLE!!! Mediocre chain food and RUDE SERVICE!!! NEVER GOING BACK!!!Expensive.}'
 
@@ -679,6 +359,8 @@ The benefit in this is that it vastly reduces our feature space.  Our pre-proces
 
 
 ```python
+%%time
+
 # Converting all words to lower case and removing punctuation
 df['comments'] = [re.sub(r'\d+\S*', '',
                   row.lower().replace('.', ' ').replace('_', '').replace('/', ''))
@@ -703,17 +385,7 @@ df['comments'].head()
     4    {west african fusion reigns at this darling tr...
     Name: comments, dtype: object
 
-
-
-
-```python
-[re.sub(r'\d+', '', row) for row in df['comments']][6][0]
-```
-
-
-
-
-    '{'
+    Wall time: 971 ms
 
 
 
@@ -732,6 +404,8 @@ Tokenizing a sentence is a way to map our words into a feature space.  This is a
 
 
 ```python
+%%time
+
 # Tokenizing comments and putting them into a new column
 tokenizer = nltk.tokenize.RegexpTokenizer(r'\w+')  # by blank space
 df['tokens'] = df['comments'].apply(tokenizer.tokenize)
@@ -749,7 +423,7 @@ df['tokens'].head()
     4    [west, african, fusion, reigns, at, this, darl...
     Name: tokens, dtype: object
 
-
+    Wall time: 718ms
 
 ### 3) Removing Stopwords  & Punctuation
 
