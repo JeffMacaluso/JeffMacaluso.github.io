@@ -184,7 +184,7 @@ td, th {
     padding: 8px;
 }
 </style>
-<div style="overflow-x:auto;">
+
 <table border="0" class="dataframe">
   <thead>
     <tr style="text-align: right;">
