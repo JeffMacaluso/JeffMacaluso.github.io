@@ -15,11 +15,11 @@ I grew up in Austin, Texas, and moved to Minneapolis, Minnesota for my wife's wo
 
 In order to better illustrate our problem, below are recent reviews from three restaurants that left us disappointed.  On the left is a pizza shop, the middle is a typical American restaurant, and the right is a Vietnamese restaurant:
 
-<img style="float: left; width: 250px;" src="http://i.imgur.com/XZ00nBV.png">
+<img style="float: left; width: 225px;" src="http://i.imgur.com/XZ00nBV.png">
 
-<img style="float: right; width: 250px;" src="http://i.imgur.com/9C8c1ql.png">
+<img style="float: right; width: 225px;" src="http://i.imgur.com/9C8c1ql.png">
 
-<img style="float: none!important; display: block; width: 250px;" src="http://i.imgur.com/D15CLBU.png">
+<img style="float: none!important; display: block; width: 225px;" src="http://i.imgur.com/D15CLBU.png">
 
 I highlighted the main points to stand out against the small font. Service, atmosphere, and apparently eggrolls were the most common and unifying factors. You see very little discussion on the quality of the actual food,  and you can even see an instance where a reviewer rates the pizza place as 5/5 even after saying that it is expensive. I began to notice a disconnect in how I evaluate restaurants versus how the people of Minneapolis evaluate restaurants. If you have previously worked with recommender systems, you already know where I'm going with this. If not, here is a primer:
 
@@ -60,7 +60,7 @@ Let's return to our problem. The previous way of selecting restaurants at the re
 
 We're going to use cosine similarity since it's generally accepted as producing better results in item-to-item filtering:
 
-<img src="http://mathurl.com/ybv72jfa.png">
+<img hspace="20" src="http://mathurl.com/ybv72jfa.png">
 
 Before calculating this, we need to perform a couple of pre-processing steps on our reviews in order to make the data  usable for our cosine similarity calculation.  These will be common NLP (**n**atural **l**anguage **p**rocessing) techniques that you should be familiar with if you have worked with text before.  These are the steps I took, but I am open to feedback and improvement if you have recommendations on other methods that may yield better results.
 
@@ -106,11 +106,11 @@ becomes
 
 **5) Term Frequency-Inverse Document Frequency (TF-IDF)**: This technique determines how important a word is to a document (which is a review in this case) within a corpus (the collection documents, or all reviews).  This doesn't necessarily help establish context within our reviews themselves (for example, 'this Pad Kee Mao is bad ass' is technically a good thing, which wouldn't be accounted for unless we did [n-grams](https://en.wikipedia.org/wiki/N-gram) (which will give my laptop a much more difficult time)), but it does help with establishing the importance of the word.
 
-<img src="http://mathurl.com/ya3r3wkx.png">
+<img hspace="20" src="http://mathurl.com/ya3r3wkx.png">
 
-<img src="http://mathurl.com/yazeemgy.png">
+<img hspace="20" src="http://mathurl.com/yazeemgy.png">
 
-<img src="http://mathurl.com/y82lttkz.png">
+<img hspace="20" src="http://mathurl.com/y82lttkz.png">
 
 On a side note, sarcasm, slang, misspellings, emoticons, and context are common problems in NLP, but we will be ignoring these due to time limitations.  
 
@@ -885,11 +885,11 @@ stemmed_sentences[np.random.randint(len(stemmed_sentences))]
 
 This determines how important a word is to a document (which is a review in this case) within a corpus (the collection documents). It is a number resulting from the following formula: 
 
-<img src="http://mathurl.com/ya3r3wkx.png">
+<img hspace="20" src="http://mathurl.com/ya3r3wkx.png">
 
-<img src="http://mathurl.com/yazeemgy.png">
+<img hspace="20" src="http://mathurl.com/yazeemgy.png">
 
-<img src="http://mathurl.com/y82lttkz.png">
+<img hspace="20" src="http://mathurl.com/y82lttkz.png">
 
 Scikit-learn has an [excellent function](http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html) that is able to transform our processed text into a TF-IDF matrix very quickly.  We'll convert it back to a data frame, and join it to our original data frame by the indexes.
 
