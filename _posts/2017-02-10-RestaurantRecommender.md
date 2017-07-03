@@ -60,49 +60,57 @@ We're going to use cosine similarity since it's generally accepted as producing 
 
 Before calculating this, we need to perform a couple of pre-processing steps on our reviews in order to make the data  usable for our cosine similarity calculation.  These will be common NLP (**n**atural **l**anguage **p**rocessing) techniques that you should be familiar with if you have worked with text before.  These are the steps I took, but I am open to feedback and improvement if you have recommendations on other methods that may yield better results.
 
-**1) Normalizing**: This step converts our words into lower case so that when we map to our feature space, we don't end up with redundant features for the same words.  For example:
+**1) Normalizing**: This step converts our words into lower case so that when we map to our feature space, we don't end up with redundant features for the same words.
+
+**Before:**
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0;">
   "Central Texas barbecue is the best smoked and the only barbecue that matters"
 </div>
 
-becomes
+**After:**
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0;">
 "central texas barbecue is the best smoked and the only barbecue that matters"
 </div>
 
-**2) Tokenizing**: This step breaks up a sentence into individual words, essentially turning our reviews into [bags of words](https://en.wikipedia.org/wiki/Bag-of-words_model), which makes it easier to perform other operations.  Though we are going to perform many other preprocessing operations, this is more or less the beginning of mapping our reviews into the feature space.  For example:
+**2) Tokenizing**: This step breaks up a sentence into individual words, essentially turning our reviews into [bags of words](https://en.wikipedia.org/wiki/Bag-of-words_model), which makes it easier to perform other operations.  Though we are going to perform many other preprocessing operations, this is more or less the beginning of mapping our reviews into the feature space.
+
+**Before:**
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0;">
 'Central Texas barbecue is the best smoked and the only barbecue that matters'
 </div>
 
-becomes
+**After:**
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0;">
 ['Central', 'Texas', 'barbecue', 'is', 'the', 'best', 'smoked', 'and', 'the', 'only', 'barbecue', 'that', 'matters']
 </div>
 
-**3) Removing Stopwords and Punctuation**: This step removes unnecessary words and punctuation often used in language that computers don't need such as *as*, *the*, *and*, and *of*.  For example:
+**3) Removing Stopwords and Punctuation**: This step removes unnecessary words and punctuation often used in language that computers don't need such as *as*, *the*, *and*, and *of*.
+
+**Before:**
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0;">
 ['central', 'texas', 'barbecue', 'is', 'the', 'best', 'smoked', 'and', 'the', 'only', 'barbecue', 'that', 'matters']
 </div>
 
-becomes
+**After:**
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0;">
 ['central', 'texas', 'barbecue', 'best', 'smoked', 'only', 'barbecue', 'matters']
 </div>
 
-**4) Lemmatizing (Stemming)**: Lemmatizing (which is very similar to stemming) removes variations at the end of a word to revert words to their root word.  For example:
+**4) Lemmatizing (Stemming)**: Lemmatizing (which is very similar to stemming) removes variations at the end of a word to revert words to their root word.
+
+**Before:**
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0;">
 ['central', 'texas', 'barbecue', 'best', 'smoked', 'only', 'barbecue', 'matters']
 </div>
 
-becomes
+**After:**
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0;">
 ['central', 'texas', 'barbecue', 'best', 'smoke', 'only', 'barbecue', 'matter']
@@ -130,6 +138,7 @@ It's always important to state your assumptions in any analysis because a violat
 - Sarcasm, slang, misspellings, and other common NLP problems will not have a significant impact on our results.
 
 ---
+
 # Restaurant Recommender
 
 
