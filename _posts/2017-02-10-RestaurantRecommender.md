@@ -64,13 +64,13 @@ Before calculating this, we need to perform a couple of pre-processing steps on 
 
 &nbsp;&nbsp;&nbsp;&nbsp;**Before:**
 
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0; font-family:helvetica;">
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0; font-family:tahoma;">
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Central Texas barbecue is the best smoked and the only barbecue that matters"
 </div>
 
 &nbsp;&nbsp;&nbsp;&nbsp;**After:**
 
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0; font-family:helvetica;">
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0; font-family:tahoma;">
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"central texas barbecue is the best smoked and the only barbecue that matters"
 </div>
 
@@ -78,13 +78,13 @@ Before calculating this, we need to perform a couple of pre-processing steps on 
 
 &nbsp;&nbsp;&nbsp;&nbsp;**Before:**
 
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0; font-family:helvetica;">
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0; font-family:tahoma;">
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'Central Texas barbecue is the best smoked and the only barbecue that matters'
 </div>
 
 &nbsp;&nbsp;&nbsp;&nbsp;**After:**
 
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0; font-family:helvetica;">
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0; font-family:tahoma;">
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;['Central', 'Texas', 'barbecue', 'is', 'the', 'best', 'smoked', 'and', 'the', 'only', 'barbecue', 'that', 'matters']
 </div>
 
@@ -92,13 +92,13 @@ Before calculating this, we need to perform a couple of pre-processing steps on 
 
 &nbsp;&nbsp;&nbsp;&nbsp;**Before:**
 
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0; font-family:helvetica;">
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0; font-family:tahoma;">
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;['central', 'texas', 'barbecue', 'is', 'the', 'best', 'smoked', 'and', 'the', 'only', 'barbecue', 'that', 'matters']
 </div>
 
 &nbsp;&nbsp;&nbsp;&nbsp;**After:**
 
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0; font-family:helvetica;">
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0; font-family:tahoma;">
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;['central', 'texas', 'barbecue', 'best', 'smoked', 'only', 'barbecue', 'matters']
 </div>
 
@@ -106,13 +106,13 @@ Before calculating this, we need to perform a couple of pre-processing steps on 
 
 &nbsp;&nbsp;&nbsp;&nbsp;**Before:**
 
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0; font-family:helvetica;">
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0; font-family:tahoma;">
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;['central', 'texas', 'barbecue', 'best', 'smoked', 'only', 'barbecue', 'matters']
 </div>
 
 &nbsp;&nbsp;&nbsp;&nbsp;**After:**
 
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0; font-family:helvetica;">
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0; font-family:tahoma;">
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;['central', 'texas', 'barbecue', 'best', 'smoke', 'only', 'barbecue', 'matter']
 </div>
 
@@ -347,7 +347,7 @@ To summarize this chart:
 
 Lastly, here's an example of the comments for one random restaurant to give a better idea of the text that we're dealing with:
 
-<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0;">
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0; font-family:tahoma;">
 '{Make sure you check your steaks, they don\'t cook it the way you ask for them. The Outlaw Ribeye is excellent when cooked to order!Kyle is the best waiter here he should be a trainer or head waiter an train everyone at his level of customer service. I will wait to be seated when he\'s working.Alex is a great waitress very polite and very conscious about refills and service.  I give her 4.5 stars. Not quite a 5 yet.Great place awesome staff....but alas....their is a sign banning Cody G. Sangria is awesome!!!They make good food but if you are taking to go it takes awhile. They say 15 minutes but it\'s like 25-30.  Prepare for that.Lunch specials are great and service is always good.If you don\'t like lemon juice in your water, make sure to ask for it without.The burgers here are awesome! Freshly ground sirloin! Yummy!Try the Wild West Shrimp. Plenty to share. Yum!!!Customer service here is at 110%. Best service of any longhorns that I have been to across Texas.I was enjoying my salad when I bit into something odd.  It turned out to be a shard of clear hard plastic. I called the manager over. He replied, "glad you didn\'t swallow that". Not even an apology.I ordered a pork chop dinner and they brought me ribs. Talk about disorganized, plus I had to wait an hour for the pork chops.This isn\'t Ruth\'s Chris; understanding that is key to having a good time.The Mula drink it\'s excellentI can\'t believe they don\'t have Dr Pepper here; come on, this Texas, it\'s a requirement!!!The broccoli cheese soup was good!The passion/pineapple vodka is yummy!!!!Excelente lugarBuen servicio.This place is trash, save ur money ! Go to Texas road house.... YeaaaahhhhhhhCody G. must live here.Casey spends a lot of time here.TERRIBLE!!! Mediocre chain food and RUDE SERVICE!!! NEVER GOING BACK!!!Expensive.}'
 </div>
 
@@ -545,15 +545,7 @@ for row in df['tokens']:
     stemmed_sentences.append(stemmed_string)
     
 df['tokens'] = stemmed_sentences
-stemmed_sentences[np.random.randint(len(stemmed_sentences))]
 ```
-
-
-
-
-    ' line ridiculous download app order get bowl min whilst person take place line wait wait hangry townsuper nice staff give extra chicken cost waswink speedy service even onsaturday order fajita sure let know mean pepper bean skimpy portion compare location especially compare portion employee give front pay customer try almost chipotle area one make best steak service really shitty everyone else say third row line least min getbowl andbunch chip best chip dip ever taste use app order advance get comical long line location staff oblivious tell cashier reguerilla getfree bag chip slow chipolte ever seriously come rush anywhere chance go late end withoutdinner get salad dress tangy place crazy busy matter go staff slow expect wait putlime wedge coke good linesridiculous worth wait chicken burrito bowl bestgetbowl healthy great burrito chipsits nice charge guacamolesteak soft taco withside guacamole mexican cuisineorder ahead online great staff line way behind fillingfax order good customer servicei desire earn back mayor ship quality food service takenserious turn since mgr ben sexe leave slow chipotle staff twin citiesthis place go hill lot staff fast mayor unhappyborrito bowlgreat place disfunctional officially bad chipotle go lyndale good service slow chipotle land prepare wait line always terrible management seem carekicks qdoba buttway toooooo slow tonight outta chip guaq areno brainerdamn soooo slow food good service suck'
-
-
 
 ### 5) Term Frequency-Inverse Document Frequency (TF-IDF)
 
