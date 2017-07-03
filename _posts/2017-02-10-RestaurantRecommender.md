@@ -11,7 +11,7 @@ In this project, I extracted restaurant ratings and reviews from [Foursquare](ht
 
 ### Motivation
 
-I grew up in Austin, Texas, and moved to Minneapolis, Minnesota for my wife's work a few years ago. My wife and I are people who love food, and loved the food culture in Austin. After our move, we wanted to find new restaurants to replace our favorites from back home.  However, most decently rated places in Minneapolis we went to just didn't quite live up to our Austin expectations.  These restaurants usually came at the recommendations of locals, acquaintances, or from Google ratings, but the food was often bland and overpriced.  It took us one deep dive into the actual reviews to figure it out.  
+I grew up in Austin, Texas, and moved to Minneapolis, Minnesota a few years ago. My wife and I are people who love food, and loved the food culture in Austin. After our move, we wanted to find new restaurants to replace our favorites from back home.  However, most decently rated places in Minneapolis we went to just didn't quite live up to our Austin expectations.  These restaurants usually came at the recommendations of locals, acquaintances, or from Google ratings, but the food was often bland and overpriced.  It took us one deep dive into the actual reviews to figure it out.  
 
 In order to better illustrate our problem, below are recent reviews from three restaurants that left us disappointed.  On the left is a typical American restaurant, the middle is a Vietnamese restaurant, and the right is a pizza shop:
 
