@@ -5,23 +5,11 @@ date:   2017-02-10 21:04:11 -0500
 categories: jekyll update
 ---
 
-# One
-
-## Two
-
-### Three
-
-#### Four
-
-##### Five
-
-###### Six
-
 ## Introduction
 
 In this project, I extracted restaurant ratings and reviews from [Foursquare](https://foursquare.com/) and used distance (one of the main ideas behind recommender systems) to generate recommendations for restaurants in one city that have similar reviews to restaurants in another city.  This post is the abridged version, but check out [my github post](https://github.com/JeffMacaluso/Blog/blob/master/Restaurant%20Recommender.ipynb) for all of the code if you are curious or want to use it.
 
-### Motivation
+#### Motivation
 
 I grew up in Austin, Texas, and moved to Minneapolis, Minnesota for my wife's work a few years ago. My wife and I are people who love food, and loved the food culture in Austin. After our move, we wanted to find new restaurants to replace our favorites from back home.  However, most decently rated places in Minneapolis we went to just didn't quite live up to our Austin expectations.  These restaurants usually came at the recommendations of locals, acquaintances, or from Google ratings, but the food was often bland and overpriced.  It took us one deep dive into the actual reviews to figure it out.  
 
@@ -31,7 +19,7 @@ In order to better illustrate our problem, below are recent reviews from three r
 
 I highlighted the main points to stand out against the small font. Service, atmosphere, and apparently eggrolls were the most common and unifying factors. You see very little discussion on the quality of the actual food,  and you can even see an instance where a reviewer rates the pizza place as 5/5 even after saying that it is expensive. I began to notice a disconnect in how I evaluate restaurants versus how the people of Minneapolis evaluate restaurants. If you have previously worked with recommender systems, you already know where I'm going with this. If not, here is a primer:
 
-### Recommender Systems Overview
+#### Recommender Systems Overview
 
 Before getting into the overview of recommender systems, I wanted to point out that I won't actually be building a legitimate recommender system in this notebook.  There are some [great](https://turi.com/learn/userguide/recommender/introduction.html) [packages](https://github.com/lyst/lightfm) for doing so, but I'm going to stick with one of the main ideas behind recommender systems.  This is for two reasons:
 
@@ -62,7 +50,7 @@ Those are the three main types, but there is one additional type that you may fi
 - **[Knowledge-Based](https://en.wikipedia.org/wiki/Knowledge-based_recommender_system)**: This is is the most rare type mainly because it requires explicit domain knowledge. It is often used for products that have a low number of available ratings, such as high luxury goods like hypercars. We won't delve any further into this type, but I recommend reading more about it if you're interested in the concept.
 
 
-### Methodology
+#### Methodology
 
 Let's return to our problem. The previous way of selecting restaurants at the recommendation of locals and acquaintances (collaborative filtering) wasn't always successful, so we are going to use the idea behind content-based recommender systems to evaluate our options.  However, we don't have a lot of content about the restaurants available, so we are going to primarily use the reviews people left for them.  More specifically, we are going to determine similarity between restaurants based off of the similarity of the reviews that people have written for them.  
 
@@ -361,7 +349,7 @@ Lastly, here's an example of the comments for one random restaurant to give a be
 '{Make sure you check your steaks, they don\'t cook it the way you ask for them. The Outlaw Ribeye is excellent when cooked to order!Kyle is the best waiter here he should be a trainer or head waiter an train everyone at his level of customer service. I will wait to be seated when he\'s working.Alex is a great waitress very polite and very conscious about refills and service.  I give her 4.5 stars. Not quite a 5 yet.Great place awesome staff....but alas....their is a sign banning Cody G. Sangria is awesome!!!They make good food but if you are taking to go it takes awhile. They say 15 minutes but it\'s like 25-30.  Prepare for that.Lunch specials are great and service is always good.If you don\'t like lemon juice in your water, make sure to ask for it without.The burgers here are awesome! Freshly ground sirloin! Yummy!Try the Wild West Shrimp. Plenty to share. Yum!!!Customer service here is at 110%. Best service of any longhorns that I have been to across Texas.I was enjoying my salad when I bit into something odd.  It turned out to be a shard of clear hard plastic. I called the manager over. He replied, "glad you didn\'t swallow that". Not even an apology.I ordered a pork chop dinner and they brought me ribs. Talk about disorganized, plus I had to wait an hour for the pork chops.This isn\'t Ruth\'s Chris; understanding that is key to having a good time.The Mula drink it\'s excellentI can\'t believe they don\'t have Dr Pepper here; come on, this Texas, it\'s a requirement!!!The broccoli cheese soup was good!The passion/pineapple vodka is yummy!!!!Excelente lugarBuen servicio.This place is trash, save ur money ! Go to Texas road house.... YeaaaahhhhhhhCody G. must live here.Casey spends a lot of time here.TERRIBLE!!! Mediocre chain food and RUDE SERVICE!!! NEVER GOING BACK!!!Expensive.}'
 </div>
 
-## Data Processing
+### Data Processing
 
 When working with language, we have to process the text into something that a computer can handle more easily.  Our end result will be a large number of numerical features for each restaurant that we can use to calculate the cosine similarity.
 
@@ -374,7 +362,7 @@ The steps here are:
 
 I'll explain a little more on what these are and why we are doing them below in case you aren't familiar with them.
 
-### 1) Normalizing
+#### 1) Normalizing
 
 This section uses regex scripts that makes cases every word lower cased, removes punctuation, and removes digits.
 
@@ -414,7 +402,7 @@ df['comments'] = [re.sub(r'\d+', '', row) for row in df['comments']]
 
 
 
-### 2) Tokenizing
+#### 2) Tokenizing
 
 Tokenizing a sentence is a way to map our words into a feature space.  This is achieved by treating every word as an individual object.
 
@@ -444,7 +432,7 @@ df['tokens'] = df['comments'].apply(tokenizer.tokenize)
 
     Wall time: 718ms
 
-### 3) Removing Stopwords  & Punctuation
+#### 3) Removing Stopwords  & Punctuation
 
 Stopwords are unnecessary words like *as*, *the*, *and*, and *of* that aren't very useful for our purposes.  Since they don't have any intrinsic value, removing them reduces our feature space which will speed up our computations.
 
@@ -481,7 +469,7 @@ df['tokens'] = filtered_words
     Wall time: 4min 59s
     
 
-### 4) Lemmatizing (Stemming)
+#### 4) Lemmatizing (Stemming)
 
 Stemming removes variations at the end of a word to revert words to their root in order to reduce our overall feature space (e.x. *running* --> *run*).  This has the possibility to adversely impact our performance when the root word is different (e.x. *university* --> *universe*), but the net positives typically outweigh the net negatives.
 
@@ -579,7 +567,7 @@ for row in df['tokens']:
 df['tokens'] = stemmed_sentences
 ```
 
-### 5) Term Frequency-Inverse Document Frequency (TF-IDF)
+#### 5) Term Frequency-Inverse Document Frequency (TF-IDF)
 
 This determines how important a word is to a document (which is a review in this case) within a corpus (the collection documents). It is a number resulting from the following formula: 
 
@@ -955,7 +943,7 @@ This drastically reduced the dimensions of our data set, and we now have somethi
 
 
 ```python
-# Storing the original data frame before the merge in case any changes are needed
+# Storing the original data frame before the merge in case of changes
 df_orig = df.copy()
 
 # Renaming columns that conflict with column names in tfidfCore
@@ -1377,167 +1365,7 @@ selfRatings.head()
 ```python
 # Merging into df to add the column 'selfRating'
 df = pd.merge(df, selfRatings)
-
-df.head()
 ```
-
-
-
-
-<div style="overflow-x:auto;">
-<table border="0" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>Name</th>
-      <th>category</th>
-      <th>shortCategory</th>
-      <th>checkinsCount</th>
-      <th>City</th>
-      <th>state</th>
-      <th>Location</th>
-      <th>commentsCount</th>
-      <th>usersCount</th>
-      <th>...</th>
-      <th>Tea Room</th>
-      <th>Tex-Mex</th>
-      <th>Thai</th>
-      <th>Theme Restaurant</th>
-      <th>Turkish</th>
-      <th>Vegetarian / Vegan</th>
-      <th>Vietnamese</th>
-      <th>Wine Bar</th>
-      <th>Yogurt</th>
-      <th>selfRating</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>4e17b348b0fb8567c665ddaf</td>
-      <td>Souper Salad</td>
-      <td>Salad Place</td>
-      <td>Salad</td>
-      <td>1769</td>
-      <td>Austin</td>
-      <td>TX</td>
-      <td>Austin, TX</td>
-      <td>17</td>
-      <td>683</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>4aceefb7f964a52013d220e3</td>
-      <td>Aster's Ethiopian Restaurant</td>
-      <td>Ethiopian Restaurant</td>
-      <td>Ethiopian</td>
-      <td>1463</td>
-      <td>Austin</td>
-      <td>TX</td>
-      <td>Austin, TX</td>
-      <td>34</td>
-      <td>1018</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>4b591015f964a520c17a28e3</td>
-      <td>Taste Of Ethiopia</td>
-      <td>Ethiopian Restaurant</td>
-      <td>Ethiopian</td>
-      <td>1047</td>
-      <td>Pflugerville</td>
-      <td>TX</td>
-      <td>Austin, TX</td>
-      <td>31</td>
-      <td>672</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>4ead97ba4690615f26a8adfe</td>
-      <td>Wasota African Cuisine</td>
-      <td>African Restaurant</td>
-      <td>African</td>
-      <td>195</td>
-      <td>Austin</td>
-      <td>TX</td>
-      <td>Austin, TX</td>
-      <td>12</td>
-      <td>140</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>4c7efeba2042b1f76cd1c1ad</td>
-      <td>Cazamance</td>
-      <td>African Restaurant</td>
-      <td>African</td>
-      <td>500</td>
-      <td>Austin</td>
-      <td>TX</td>
-      <td>Austin, TX</td>
-      <td>11</td>
-      <td>435</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>NaN</td>
-    </tr>
-  </tbody>
-</table>
-<p>5 rows × 1091 columns</p>
-</div>
-
 
 
 ### Additional features & min-max scaling 
@@ -1962,13 +1790,6 @@ topRated[['Name', 'category', 'Location', 'selfRating']].sort_values(
       <td>10.0</td>
     </tr>
     <tr>
-      <th>88</th>
-      <td>Black's Barbecue</td>
-      <td>BBQ Joint</td>
-      <td>Austin, TX</td>
-      <td>10.0</td>
-    </tr>
-    <tr>
       <th>447</th>
       <td>Cabo Bob's</td>
       <td>Burrito Place</td>
@@ -2060,13 +1881,6 @@ topRated[['Name', 'category', 'Location', 'selfRating']].sort_values(
       <td>9.0</td>
     </tr>
     <tr>
-      <th>426</th>
-      <td>Trudy's North Star</td>
-      <td>Mexican Restaurant</td>
-      <td>Austin, TX</td>
-      <td>9.0</td>
-    </tr>
-    <tr>
       <th>421</th>
       <td>Chuy's</td>
       <td>Mexican Restaurant</td>
@@ -2143,20 +1957,6 @@ topRated[['Name', 'category', 'Location', 'selfRating']].sort_values(
       <td>Austin, TX</td>
       <td>8.0</td>
     </tr>
-    <tr>
-      <th>120</th>
-      <td>Texas Honey Ham Company</td>
-      <td>Sandwich Place</td>
-      <td>Austin, TX</td>
-      <td>8.0</td>
-    </tr>
-    <tr>
-      <th>832</th>
-      <td>Kramarczuk's East European Deli</td>
-      <td>Eastern European Restaurant</td>
-      <td>Minneapolis, MN</td>
-      <td>8.0</td>
-    </tr>
   </tbody>
 </table>
 </div>
@@ -2171,7 +1971,7 @@ def retrieve_recommendations(restaurant_index, num_recommendations=5):
     """
     Retrieves the most similar restaurants for the index of a given restaurant 
     
-    Outputs a data frame showing similarity, name, location, category, and rating
+    Outputs a data frame showing similarity, name, location, category, & rating
     """
     # Formatting the cosine similarity data frame for merging
     similarity = pd.melt(dfCos[dfCos.index == restaurant_index])
@@ -2198,7 +1998,7 @@ def retrieve_recommendations(restaurant_index, num_recommendations=5):
 
 Alright, let's test it out!
 
-### Barbecue
+#### Barbecue
 
 Let's start with the [Salt Lick](http://saltlickbbq.com/).  This is a popular central Texas barbecue place featured on [various food shows](https://www.youtube.com/watch?v=vLnsXechOWc).  They are well-known for their open smoke pit:
 
@@ -2311,7 +2111,7 @@ Funny enough, Brasa was also in [Man vs Food](https://www.youtube.com/watch?v=gZ
 
 Famous Dave's is a Midwestern barbecue chain that focuses more on ribs, which isn't generally considered a Texan specialty.  Psycho Suzi's (a theme restaurant that serves pizza and cocktails) and Brit's Pub (an English pub with a lawn bowling field) don't seem very similar, but their cosine similarity scores reflect that.
 
-### Donuts
+#### Donuts
 
 Moving on, let's find some donuts.  Before maple-bacon-cereal-whatever donuts become the craze (thanks for nothing, Portland), my home town was also famous for [Round Rock Donuts](http://roundrockdonuts.com/), a simple and delicious no-nonsense donut shop.  And yes, Man vs. Food also did a segment here.
 
@@ -2418,7 +2218,7 @@ Sadly, a lot of the most similar places our results returned were places I've tr
 
 <img style="width: 400px;" src="https://s3-media3.fl.yelpcdn.com/bphoto/VVpoCxOqusvCGpr5zAW-ZQ/o.jpg">
 
-### Tacos
+#### Tacos
 
 This is another Austin specialty that likely won't give promising results, but let's try it anyway.
 
@@ -2531,7 +2331,7 @@ I have tried Rusty Taco, and it does seem a lot like Tacodeli. They even sell br
 
 Taco Taxi looks like it could be promising, but they appear to be more of a traditional taqueria (delicious but dissimilar). To be fair, taquerias have had the best tacos I've found up here (though most of them aren't included in this list because they were outside of the search range).
 
-### Burritos
+#### Burritos
 
 I'm not actually going to run our similarity function for this part because the burrito place back home actually disappeared from our data pulling query in between me originally running this and finally having time to annotate everything and write this post. However, I wanted to include it because it was one of my other field tests.
 
@@ -2543,7 +2343,7 @@ I'm not actually going to run our similarity function for this part because the 
 
 <img src="https://media-cdn.tripadvisor.com/media/photo-s/06/a6/13/44/el-burrito-mercado.jpg">
 
-### Indian
+#### Indian
 
 Next up is the the [Clay Pit](https://www.claypit.com/), a contemporary Indian restaurant in Austin.  They focus mostly on curry dishes with naan, though some of my friends from grad school can tell you that India has way more cuisine diversity than curry dishes.
 
@@ -2683,7 +2483,7 @@ This was actually the first place I did a field test on.  When I originally look
 
 <img style="width: 300px;" src="https://s3-media4.fl.yelpcdn.com/bphoto/gueLSLa3LY6LGjYVrGdZkw/o.jpg">
 
-### French/Bistro
+#### French/Bistro
 
 One of our favorite places back home is [Blue Dahlia Bistro](http://www.bluedahliabistro.com/), a European-style bistro specializing in French fusion.  They use a lot of fresh and simple ingredients, and it's a great place for a date night due to its cozy interior and decorated back patio.
 
@@ -2791,7 +2591,7 @@ I think our heavier category weighting is hurting us here since Blue Dahlia is c
 <img style="width: 350px;" src="https://igx.4sqi.net/img/general/600x600/2736_Sy4oGIGsTbzfD5ykDTnPCUDgISnx9xQnDlCpqu6bGyU.jpg">
 
 
-### Coffee
+#### Coffee
 
 Speaking of coffee, let's wrap this up with coffee recommendations.  I still have a lot of places to find matches for, but since I did this project as a poor graduate student, most of them would be "that looks promising, but I haven't tried it yet".  
 
@@ -2912,7 +2712,7 @@ This chart from [an article on FlowingData](http://flowingdata.com/2014/03/18/co
 
 As for my verdict on Caribou, I actually like it better than the Coffee Bean and Tea Leaf.  In fact, I actually have a gift card for them in my wallet right now.  There also used to be a location for the Coffee Bean and Tea Leaf up here, but they closed it down shortly after I moved here (just like all of the Minnesotan [Schlotzsky's](https://www.schlotzskys.com/) locations...I'm still mad about that).
 
-# Summary
+## Summary
 
 Like any other tool, this method isn't perfect for every application, but it can work if we use it effectively. While there is room for improvement, I am pleased with how it has been working for me so far.
 
