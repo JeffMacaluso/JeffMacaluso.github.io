@@ -1998,7 +1998,7 @@ def retrieve_recommendations(restaurant_index, num_recommendations=5):
 
 Alright, let's test it out!
 
-#### Barbecue
+### Barbecue
 
 Let's start with the [Salt Lick](http://saltlickbbq.com/).  This is a popular central Texas barbecue place featured on [various food shows](https://www.youtube.com/watch?v=vLnsXechOWc).  They are well-known for their open smoke pit:
 
@@ -2111,7 +2111,7 @@ Funny enough, Brasa was also in [Man vs Food](https://www.youtube.com/watch?v=gZ
 
 Famous Dave's is a Midwestern barbecue chain that focuses more on ribs, which isn't generally considered a Texan specialty.  Psycho Suzi's (a theme restaurant that serves pizza and cocktails) and Brit's Pub (an English pub with a lawn bowling field) don't seem very similar, but their cosine similarity scores reflect that.
 
-#### Donuts
+### Donuts
 
 Moving on, let's find some donuts.  Before maple-bacon-cereal-whatever donuts become the craze (thanks for nothing, Portland), my home town was also famous for [Round Rock Donuts](http://roundrockdonuts.com/), a simple and delicious no-nonsense donut shop.  And yes, Man vs. Food also did a segment here.
 
@@ -2218,7 +2218,7 @@ Sadly, a lot of the most similar places our results returned were places I've tr
 
 <img style="width: 400px;" src="https://s3-media3.fl.yelpcdn.com/bphoto/VVpoCxOqusvCGpr5zAW-ZQ/o.jpg">
 
-#### Tacos
+### Tacos
 
 This is another Austin specialty that likely won't give promising results, but let's try it anyway.
 
@@ -2343,7 +2343,7 @@ I'm not actually going to run our similarity function for this part because the 
 
 <img src="https://media-cdn.tripadvisor.com/media/photo-s/06/a6/13/44/el-burrito-mercado.jpg">
 
-#### **Indian**
+### Indian
 
 Next up is the the [Clay Pit](https://www.claypit.com/), a contemporary Indian restaurant in Austin.  They focus mostly on curry dishes with naan, though some of my friends from grad school can tell you that India has way more cuisine diversity than curry dishes.
 
@@ -2591,7 +2591,7 @@ I think our heavier category weighting is hurting us here since Blue Dahlia is c
 <img style="width: 350px;" src="https://igx.4sqi.net/img/general/600x600/2736_Sy4oGIGsTbzfD5ykDTnPCUDgISnx9xQnDlCpqu6bGyU.jpg">
 
 
-#### Coffee
+### Coffee
 
 Speaking of coffee, let's wrap this up with coffee recommendations.  I still have a lot of places to find matches for, but since I did this project as a poor graduate student, most of them would be "that looks promising, but I haven't tried it yet".  
 
