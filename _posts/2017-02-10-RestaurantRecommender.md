@@ -7,7 +7,7 @@ categories: jekyll update
 
 # Introduction
 
-In this notebook, I will extract restaurant ratings and reviews from [Foursquare](https://foursquare.com/) and use distance (one of the main ideas behind recommender systems) to generate recommendations for restaurants in one city that have similar reviews to restaurants in another city.
+In this project, I extracted restaurant ratings and reviews from [Foursquare](https://foursquare.com/) and used distance (one of the main ideas behind recommender systems) to generate recommendations for restaurants in one city that have similar reviews to restaurants in another city.  This post is the abridged version, but check out [my github post](https://github.com/JeffMacaluso/Blog/blob/master/Restaurant%20Recommender.ipynb) for all of the code if you are curious or want to use it.
 
 ### Motivation
 
@@ -54,7 +54,7 @@ Those are the three main types, but there is one additional type that you may fi
 - **[Knowledge-Based](https://en.wikipedia.org/wiki/Knowledge-based_recommender_system)**: This is is the most rare type mainly because it requires explicit domain knowledge. It is often used for products that have a low number of available ratings, such as high luxury goods like hypercars. We won't delve any further into this type, but I recommend reading more about it if you're interested in the concept.
 
 
-### Method
+### Methodology
 
 Let's return to our problem. The previous way of selecting restaurants at the recommendation of locals and acquaintances (collaborative filtering) wasn't always successful, so we are going to use the idea behind content-based recommender systems to evaluate our options.  However, we don't have a lot of content about the restaurants available, so we are going to primarily use the reviews people left for them.  More specifically, we are going to determine similarity between restaurants based off of the similarity of the reviews that people have written for them.  
 
@@ -78,7 +78,7 @@ becomes
 
     Ex. 'Central Texas barbecue is the best smoked and the only barbecue that matters'
 
-ecomes
+becomes
 
 ```
     ['Central', 'Texas', 'barbecue', 'is', 'the', 'best', 'smoked', 'and', 'the', 'only', 'barbecue', 'that', 'matters']
