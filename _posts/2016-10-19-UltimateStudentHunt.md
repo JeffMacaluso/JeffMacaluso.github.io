@@ -81,7 +81,7 @@ df.describe()
 
 
 
-<div>
+<div style="overflow-x:auto;">
 <style>
 table {
         margin-left: auto;
@@ -323,7 +323,7 @@ df.head()
 
 
 
-<div>
+<div style="overflow-x:auto;">
 <table border="0" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -2159,7 +2159,7 @@ cv_error.sort_values('Error').head()
 
 
 
-<div>
+<div style="overflow-x:auto;">
 <table border="0" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -2323,7 +2323,7 @@ cv_error.sort_values('Error').tail()
 
 
 
-<div>
+<div style="overflow-x:auto;">
 <table border="0" class="dataframe">
   <thead>
     <tr style="text-align: right;">

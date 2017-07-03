@@ -131,7 +131,7 @@ Father.tail()
 
 
 
-<div>
+<div style="overflow-x:auto;">
 <style>
 table {
         margin-left: auto;
@@ -265,7 +265,7 @@ Mother.tail()
 
 
 
-<div>
+<div style="overflow-x:auto;">
 <table border="0" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -396,7 +396,7 @@ df.ix[304:307]
 
 
 
-<div>
+<div style="overflow-x:auto;">
 <table border="0" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -619,7 +619,7 @@ df[df['Given'].str.contains("Keturah") == True]
 
 
 
-<div>
+<div style="overflow-x:auto;">
 <table border="0" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -861,7 +861,7 @@ df[['BirthPlace', 'BirthState', 'DeathPlace', 'DeathState', 'FatherBirthState', 
 
 
 
-<div>
+<div style="overflow-x:auto;">
 <table border="0" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1141,7 +1141,7 @@ df[['BirthDate', 'BirthYear', 'BirthDecade', 'DeathDate', 'DeathYear']].head()
 
 
 
-<div>
+<div style="overflow-x:auto;">
 <table border="0" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1530,7 +1530,7 @@ usaMap.head()
 
 
 
-<div>
+<div style="overflow-x:auto;">
 <table border="0" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1819,7 +1819,7 @@ euroMap
 
 
 
-<div>
+<div style="overflow-x:auto;">
 <table border="0" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1886,7 +1886,7 @@ euroMap
 
 
 
-<div>
+<div style="overflow-x:auto;">
 <table border="0" class="dataframe">
   <thead>
     <tr style="text-align: right;">

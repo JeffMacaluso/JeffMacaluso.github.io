@@ -285,7 +285,7 @@ dfRest.head()
 
 
 
-<div>
+<div style="overflow-x:auto;">
 <style>
 table {
         margin-left: auto;
@@ -474,7 +474,7 @@ dfComments.head()
 
 
 
-<div>
+<div style="overflow-x:auto;">
 <table border="0" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -523,7 +523,7 @@ This is where we merge everything into one data frame, df, which has a row for e
 
 
 
-<div>
+<div style="overflow-x:auto;">
 <table border="0" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -923,7 +923,7 @@ tfidf_df.head()
 
 
 
-<div>
+<div style="overflow-x:auto;">
 <table border="0" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1099,7 +1099,7 @@ tfidf_df.head()
 
 
 
-<div>
+<div style="overflow-x:auto;">
 
 <table border="0" class="dataframe">
   <thead>
@@ -1277,7 +1277,7 @@ df.head()
 
 
 
-<div>
+<div style="overflow-x:auto;">
 <table border="0" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1446,7 +1446,7 @@ df.head()
 
 
 
-<div>
+<div style="overflow-x:auto;">
 <table border="0" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1637,7 +1637,7 @@ selfRatings.head()
 
 
 
-<div>
+<div style="overflow-x:auto;">
 <table border="0" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1689,7 +1689,7 @@ df.head()
 
 
 
-<div>
+<div style="overflow-x:auto;">
 <table border="0" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1888,7 +1888,7 @@ df_item_norm.head()
 
 
 
-<div>
+<div style="overflow-x:auto;">
 <table border="0" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -2076,7 +2076,7 @@ dfCos.head()
 
 
 
-<div>
+<div style="overflow-x:auto;">
 <table border="0" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -2247,7 +2247,7 @@ topRated[['Name', 'category', 'Location', 'selfRating']].sort_values(
 
 
 
-<div>
+<div style="overflow-x:auto;">
 <table border="0" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -2520,7 +2520,7 @@ retrieve_recommendations(66)
 
 
 
-<div>
+<div style="overflow-x:auto;">
 <table border="0" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -2630,7 +2630,7 @@ retrieve_recommendations(222)
 
 
 
-<div>
+<div style="overflow-x:auto;">
 <table border="0" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -2738,7 +2738,7 @@ retrieve_recommendations(420)
 
 
 
-<div>
+<div style="overflow-x:auto;">
 <table border="0" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -2860,7 +2860,7 @@ retrieve_recommendations(338, 8)
 
 
 
-<div>
+<div style="overflow-x:auto;">
 <table border="0" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -2999,7 +2999,7 @@ retrieve_recommendations(124)
 
 
 
-<div>
+<div style="overflow-x:auto;">
 <table border="0" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -3116,7 +3116,7 @@ retrieve_recommendations(558)
 
 
 
-<div>
+<div style="overflow-x:auto;">
 <table border="0" class="dataframe">
   <thead>
     <tr style="text-align: right;">
