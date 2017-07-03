@@ -669,11 +669,11 @@ For example:
 
 **Before:**
 
-$\hspace{1cm}$"ThIs Is HoW mIdDlE sChOoLeRs TaLkEd 2 EaCh OtHeR oN AIM!!!!"
+    "ThIs Is HoW mIdDlE sChOoLeRs TaLkEd 2 EaCh OtHeR oN AIM!!!!"
 
 **After:**
 
-$\hspace{1cm}$"this is how middle schoolers talked each other on aim"
+    "this is how middle schoolers talked each other on aim"
 
 The benefit in this is that it vastly reduces our feature space.  Our pre-processed example would have created an additional ~10 features from someone who doesn't know how to type like a regular human being.
 
@@ -723,11 +723,11 @@ Tokenizing a sentence is a way to map our words into a feature space.  This is a
 
 **Before:**
 
-$\hspace{1cm}$'central texas barbecue is the best smoked and the only barbecue that matters'
+    'central texas barbecue is the best smoked and the only barbecue that matters'
 
 **After:**
 
-$\hspace{1cm}$['central', 'texas', 'barbecue', 'is', 'the', 'best', 'smoked', 'and', 'the', 'only', 'barbecue', 'that', 'matters']
+    ['central', 'texas', 'barbecue', 'is', 'the', 'best', 'smoked', 'and', 'the', 'only', 'barbecue', 'that', 'matters']
 
 
 
@@ -757,11 +757,11 @@ Stopwords are unnecessary words like *as*, *the*, *and*, and *of* that aren't ve
 
 **Before:**
 
-$\hspace{1cm}$['central', 'texas', 'barbecue', 'is', 'the', 'best', 'smoked', 'and', 'the', 'only', 'barbecue', 'that', 'matters']
+    ['central', 'texas', 'barbecue', 'is', 'the', 'best', 'smoked', 'and', 'the', 'only', 'barbecue', 'that', 'matters']
 
 **After:**
 
-$\hspace{1cm}$['central', 'texas', 'barbecue', 'best', 'smoked', 'only', 'barbecue', 'matters']
+    ['central', 'texas', 'barbecue', 'best', 'smoked', 'only', 'barbecue', 'matters']
 
 This does take a bit longer to run at ~6 minutes
 
@@ -788,11 +788,11 @@ Stemming removes variations at the end of a word to revert words to their root i
 
 **Before:**
 
-$\hspace{1cm}$['central', 'texas', 'barbecue', 'best', 'smoked', 'only', 'barbecue', 'matters']
+    ['central', 'texas', 'barbecue', 'best', 'smoked', 'only', 'barbecue', 'matters']
 
 **After:**
 
-$\hspace{1cm}$['central', 'texas', 'barbecue', 'best', 'smoke', 'only', 'barbecue', 'matter']
+    ['central', 'texas', 'barbecue', 'best', 'smoke', 'only', 'barbecue', 'matter']
 
 One very important thing to note here is that we're actually doing something called **[Lemmatization](https://en.wikipedia.org/wiki/Lemmatisation)**, which is similar to [stemming](https://en.wikipedia.org/wiki/Stemming), but is a little different. Both seek to reduce inflectional forms and sometimes derivationally related forms of a word to a common base form, but they go about it in different ways.  In order to illustrate the difference, here's a dictionary entry:
 
@@ -2057,7 +2057,7 @@ This section calculates the cosine similarity and puts it into a matrix with the
 
 As a reminder, we're using cosine similarity because it's generally accepted as producing better results in item-to-item filtering. For all you math folk, here's the formula again:
 
-$\hspace{8cm}sim(A, B) = \cos(\theta) = \frac{A \cdot B}{\|A\|\|B\|}$
+<img hspace="40" src="http://mathurl.com/ybv72jfa.png">
 
 
 ```python
@@ -2466,7 +2466,7 @@ topRated[['Name', 'category', 'Location', 'selfRating']].sort_values(
 
 
 
-In order to speed things up, we'll make a function that formats the cosine similarity data frame and retrieves the top $n$ most similar restaurants for the given restaurant:
+In order to speed things up, we'll make a function that formats the cosine similarity data frame and retrieves the top n most similar restaurants for the given restaurant:
 
 
 ```python
@@ -2622,6 +2622,7 @@ Moving on, let's find some donuts.  Before maple-bacon-cereal-whatever donuts be
 
 
 ```python
+# Round Rock Donuts
 retrieve_recommendations(222)
 ```
 
@@ -2730,6 +2731,7 @@ This is another Austin specialty that likely won't give promising results, but l
 
 
 ```python
+# Tacodeli
 retrieve_recommendations(420)
 ```
 
@@ -2852,6 +2854,7 @@ Next up is the the [Clay Pit](https://www.claypit.com/), a contemporary Indian r
 
 
 ```python
+# Clay Pit
 retrieve_recommendations(338, 8)
 ```
 
@@ -2991,6 +2994,7 @@ One of our favorite places back home is [Blue Dahlia Bistro](http://www.bluedahl
 
 
 ```python
+# Blue Dahlia
 retrieve_recommendations(124)
 ```
 
@@ -3108,6 +3112,7 @@ Let's go with The Coffee Bean & Tea Leaf instead. It's actually a small chain ou
 
 
 ```python
+# Coffee Bean & Tea Leaf
 retrieve_recommendations(558)
 ```
 
