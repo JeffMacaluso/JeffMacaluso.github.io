@@ -142,6 +142,8 @@ table {
         color: @rendered_html_border_color;
         font-size: 12px;
         table-layout: fixed;
+        max-width:800px;
+        overflow-x:scroll;
     }
     thead {
         border-bottom: 1px solid @rendered_html_border_color;
