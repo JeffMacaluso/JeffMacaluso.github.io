@@ -139,12 +139,10 @@ It's always important to state your assumptions in any analysis because a violat
 
 ---
 
-# Restaurant Recommender
+## Restaurant Recommender
 
 
 If you're still with us after all of that, let's get started!
-
----
 
 
 We'll be using standard libraries for this project (pandas, nltk, and scikit-learn), but one additional thing we need for this project are credentials to access the Foursquare API.  I'm not keen on sharing mine, but you can get your own by [signing up](https://developer.foursquare.com/).  
@@ -370,13 +368,17 @@ This section uses regex scripts that makes cases every word lower cased, removes
 
 For example:
 
-**Before:**
+&nbsp;&nbsp;&nbsp;&nbsp;**Before:**
 
-    "ThIs Is HoW mIdDlE sChOoLeRs TaLkEd 2 EaCh OtHeR oN AIM!!!!"
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0; font-family:tahoma;">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Central Texas barbecue is the best smoked and the only barbecue that matters"
+</div>
 
-**After:**
+&nbsp;&nbsp;&nbsp;&nbsp;**After:**
 
-    "this is how middle schoolers talked each other on aim"
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0; font-family:tahoma;">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"central texas barbecue is the best smoked and the only barbecue that matters"
+</div>
 
 The benefit in this is that it vastly reduces our feature space.  Our pre-processed example would have created an additional ~10 features from someone who doesn't know how to type like a regular human being.
 
@@ -404,13 +406,19 @@ df['comments'] = [re.sub(r'\d+', '', row) for row in df['comments']]
 
 Tokenizing a sentence is a way to map our words into a feature space.  This is achieved by treating every word as an individual object.
 
-**Before:**
+For example:
 
-    'central texas barbecue is the best smoked and the only barbecue that matters'
+&nbsp;&nbsp;&nbsp;&nbsp;**Before:**
 
-**After:**
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0; font-family:tahoma;">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'Central Texas barbecue is the best smoked and the only barbecue that matters'
+</div>
 
-    ['central', 'texas', 'barbecue', 'is', 'the', 'best', 'smoked', 'and', 'the', 'only', 'barbecue', 'that', 'matters']
+&nbsp;&nbsp;&nbsp;&nbsp;**After:**
+
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0; font-family:tahoma;">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;['Central', 'Texas', 'barbecue', 'is', 'the', 'best', 'smoked', 'and', 'the', 'only', 'barbecue', 'that', 'matters']
+</div>
 
 
 
@@ -428,13 +436,19 @@ df['tokens'] = df['comments'].apply(tokenizer.tokenize)
 
 Stopwords are unnecessary words like *as*, *the*, *and*, and *of* that aren't very useful for our purposes.  Since they don't have any intrinsic value, removing them reduces our feature space which will speed up our computations.
 
-**Before:**
+For example:
 
-    ['central', 'texas', 'barbecue', 'is', 'the', 'best', 'smoked', 'and', 'the', 'only', 'barbecue', 'that', 'matters']
+&nbsp;&nbsp;&nbsp;&nbsp;**Before:**
 
-**After:**
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0; font-family:tahoma;">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;['central', 'texas', 'barbecue', 'is', 'the', 'best', 'smoked', 'and', 'the', 'only', 'barbecue', 'that', 'matters']
+</div>
 
-    ['central', 'texas', 'barbecue', 'best', 'smoked', 'only', 'barbecue', 'matters']
+&nbsp;&nbsp;&nbsp;&nbsp;**After:**
+
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0; font-family:tahoma;">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;['central', 'texas', 'barbecue', 'best', 'smoked', 'only', 'barbecue', 'matters']
+</div>
 
 This does take a bit longer to run at ~6 minutes
 
@@ -459,13 +473,19 @@ df['tokens'] = filtered_words
 
 Stemming removes variations at the end of a word to revert words to their root in order to reduce our overall feature space (e.x. running $\rightarrow$ run).  This has the possibility to adversely impact our performance when the root word is different (e.x. university $\rightarrow$ universe), but the net positives typically outweigh the net negatives.
 
-**Before:**
+For example:
 
-    ['central', 'texas', 'barbecue', 'best', 'smoked', 'only', 'barbecue', 'matters']
+&nbsp;&nbsp;&nbsp;&nbsp;**Before:**
 
-**After:**
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0; font-family:tahoma;">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;['central', 'texas', 'barbecue', 'best', 'smoked', 'only', 'barbecue', 'matters']
+</div>
 
-    ['central', 'texas', 'barbecue', 'best', 'smoke', 'only', 'barbecue', 'matter']
+&nbsp;&nbsp;&nbsp;&nbsp;**After:**
+
+<div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:20px 0; font-family:tahoma;">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;['central', 'texas', 'barbecue', 'best', 'smoke', 'only', 'barbecue', 'matter']
+</div>
 
 One very important thing to note here is that we're actually doing something called **[Lemmatization](https://en.wikipedia.org/wiki/Lemmatisation)**, which is similar to [stemming](https://en.wikipedia.org/wiki/Stemming), but is a little different. Both seek to reduce inflectional forms and sometimes derivationally related forms of a word to a common base form, but they go about it in different ways.  In order to illustrate the difference, here's a dictionary entry:
 
