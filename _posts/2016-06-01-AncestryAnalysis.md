@@ -4,7 +4,9 @@ title:  "Ancestry Analysis"
 date:   2016-06-01 21:04:11 -0500
 categories: jekyll update
 ---
-**Note**: Some images of this notebook did not render properly, so see the my [github post](http://nbviewer.jupyter.org/github/JeffMacaluso/Blog/blob/master/AncestryAnalysis.ipynb) for the complete version.
+
+[Github link to notebook](http://nbviewer.jupyter.org/github/JeffMacaluso/Blog/blob/master/AncestryAnalysis.ipynb)
+
 
 # Introduction
 My wife and I are both interested in our genealogy and genealogical record, and subsequently have an [Ancestry account](www.ancestry.com). We both have family that reaches *really* far back (...in American terms), and have put in a lot of time into tracking and researching our ancestral records.  
@@ -374,8 +376,7 @@ msno.matrix(df)
 ```
 
 
-![png](AncestryAnalysis_files/AncestryAnalysis_13_0.png)
-
+<img src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/_posts/AncestryAnalysis_files/AncestryAnalysis_13_0.png?raw=true">
 
 
 ```python
@@ -608,7 +609,7 @@ plt.gca().invert_yaxis()  # For descending order
 ```
 
 
-![png](AncestryAnalysis_files/AncestryAnalysis_22_0.png)
+<img src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/_posts/AncestryAnalysis_files/AncestryAnalysis_22_0.png?raw=true">
 
 
 When I initially received these results, my data frame contained duplicates, and I saw the name "Keturah" appear with 6 instances.  Given its unique nature and the fact that I have never heard this name in the family before, I decided to take a look at these records to rule out duplicates and conduct further examination: 
@@ -726,7 +727,7 @@ ax.invert_yaxis()
 ```
 
 
-![png](AncestryAnalysis_files/AncestryAnalysis_26_0.png)
+<img src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/_posts/AncestryAnalysis_files/AncestryAnalysis_26_0.png?raw=true">
 
 
 I didn't expect to see Flint appear more frequently than Johnson, but it makes sense considering that it belongs to my great grandmother's line which dates back to the colonial times.  The surname Rasberry is a similar story, and is my direct grandma's maiden name.  However, I don't recognize any of the others listed after my last name (Macaluso). 
@@ -943,7 +944,7 @@ fig.set_size_inches(8,8)
 ```
 
 
-![png](AncestryAnalysis_files/AncestryAnalysis_34_0.png)
+<img src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/_posts/AncestryAnalysis_files/AncestryAnalysis_34_0.png?raw=true">
 
 
 Let's create a few flag variables that we'll use later:
@@ -982,7 +983,7 @@ sns.countplot(x='DiedWhereBorn', data=df)
 
 
 
-![png](AncestryAnalysis_files/AncestryAnalysis_38_1.png)
+<img src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/_posts/AncestryAnalysis_files/AncestryAnalysis_38_1.png?raw=true">
 
 
 I filtered the data set to identify any records that did not include the United States to check if this dictionary contained all available countries.  This list ended up being more comprehensive, but I left it for future use with other GEDCOM files. 
@@ -1050,7 +1051,7 @@ sns.countplot(y='BirthCountry', data=df)
 
 
 
-![png](AncestryAnalysis_files/AncestryAnalysis_41_1.png)
+<img src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/_posts/AncestryAnalysis_files/AncestryAnalysis_41_1.png?raw=true">
 
 
 ### Question 3: How mobile were my ancestors over time?
@@ -1076,7 +1077,7 @@ DiedWhereBornRatio.plot(kind="barh", figsize=(10, 6),
 
 
 
-![png](AncestryAnalysis_files/AncestryAnalysis_44_1.png)
+<img src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/_posts/AncestryAnalysis_files/AncestryAnalysis_44_1.png?raw=true">
 
 
 
@@ -1101,7 +1102,7 @@ ax.set_ylabel("State")
 
 
 
-![png](AncestryAnalysis_files/AncestryAnalysis_45_1.png)
+<img src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/_posts/AncestryAnalysis_files/AncestryAnalysis_45_1.png?raw=true">
 
 
 Before generating the time series plots, we are going to discretize the birth years into decades.  This will assist us in making the plots more consistent by taking care of the binary variables (Ex. born in the same state as their parents or not) which aren't suitable for time series graphs on their own.
@@ -1286,7 +1287,7 @@ ax.set_xlabel("Decade")
 
 
 
-![png](AncestryAnalysis_files/AncestryAnalysis_51_1.png)
+<img src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/_posts/AncestryAnalysis_files/AncestryAnalysis_51_1.png?raw=true">
 
 
 We can see a large upward trend after 1800.  We can likely infer from this that there was a lot of transience in the colonial period for my family, and that my ancestors began to stay in areas longer after the establishment of the US.
@@ -1329,7 +1330,7 @@ ax.set_xlabel("Decade Born")
 
 
 
-![png](AncestryAnalysis_files/AncestryAnalysis_54_1.png)
+<img src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/_posts/AncestryAnalysis_files/AncestryAnalysis_54_1.png?raw=true">
 
 
 Surprisingly, there isn't a large gradual trend upward like you would expect.  That being said, most charts you see (like the one below) often start in the 20th century, which is where most modern medicine advancements were made (namely the discovery of [penecillin](https://en.wikipedia.org/wiki/Penicillin) in 1928).
