@@ -1780,7 +1780,7 @@ This map may be relatively uninteresting since it very similar to the previous m
 
 *Blue*: Traveled Through (on the ground)
 
-<img src="http://i.imgur.com/81GoIyw.png", style="width: 900px">
+<img src="http://i.imgur.com/81GoIyw.png">
 
 ### Ancestral Countries
 
