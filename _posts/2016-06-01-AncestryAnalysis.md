@@ -1945,7 +1945,7 @@ cg.done(show=True)
     
 
 
-![svg](AncestryAnalysis_files/AncestryAnalysis_83_1.svg)
+<img src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/_posts/AncestryAnalysis_files/AncestryAnalysis_83_1.svg">
 
 
 That's about what I would expect with the exception of the lack of Ireland.  Keep in mind this doesn't account for movement within Europe - only what countries in Europe my ancestors immigrated from originally. 
