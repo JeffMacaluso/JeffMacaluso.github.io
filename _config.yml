@@ -91,7 +91,7 @@ analytics:
 # Site Author
 author:
   name             : "Jeff Macaluso"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : /assets/images/selfPortrait.jpg # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "Fill bio here"
   location         : "Somewhere"
   email            :
