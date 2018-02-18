@@ -260,9 +260,8 @@ defaults:
       share: true
 related: true
 
-
-
-
+# Github Pages setting
+remote_theme: "mmistakes/minimal-mistakes"
 
 
 
