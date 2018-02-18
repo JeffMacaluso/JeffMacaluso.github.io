@@ -12,11 +12,11 @@ locale                   : "en-US"
 title                    : "Jeff Macaluso"
 title_separator          : "-"
 name                     : "Jeff Macaluso"
-description              : "Hello and welcome to my github page!  This is a place for showcasing my personal projects, the code I use for competitions, and so on.  I'll have more in my regular github, so check that out if you want to see other projects that aren't fully complete. I believe in sharing information with others, so feel free to reach out with any questions or comments!"
+description              : "A blog of personal projects, thoughts, and teachings in the world of data science, machine learning, and artificial intelligence"
 url                      : "https://jeffmacaluso.github.io/" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "JeffMacaluso/JeffMacaluso.github.io" # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
-teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
+teaser                   : "/assets/images/test.jpg" # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 # breadcrumbs            : false # true, false (default)
 words_per_minute         : 200
 comments:
@@ -303,3 +303,5 @@ remote_theme: "mmistakes/minimal-mistakes"
 # exclude:
 #   - Gemfile
 #   - Gemfile.lock
+
+# Hello and welcome to my github page!  This is a place for showcasing my personal projects, the code I use for competitions, and so on.  I'll have more in my regular github, so check that out if you want to see other projects that aren't fully complete. I believe in sharing information with others, so feel free to reach out with any questions or comments!
