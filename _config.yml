@@ -29,7 +29,8 @@ github_username:  JeffMacaluso
 
 # Build settings
 markdown: kramdown
-theme: minima
+# theme: minima
+remote_theme: "mmistakes/minimal-mistakes"
 gems:
   - jekyll-feed
 exclude:
