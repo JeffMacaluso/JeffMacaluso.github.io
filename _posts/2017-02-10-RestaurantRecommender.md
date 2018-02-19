@@ -1,6 +1,7 @@
 ---
 layout: single
 title:  "Restaurant Recommender"
+excerpt: "Finding new restaurants based off of review similarity to favorites back home"
 date:   2017-02-10 21:04:11 -0500
 categories: post
 classes: wide

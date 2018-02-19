@@ -2,6 +2,7 @@
 layout: single
 classes: wide
 title:  "Ancestry Analysis"
+excerpt: "Using data from Ancestry.com to discover more about my heritage"
 date:   2016-06-01 21:04:11 -0500
 categories: post
 header:

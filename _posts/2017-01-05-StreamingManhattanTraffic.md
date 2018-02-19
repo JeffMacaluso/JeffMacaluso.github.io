@@ -2,6 +2,7 @@
 layout: single
 classes: wide
 title:  "Streaming Manhattan Traffic with Spark"
+excerpt: "Visualizing traffic real-time with Spark Streaming"
 date:   2017-01-05 21:04:11 -0500
 categories: post
 header:
