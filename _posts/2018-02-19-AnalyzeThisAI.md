@@ -8,8 +8,25 @@ classes: wide
 header:
     image: /assets/images/notMNIST.png
 ---
+# Introduction
 
-## Introduction
+A few months ago, the twin cities meetup group [Analyze This!](https://www.meetup.com/AnalyzeThis/) hosted a competition on something rare in the area - deep learning. More specifically, the competition was on image classification of Yaroslav Bulatov's [notMNIST dataset](http://yaroslavvb.blogspot.com/2011/09/notmnist-dataset.html) (pictured in the header photo). This dataset is very similar to Yann LeCun's [MNIST dataset](http://yann.lecun.com/exdb/mnist/) of handwritten digits, the "iris dataset of deep learning", but with less structure and more noise.
+
+## Methodology
+
+For this competition, I prototyped architectures in [Keras](https://keras.io/) due to the ability of quickly creating and modifying architectures without worrying about things like graphs, sessions, weights, or placeholder variables. Since the competition required submissions to be done in TensorFlow, I re-created the best performing architecture in TensorFlow after finishing testing in Keras.
+
+### Data Preparation
+
+Since our samples vary greatly by class, I wanted to produce additional training samples to help our network further learn and generalize. I initially looked into [generative adversarial networks (GANs)](https://en.wikipedia.org/wiki/Generative_adversarial_network) to generate new training samples. This works by pitting two networks, a generator to generate the images from random noise and a discriminator to detect the fake images, against each other in order to cause the generator to become good enough at creating fake images that it fools the discriminator. 
+
+<img src=https://www.kdnuggets.com/wp-content/uploads/generative-adversarial-network.png>
+
+
+
+## Code
+
+Here's the unedited script used to train the winning model.
 
 ```python
 from __future__ import division, print_function, absolute_import
