@@ -8,9 +8,13 @@ classes: wide
 header:
     image: /assets/images/notMNIST.png
 ---
+# Note: In progress, below is an incomplete draft
+
 # Introduction
 
 A few months ago, the twin cities meetup group [Analyze This!](https://www.meetup.com/AnalyzeThis/) hosted a competition on something rare in the area - deep learning. More specifically, the competition was on image classification of Yaroslav Bulatov's [notMNIST dataset](http://yaroslavvb.blogspot.com/2011/09/notmnist-dataset.html) (pictured in the header photo). This dataset is very similar to Yann LeCun's [MNIST dataset](http://yann.lecun.com/exdb/mnist/) of handwritten digits, the "iris dataset of deep learning", but with less structure and more noise.
+
+The script is at the bottom of the page, and here is a brief overview and explanation of what I did for this competition.
 
 ## Methodology
 
@@ -18,7 +22,15 @@ For this competition, I prototyped architectures in [Keras](https://keras.io/) d
 
 ### Data Preparation
 
-Since our samples vary greatly by class, I wanted to produce additional training samples to help our network further learn and generalize. I initially looked into [generative adversarial networks (GANs)](https://en.wikipedia.org/wiki/Generative_adversarial_network) to generate new training samples. This works by pitting two networks, a generator to generate the images from random noise and a discriminator to detect the fake images, against each other in order to cause the generator to become good enough at creating fake images that it fools the discriminator:
+#### Normalizing
+
+In most cases, you need to normalize your inputs before feeding them to a neural network. This allows it to train faster, reduces the chances of getting stuck in a local optima, and provides a few other nice mathematical properties. 
+
+You will notice that there is no scaling or normalizing in the script. This is because it was already performed on the data that we are reading in.
+
+#### Data Augmentation
+
+Since our samples vary greatly within class, I wanted to produce additional training samples to help our network further learn and generalize. I initially looked into [generative adversarial networks (GANs)](https://en.wikipedia.org/wiki/Generative_adversarial_network) to generate new training samples. This works by pitting two networks, a generator to generate the images from random noise and a discriminator to detect the fake images, against each other in order to cause the generator to become good enough at creating fake images that it fools the discriminator:
 
 <img style="width: 650px;" src="https://www.kdnuggets.com/wp-content/uploads/generative-adversarial-network.png">
 
@@ -29,12 +41,31 @@ Favoring simplicity, I ended up using [data augmentation](http://cs231n.stanford
 - Rotating images
 - Shifting images
 - Zooming in
-- Stretching images (e.x. horizontally or vertically)
+- Stretching images (ex. horizontally or vertically)
 - Adding noise
 - Elastic deformation 
   - <img style="width: 650px;" src="https://www.kaggleusercontent.com/kf/288029/eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..03XMekk3KT0D75I84ZZSjg.GgzWhrkiSwJ84KLHZs7PjD8VIHUeyQCmFTdecSeSc8mLn5Uv6zgGPt3iZ3S6gyjbbrMx1l1nOIuehhbP3_nWvl3J3F96Q17JZJpfryuHQKZyxSrS3roGwAjl-fZQQcbrVdZZHBZhCoNZrAHozLj-qA.VGrgSDqXISt_dJ930S01tg/__results___files/__results___5_1.png">
 
-The idea is that these modified images will make the model more robust by 
+The idea is that these modified images will make the model more robust by both having additional training samples (reducing chances of underfitting) and due to having more noise and variation in the training set (reducing chances of overfitting).
+
+For this competition, I stuck with image rotation and shifting. Elastic deformation would've likely helped with performance, but I didn't implement it due to time constraints.
+
+### Neural Network
+
+*Note: Replace text with image*
+
+**Conv(5,5) -> Conv(5,5) -> MaxPooling -> Dropout (50%) -> Conv(3,3) -> Conv(3,3) -> MaxPooling -> Dropout (50%) -> FC1024 Dropout (50%) -> FC1024 -> SoftMax**
+
+- Convolutional Layers
+    - All convolutional layers had batch normalization (explain it here)
+    - <img style="width: 250px;" src="https://www.cntk.ai/jup/cntk103d_conv2d_final.gif">
+- Max Pooling
+    - <img style="width: 300px;" src="https://www.cntk.ai/jup/c103d_max_pooling.gif">
+- Dropout
+- Fully Connected
+- Softmax
+
+Explain idea of the network here (learning edges/corners/shapes in conv layers, FC layers for actual classification, maybe something about deep learning auto learning/creating features)
 
 
 ## Code
