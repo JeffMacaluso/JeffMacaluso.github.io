@@ -2,6 +2,7 @@
 layout: single
 classes: wide
 title:  "Competition: The Ultimate Student Hunt"
+excerpt: "9th place submission for a Kaggle style competition I did while in grad school"
 date:   2016-10-19 20:04:11 -0500
 categories: post
 ---
