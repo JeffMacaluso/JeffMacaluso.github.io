@@ -5,5 +5,6 @@ author_profile: true
 
 # Test
 
-
-Test
+To-do: 
+- Fix pagination
+- Add section for all posts
