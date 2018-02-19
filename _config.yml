@@ -258,10 +258,23 @@ defaults:
       read_time: true
       comments: # true
       share: true
+  - scope:
+      path: ""
+      type: portfolio
+    values:
+      layout: single
+      author:profile: false
+      share: true
 related: true
 
 # Github Pages setting
 remote_theme: "mmistakes/minimal-mistakes"
+
+# Collections
+collections:
+  portfolio:
+    output: true
+    permalink: /:collection:/path/
 
 
 
