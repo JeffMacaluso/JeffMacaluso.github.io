@@ -3,8 +3,6 @@ layout: home
 author_profile: true
 ---
 
-# Test
-
-To-do: 
-- Fix pagination
-- Add section for all posts
+{% for post in site.posts limit:5 %}
+  {% include archive-single.html %}
+{% endfor %}
