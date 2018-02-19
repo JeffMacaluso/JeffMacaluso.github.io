@@ -258,12 +258,13 @@ defaults:
       read_time: true
       comments: # true
       share: true
+  # _portfolio
   - scope:
       path: ""
       type: portfolio
     values:
       layout: single
-      author:profile: false
+      author_profile: false
       share: true
 related: true
 
