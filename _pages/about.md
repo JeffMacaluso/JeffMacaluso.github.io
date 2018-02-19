@@ -1,5 +1,5 @@
 ---
-layout: single
+layout: splash
 permalink: /about/
 ---
 
