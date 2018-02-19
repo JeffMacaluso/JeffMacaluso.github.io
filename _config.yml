@@ -93,7 +93,7 @@ author:
   name             : "Jeff Macaluso"
   avatar           : /assets/images/selfPortrait.jpg # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "Fill bio here"
-  location         : "Somewhere"
+  location         : "USA"
   email            :
   uri              :
   home             : # null (default), "absolute or relative url to link to author home"
