@@ -20,7 +20,7 @@ For this competition, I prototyped architectures in [Keras](https://keras.io/) d
 
 Since our samples vary greatly by class, I wanted to produce additional training samples to help our network further learn and generalize. I initially looked into [generative adversarial networks (GANs)](https://en.wikipedia.org/wiki/Generative_adversarial_network) to generate new training samples. This works by pitting two networks, a generator to generate the images from random noise and a discriminator to detect the fake images, against each other in order to cause the generator to become good enough at creating fake images that it fools the discriminator:
 
-<img src="https://www.kdnuggets.com/wp-content/uploads/generative-adversarial-network.png">
+<img style="width: 650px;" src="https://www.kdnuggets.com/wp-content/uploads/generative-adversarial-network.png">
 
 This is a very popular concept today, and I agree that it's an interesting and creative concept. However, it is also computationally costly, and thus time consuming.
 
@@ -29,10 +29,10 @@ Favoring simplicity, I ended up using [data augmentation](http://cs231n.stanford
 - Rotating images
 - Shifting images
 - Zooming in
-- Stretching images either horizontally or vertically
+- Stretching images (e.x. horizontally or vertically)
 - Adding noise
 - Elastic deformation 
-  - <img src="https://www.kaggleusercontent.com/kf/288029/eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..03XMekk3KT0D75I84ZZSjg.GgzWhrkiSwJ84KLHZs7PjD8VIHUeyQCmFTdecSeSc8mLn5Uv6zgGPt3iZ3S6gyjbbrMx1l1nOIuehhbP3_nWvl3J3F96Q17JZJpfryuHQKZyxSrS3roGwAjl-fZQQcbrVdZZHBZhCoNZrAHozLj-qA.VGrgSDqXISt_dJ930S01tg/__results___files/__results___5_1.png">
+  - <img style="width: 650px;" src="https://www.kaggleusercontent.com/kf/288029/eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..03XMekk3KT0D75I84ZZSjg.GgzWhrkiSwJ84KLHZs7PjD8VIHUeyQCmFTdecSeSc8mLn5Uv6zgGPt3iZ3S6gyjbbrMx1l1nOIuehhbP3_nWvl3J3F96Q17JZJpfryuHQKZyxSrS3roGwAjl-fZQQcbrVdZZHBZhCoNZrAHozLj-qA.VGrgSDqXISt_dJ930S01tg/__results___files/__results___5_1.png">
 
 The idea is that these modified images will make the model more robust by 
 
