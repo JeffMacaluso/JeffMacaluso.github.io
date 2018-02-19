@@ -3,7 +3,7 @@ layout: single
 classes: wide
 title:  "Streaming Manhattan Traffic with Spark"
 date:   2017-01-05 21:04:11 -0500
-categories: post
+categories: post portfolio
 header:
     image: /assets/images/nyc.jpg
     caption: "Photo credit: [Navid Baraty](https://www.instagram.com/navidbaraty/)"
