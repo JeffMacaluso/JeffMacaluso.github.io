@@ -3,7 +3,7 @@ layout: single
 classes: wide
 title:  "Data Science Overview"
 date:   2016-03-03 20:04:11 -0500
-categories: jekyll update
+categories: post
 ---
 
 

@@ -3,7 +3,7 @@ layout: single
 classes: wide
 title:  "Streaming Manhattan Traffic with Spark"
 date:   2017-01-05 21:04:11 -0500
-categories: jekyll update
+categories: post
 ---
 
 [Github link to notebook](http://github.com/JeffMacaluso/Blog/blob/master/StreamingNYC/StreamingManhattanTraffic.ipynb)

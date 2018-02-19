@@ -3,7 +3,7 @@ layout: single
 classes: wide
 title:  "Competition: The Ultimate Student Hunt"
 date:   2016-10-19 20:04:11 -0500
-categories: jekyll update
+categories: post
 ---
 [Github link to notebook](http:github.com/JeffMacaluso/Competitions/blob/master/Hackathon%20-%20The%20Ultimate%20Student%20Hunt.ipynb)
 
