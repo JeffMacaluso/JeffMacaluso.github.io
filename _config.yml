@@ -92,7 +92,7 @@ analytics:
 author:
   name             : "Jeff Macaluso"
   avatar           : /assets/images/selfPortrait.jpg # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "Fill bio here"
+  bio              : "I enjoy solving interesting problems with data"
   location         : "USA"
   email            :
   uri              :
@@ -303,5 +303,3 @@ remote_theme: "mmistakes/minimal-mistakes"
 # exclude:
 #   - Gemfile
 #   - Gemfile.lock
-
-# Hello and welcome to my github page!  This is a place for showcasing my personal projects, the code I use for competitions, and so on.  I'll have more in my regular github, so check that out if you want to see other projects that aren't fully complete. I believe in sharing information with others, so feel free to reach out with any questions or comments!
