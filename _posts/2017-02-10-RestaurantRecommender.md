@@ -4,6 +4,9 @@ title:  "Restaurant Recommender"
 date:   2017-02-10 21:04:11 -0500
 categories: jekyll update
 classes: wide
+header:
+    image: /assets/images/tacos.jpg
+    caption: "Photo credit: [Texas Monthly](https://www.texasmonthly.com/food/best-tacos-austin/)"
 ---
 
 ## Introduction
