@@ -18,9 +18,13 @@ For this competition, I prototyped architectures in [Keras](https://keras.io/) d
 
 ### Data Preparation
 
-Since our samples vary greatly by class, I wanted to produce additional training samples to help our network further learn and generalize. I initially looked into [generative adversarial networks (GANs)](https://en.wikipedia.org/wiki/Generative_adversarial_network) to generate new training samples. This works by pitting two networks, a generator to generate the images from random noise and a discriminator to detect the fake images, against each other in order to cause the generator to become good enough at creating fake images that it fools the discriminator. 
+Since our samples vary greatly by class, I wanted to produce additional training samples to help our network further learn and generalize. I initially looked into [generative adversarial networks (GANs)](https://en.wikipedia.org/wiki/Generative_adversarial_network) to generate new training samples. This works by pitting two networks, a generator to generate the images from random noise and a discriminator to detect the fake images, against each other in order to cause the generator to become good enough at creating fake images that it fools the discriminator:
 
-<img src=https://www.kdnuggets.com/wp-content/uploads/generative-adversarial-network.png>
+<img src="https://www.kdnuggets.com/wp-content/uploads/generative-adversarial-network.png">
+
+This is a very popular concept today, and I agree that it's an interesting and creative concept. However, it is also computationally costly, and thus time consuming.
+
+Favoring simplicity, I ended up using [data augmentation](http://cs231n.stanford.edu/reports/2017/pdfs/300.pdf), a technique to create additional training samples by rotating and shifting images, and adding noise 
 
 
 
