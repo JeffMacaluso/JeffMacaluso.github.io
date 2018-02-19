@@ -2,9 +2,12 @@
 layout: single
 classes: wide
 title:  "Competition: The Ultimate Student Hunt"
-excerpt: "9th place submission for a Kaggle style competition I did while in grad school"
+excerpt: "9th place submission for a Kaggle style competition on predicting the number of park visitors I did while in grad school"
 date:   2016-10-19 20:04:11 -0500
 categories: post
+header:
+    image: /assets/images/park.jpg
+    caption: "Photo credit: [Aaron Burden](https://unsplash.com/photos/Zl8zGdnNcP8?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)"
 ---
 [Github link to notebook](http:github.com/JeffMacaluso/Competitions/blob/master/Hackathon%20-%20The%20Ultimate%20Student%20Hunt.ipynb)
 
