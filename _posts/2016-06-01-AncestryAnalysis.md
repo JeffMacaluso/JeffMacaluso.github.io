@@ -5,7 +5,7 @@ title:  "Ancestry Analysis"
 date:   2016-06-01 21:04:11 -0500
 header:
     image: /assets/images/treeSketch.jpg
-    caption: "Photo credit: [Brandie Bell](https://drawingartlic.com/photos/170548/tree-sketches-black-and-white-easy-tree-of-life-black-and-white-tree-sketches-black-and-white-easy-tree-of-life-black-and-white-clipart-google-search.py)"
+    caption: "Photo credit: [Brandie Bell](https://drawingartlic.com/photos/170548/tree-sketches-black-and-white-easy-tree-of-life-black-and-white-tree-sketches-black-and-white-easy-tree-of-life-black-and-white-clipart-google-search)"
 ---
 
 [Github link to notebook](http://nbviewer.jupyter.org/github/JeffMacaluso/Blog/blob/master/AncestryAnalysis.ipynb)
