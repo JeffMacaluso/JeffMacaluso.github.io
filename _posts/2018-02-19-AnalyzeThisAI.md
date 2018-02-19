@@ -24,8 +24,17 @@ Since our samples vary greatly by class, I wanted to produce additional training
 
 This is a very popular concept today, and I agree that it's an interesting and creative concept. However, it is also computationally costly, and thus time consuming.
 
-Favoring simplicity, I ended up using [data augmentation](http://cs231n.stanford.edu/reports/2017/pdfs/300.pdf), a technique to create additional training samples by rotating and shifting images, and adding noise 
+Favoring simplicity, I ended up using [data augmentation](http://cs231n.stanford.edu/reports/2017/pdfs/300.pdf), a technique that creates additional training samples by using one or more of the following techniques:
 
+- Rotating images
+- Shifting images
+- Zooming in
+- Stretching images either horizontally or vertically
+- Adding noise
+- Elastic deformation 
+  - <img src="https://www.kaggleusercontent.com/kf/288029/eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..03XMekk3KT0D75I84ZZSjg.GgzWhrkiSwJ84KLHZs7PjD8VIHUeyQCmFTdecSeSc8mLn5Uv6zgGPt3iZ3S6gyjbbrMx1l1nOIuehhbP3_nWvl3J3F96Q17JZJpfryuHQKZyxSrS3roGwAjl-fZQQcbrVdZZHBZhCoNZrAHozLj-qA.VGrgSDqXISt_dJ930S01tg/__results___files/__results___5_1.png">
+
+The idea is that these modified images will make the model more robust by 
 
 
 ## Code
