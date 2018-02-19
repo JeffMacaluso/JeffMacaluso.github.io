@@ -3,3 +3,5 @@ main:
     url: /post/
   - title: "About"
     url: /about/
+  - title: "Portfolio Test"
+    url: /portfolio/
