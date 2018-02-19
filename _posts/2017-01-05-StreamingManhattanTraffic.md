@@ -6,7 +6,7 @@ date:   2017-01-05 21:04:11 -0500
 categories: post
 header:
     image: /assets/images/nyc.jpg
-    caption: "Photo credit: [Navid Baraty](https://www.instagram.com/p/BapQlzBAYgG/?taken-by=navidbaraty/)"
+    caption: "Photo credit: [Navid Baraty](https://www.instagram.com/navidbaraty/)"
 ---
 
 [Github link to notebook](http://github.com/JeffMacaluso/Blog/blob/master/StreamingNYC/StreamingManhattanTraffic.ipynb)
