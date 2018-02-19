@@ -1,5 +1,6 @@
 ---
-layout: post
+layout: single
+classes: wide
 title:  "Ancestry Analysis"
 date:   2016-06-01 21:04:11 -0500
 categories: jekyll update

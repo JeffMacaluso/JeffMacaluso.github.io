@@ -1,5 +1,6 @@
 ---
-layout: post
+layout: single
+classes: wide
 title:  "Competition: The Ultimate Student Hunt"
 date:   2016-10-19 20:04:11 -0500
 categories: jekyll update
