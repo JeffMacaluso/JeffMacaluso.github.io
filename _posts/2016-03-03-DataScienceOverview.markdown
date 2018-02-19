@@ -5,6 +5,9 @@ title:  "Data Science Overview"
 excerpt: "Document I threw together for the FAQ section of the data science subreddit"
 date:   2016-03-03 20:04:11 -0500
 categories: post
+header:
+    image: /assets/images/dsOverview.jpg
+    caption: "Photo credit: [Andrew Elliott](https://www.reddit.com/r/dataisbeautiful/comments/5l39mu/my_daughters_sleeping_patterns_for_the_first_4/)"
 ---
 
 
