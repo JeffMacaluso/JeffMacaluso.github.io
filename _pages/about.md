@@ -1,8 +1,9 @@
 ---
 permalink: /about/
 title: About
-# layout: splash
+layout: splash
 author_profile: true
+toc: true
 ---
 
 test
