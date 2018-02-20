@@ -43,8 +43,9 @@ Favoring simplicity, I ended up using [data augmentation](http://cs231n.stanford
 - Zooming in
 - Stretching images (ex. horizontally or vertically)
 - Adding noise
-- Elastic deformation 
-  - <img style="width: 650px;" src="https://www.kaggleusercontent.com/kf/288029/eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..03XMekk3KT0D75I84ZZSjg.GgzWhrkiSwJ84KLHZs7PjD8VIHUeyQCmFTdecSeSc8mLn5Uv6zgGPt3iZ3S6gyjbbrMx1l1nOIuehhbP3_nWvl3J3F96Q17JZJpfryuHQKZyxSrS3roGwAjl-fZQQcbrVdZZHBZhCoNZrAHozLj-qA.VGrgSDqXISt_dJ930S01tg/__results___files/__results___5_1.png">
+- Elastic transformation 
+  - <img style="width: 650px;" src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/assets/images/elasticTransform.png?raw=true">
+  - *Credit to [Bruno G. do Amaral](https://www.kaggle.com/bguberfain/elastic-transform-for-data-augmentation) for the image*
 
 The idea is that these modified images will make the model more robust by both having additional training samples (reducing chances of underfitting) and due to having more noise and variation in the training set (reducing chances of overfitting).
 
