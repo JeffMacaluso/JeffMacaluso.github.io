@@ -68,6 +68,7 @@ For this competition, I stuck with image rotation and shifting. Elastic deformat
 
 Explain idea of the network here (learning edges/corners/shapes in conv layers, FC layers for actual classification, maybe something about deep learning auto learning/creating features)
 
+Add note about early stopping
 
 ## Code
 
