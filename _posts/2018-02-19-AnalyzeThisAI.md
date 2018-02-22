@@ -53,22 +53,37 @@ For this competition, I stuck with image rotation and shifting. Elastic deformat
 
 ### Neural Network
 
-*Note: Replace text with image*
+Here's the architecture of the neural network and a brief description of the components:
 
 **Conv(5,5) -> Conv(5,5) -> MaxPooling -> Dropout (50%) -> Conv(3,3) -> Conv(3,3) -> MaxPooling -> Dropout (50%) -> FC1024 Dropout (50%) -> FC1024 -> SoftMax**
 
-- Convolutional Layers
-    - All convolutional layers had batch normalization (explain it here)
+*Note: Replace text with image*
+
+- **Convolutional Layers:** These layers are a little more abstract than typical fully connected layers because they incorporate spatial aspects of the input data. More specifically, they scan over the input data (the image in this case) and create *filters* that look for specific features that the model deems important - this is a kind of automatic feature engineering by finding representation within the data automatically. For images, these filters are usually things like colors, edges, shapes, corners, textures, or even shapes. Below is an example of a convolutional layer scans over an image and creates filters.
     - <img style="width: 250px;" src="https://www.cntk.ai/jup/cntk103d_conv2d_final.gif">
-- Max Pooling
+
+        - *Credit to Microsoft for the gif*
+        - *Note:* In this image we are constructing filters for multiple channels, or colors, but this project used greyscale images. A more accurate representation would be one grey layer on the top of the gif.
+    - Below is an example of filters at different levels of the convolutional network
+        - <img style="width: 500px;" src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/assets/images/cnnFilters.png?raw=true">
+
+            - *Credit to Stanford University for the image*
+
+    - These layers also all used **batch normalization** and **ReLU activations**
+        - **Batch Normalization:** This helps the network learn faster and obtain higher accuracy by scaling the hidden units to a comparable range. This also allows our network to be more stable due to not having large discrepencies in values. Lastly, this helps us avoid the "internal covariate shift" problem where small changes to the network are amplified further on in the network, thus causing a change in the input distribution to internal layers of the network.
+        - **Rectified Linear Unit (ReLU) Activations:** Sigmoid and TanH activations were previously the most popular activation methods, but recent research has shown that ReLUs tend to outperform other activation methods. The first reason is because it can learn faster due to a reduced likelihood of having a vanishing gradient - this is where a the gradient becomes extremely small as the absolute value of x increases. The second reason is sparsity, which is a nice property that allows faster training.
+- **Max Pooling:** This allows us to train the network faster by reducing the number of parameters while still retaining a large amount of information. Below is an image of 3x3 max pooling over a 5x5 filter.
     - <img style="width: 300px;" src="https://www.cntk.ai/jup/c103d_max_pooling.gif">
-- Dropout
-- Fully Connected
-- Softmax
 
-Explain idea of the network here (learning edges/corners/shapes in conv layers, FC layers for actual classification, maybe something about deep learning auto learning/creating features)
+        - *Credit to Microsoft for the image*
+- **Dropout:** Dropout is a regularization technique that randomly de-activates components of a neural network at random. It seems very counter-intuitive at first, but it helps the neurons become more robust by forcing them to generalize more in order to obtain good performance when other neurons are randomly being de-activated. This is also an extreme form of bagging (bootstrap aggregating) because our neural network is effectively a different one at each mini-batch due to different neurons being active.
+    - <img style="width: 500px;" src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/assets/images/dropout.png?raw=true">
+- **Fully Connected Layers:** These are the traditional layers like those pictured in the dropout example above. These layers take the features learned from the convolutional layers and do the actual classification.
+- **Softmax:** This is the final piece of our neural network where we take the outputs for a given image and scale them into probabilities (with the sum of the probabilities for all images adding up to 1) in order to generate our prediction.
 
-Add note about early stopping
+**Explain idea of the network here (learning edges/corners/shapes in conv layers, FC layers for actual classification, maybe something about deep learning auto learning/creating features)**
+
+**Add note about early stopping**
 
 ## Code
 
