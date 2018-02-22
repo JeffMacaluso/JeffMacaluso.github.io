@@ -83,6 +83,8 @@ Here's the architecture of the neural network and a brief description of the com
 
 The general idea of the network is that the convolutional layers learn the features (ex. the edges/corners/shapes/color intensity differences) that the fully connected layers then use to classify the images. This is one of the key differences between deep learning and traditional machine learning - performing automatic engineering by learning representations or encoding the data. A traditional machine learning model, logistic regression for example, would generally just learn the importance of the color intensity for each given pixel, but not how important the pixels are together.
 
+Because of this automatic feature engineering, [transfer learning](http://cs231n.github.io/transfer-learning/), a method where only the fully connected layers are re-trained in order to classify specific images, is extremely popular. While this is a very simplified explanation, this is how things ilke Microsoft's [Custom Vision Service](https://azure.microsoft.com/en-us/services/cognitive-services/custom-vision-service/) work.
+
 #### Early Stopping
 
 One thing I wanted to mention that I didn't add to my script that I should have was early stopping. Early stopping is a unique regularization technique that is very computationally efficient to implement. It prevents overfitting by stopping the training of our model when the validation accuracy begins to decrease relative to our training accuracy:
