@@ -81,9 +81,17 @@ Here's the architecture of the neural network and a brief description of the com
 - **Fully Connected Layers:** These are the traditional layers like those pictured in the dropout example above. These layers take the features learned from the convolutional layers and do the actual classification.
 - **Softmax:** This is the final piece of our neural network where we take the outputs for a given image and scale them into probabilities (with the sum of the probabilities for all images adding up to 1) in order to generate our prediction.
 
-**Explain idea of the network here (learning edges/corners/shapes in conv layers, FC layers for actual classification, maybe something about deep learning auto learning/creating features)**
+The general idea of the network is that the convolutional layers learn the features (ex. the edges/corners/shapes/color intensity differences) that the fully connected layers then use to classify the images. This is one of the key differences between deep learning and traditional machine learning - performing automatic engineering by learning representations or encoding the data. A traditional machine learning model, logistic regression for example, would generally just learn the importance of the color intensity for each given pixel, but not how important the pixels are together.
 
-**Add note about early stopping**
+#### Early Stopping
+
+One thing I wanted to mention that I didn't add to my script that I should have was early stopping. Early stopping is a unique regularization technique that is very computationally efficient to implement. It prevents overfitting by stopping the training of our model when the validation accuracy begins to decrease relative to our training accuracy:
+
+<img style="width: 500px;" src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/assets/images/earlyStopping.png?raw=true">
+
+*Credit to [DL4J](https://deeplearning4j.org/earlystopping) for the image*
+
+This is extremely efficient because it not only prevents unnecessary training that inadvertently harms the generalization, but it is more or less a self-learning parameter - we don't have to re-train the model using different values because the optimal value is decided during training.
 
 ## Code
 
