@@ -43,7 +43,7 @@ Favoring simplicity, I ended up using [data augmentation](http://cs231n.stanford
 - Zooming in
 - Stretching images (ex. horizontally or vertically)
 - Adding noise
-  - <img src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/assets/images/imageNoise.png?raw=true">
+  - <img style="width: 550px;" src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/assets/images/imageNoise.png?raw=true">
   - *Credit to [Ray Phan](https://stackoverflow.com/questions/26701604/how-to-add-and-remove-noise-from-an-image) for the image*
 
 - Elastic transformation 
