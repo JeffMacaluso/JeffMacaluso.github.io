@@ -42,7 +42,7 @@ Favoring simplicity, I ended up using [data augmentation](http://cs231n.stanford
 - Shifting images
 - Zooming in
 - Stretching images (ex. horizontally or vertically)
-- Adding noise
+- Adding noise or altering pixel intensity of the channels
   - <img style="width: 550px;" src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/assets/images/imageNoise.png?raw=true">
   - *Credit to [Ray Phan](https://stackoverflow.com/questions/26701604/how-to-add-and-remove-noise-from-an-image) for the image*
 
@@ -62,24 +62,29 @@ Here's the architecture of the neural network and a brief description of the com
 
 *Note: Replace text with image*
 
-- **Convolutional Layers:** These layers are a little more abstract than typical fully connected layers because they incorporate spatial aspects of the input data. More specifically, they scan over the input data (the image in this case) and create *filters* that look for specific features that the model deems important - this is a kind of automatic feature engineering by finding representation within the data automatically. For images, these filters are usually things like colors, edges, shapes, corners, textures, or even shapes. Below is an example of a convolutional layer scans over an image and creates filters.
+- **Convolutional Layers:** These layers are a little more abstract than typical fully connected layers because they incorporate spatial aspects of the input data. More specifically, they scan over the input data (the image in this case) and create *filters* (also referred to as *kernels* or *feature maps*) that look for specific features that the model deems important - this is a kind of automatic feature engineering by finding representation within the data automatically. For images, these filters are usually things like colors, edges, corners, textures, or even more complex shapes. Below is a high level example of a convolutional layer scanning over an image and creating filters:
     - <img style="width: 250px;" src="https://www.cntk.ai/jup/cntk103d_conv2d_final.gif">
 
         - *Credit to Microsoft for the gif*
         - *Note:* In this image we are constructing filters for multiple channels, or colors, but this project used greyscale images. A more accurate representation would be one grey layer on the top of the gif.
-    - Below is an example of filters at different levels of the convolutional network
+
+    - Here is a more specific view of creating the filter by multiplying pixel intensities (the numbers under the input image) by trainable weights:
+
+        - <img style="width: 500px;" src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/assets/images/convFeatureMap.gif?raw=true">
+
+
+    - Below is an example of filters at different levels of the convolutional network that demonstrates how the learned features get more complex deeper in the network:
         - <img style="width: 500px;" src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/assets/images/cnnFilters.png?raw=true">
 
             - *Credit to Stanford University for the image*
 
     - These layers also all used **batch normalization** and **ReLU activations**
-        - **Batch Normalization:** This helps the network learn faster and obtain higher accuracy by scaling the hidden units to a comparable range. This also allows our network to be more stable due to not having large discrepencies in values. Lastly, this helps us avoid the "internal covariate shift" problem where small changes to the network are amplified further on in the network, thus causing a change in the input distribution to internal layers of the network.
-        - **Rectified Linear Unit (ReLU) Activations:** Sigmoid and TanH activations were previously the most popular activation methods, but recent research has shown that ReLUs tend to outperform other activation methods. The first reason is because it can learn faster due to a reduced likelihood of having a vanishing gradient - this is where a the gradient becomes extremely small as the absolute value of x increases. The second reason is sparsity, which is a nice property that allows faster training.
-- **Max Pooling:** This allows us to train the network faster by reducing the number of parameters while still retaining a large amount of information. Below is an image of 3x3 max pooling over a 5x5 filter.
-    - <img style="width: 300px;" src="https://www.cntk.ai/jup/c103d_max_pooling.gif">
+        - **Batch Normalization:** This helps the network learn faster and obtain higher accuracy by scaling the hidden units to a comparable range. This also allows our network to be more stable due to not having large discrepancies in values. Lastly, this helps us avoid the "internal covariate shift" problem where small changes to the network are amplified further on in the network, thus causing a change in the input distribution to internal layers of the network.
+        - **Rectified Linear Unit (ReLU) Activations:** Activation functions are used in neural networks because they apply non-linear functions to the hidden layers, thus allowing the model to learn more complex functional mappings from data. Sigmoid and TanH activations were previously the most popular activation methods, but recent research has shown that ReLUs tend to outperform other activation methods. The first reason is because it can learn faster due to a reduced likelihood of having a vanishing gradient - this is where a the gradient becomes extremely small as the absolute value of x increases. The second reason is sparsity, which is a nice property that allows faster training.
+- **Max Pooling:** This allows us to train the network faster by reducing the number of parameters while still retaining a large amount of information. Below is an image of 2x2 max pooling over a 4x4 filter.
+    - <img src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/assets/images/maxPooling.gif?raw=true">
 
-        - *Credit to Microsoft for the image*
-- **Dropout:** Dropout is a regularization technique that randomly de-activates components of a neural network at random. It seems very counter-intuitive at first, but it helps the neurons become more robust by forcing them to generalize more in order to obtain good performance when other neurons are randomly being de-activated. This is also an extreme form of bagging (bootstrap aggregating) because our neural network is effectively a different one at each mini-batch due to different neurons being active.
+- **Dropout:** Dropout is a regularization technique that randomly de-activates components of a neural network at random. It seems counter-intuitive at first, but it helps the neurons become more robust by forcing them to generalize more in order to obtain good performance when other neurons are randomly being de-activated. This is also an extreme form of bagging (bootstrap aggregating) because our neural network is effectively a different one at each mini-batch due to different neurons being active.
     - <img style="width: 500px;" src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/assets/images/dropout.png?raw=true">
 - **Fully Connected Layers:** These are the traditional layers like those pictured in the dropout example above. These layers take the features learned from the convolutional layers and do the actual classification.
 - **Softmax:** This is the final piece of our neural network where we take the outputs for a given image and scale them into probabilities (with the sum of the probabilities for all images adding up to 1) in order to generate our prediction.
@@ -108,7 +113,7 @@ Overall, the competition was a great learning experience. I've played around wit
 - GPUs are essential for any kind of serious deep learning work
     - [CUDA](https://developer.nvidia.com/cuda-zone) and [cuDNN](https://developer.nvidia.com/cudnn), the toolkits required to use an NVIDIA GPU with deep learning libraries, are not as difficult as they seem to set up
     - GPU memory matters - my 5 year old GPU has much less memory than GPUs today, and as a result my mini-batches had to be smaller (resulting in a slower training speed and reduced accuracy)
-- [fast.ai](http://www.fast.ai/) by Jeremy Howard and [Deep Learning](http://www.deeplearningbook.org/) by Yoshua Bengio, Ian Goodfellow, and Aaron Courville were fantastic learning resources
+- [fast.ai](http://www.fast.ai/) by Jeremy Howard and Rachel Thomas and [Deep Learning](http://www.deeplearningbook.org/) by Yoshua Bengio, Ian Goodfellow, and Aaron Courville were fantastic learning resources
     - I plan on writing a post in the future with all of the "rules of thumb" from Deep Learning after I finish reading it cover to cover - stay tuned!
 
 ## Code
