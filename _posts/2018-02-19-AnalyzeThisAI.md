@@ -98,6 +98,19 @@ One thing I wanted to mention that I didn't add to my script that I should have 
 
 This is extremely efficient because it not only prevents unnecessary training that inadvertently harms the generalization, but it is more or less a self-learning parameter - we don't have to re-train the model using different values because the optimal value is decided during training.
 
+## Final Thoughts
+
+Overall, the competition was a great learning experience. I've played around with deep learning in the past, but this really forced me to learn how to correctly use different concepts to build an effective model. Here are a few other thoughts:
+
+- TensorFlow is an extremely popular deep learning framework, but it is not nearly as easy to use as higher level libraries like Keras
+    - TensorFlow does have other neat tools like [TensorBoard ](https://www.tensorflow.org/programmers_guide/summaries_and_tensorboard) that I ended up not taking advantage of
+- Loading saved models adn generating predictions is not trivial in TensorFlow
+- GPUs are essential for any kind of serious deep learning work
+    - [CUDA](https://developer.nvidia.com/cuda-zone) and [cuDNN](https://developer.nvidia.com/cudnn), the toolkits required to use an NVIDIA GPU with deep learning libraries, are not as difficult as they seem to set up
+    - GPU memory matters - my 5 year old GPU has much lower memory than GPUs today, and as a result my minibatches had to be smaller (resulting in a slower training speed and reduced accuracy)
+- [fast.ai](http://www.fast.ai/) by Jeremy Howard and [Deep Learning](http://www.deeplearningbook.org/) by Yoshua Bengio, Ian Goodfellow, and Aaron Courville where fantastic resources
+    - I plan on writing a post in the future with all of the "rules of thumb" from Deep Learning after I finish reading it cover to cover - stay tuned!
+
 ## Code
 
 Here's the unedited script used to train the winning model.
