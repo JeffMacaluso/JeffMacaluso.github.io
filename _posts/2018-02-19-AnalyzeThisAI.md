@@ -8,8 +8,6 @@ classes: wide
 header:
     image: /assets/images/notMNIST.png
 ---
-# Note: In progress, below is an incomplete draft
-
 # Introduction
 
 A few months ago, the twin cities meetup group [Analyze This!](https://www.meetup.com/AnalyzeThis/) hosted a competition on something rare in the area - deep learning. More specifically, the competition was on image classification of Yaroslav Bulatov's [notMNIST dataset](http://yaroslavvb.blogspot.com/2011/09/notmnist-dataset.html) (a few samples pictured in the header photo). This dataset is very similar to Yann LeCun's [MNIST dataset](http://yann.lecun.com/exdb/mnist/) of handwritten digits, the "Iris dataset of deep learning", but with less structure and more noise.
