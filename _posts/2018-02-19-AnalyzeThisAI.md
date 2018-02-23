@@ -12,13 +12,13 @@ header:
 
 # Introduction
 
-A few months ago, the twin cities meetup group [Analyze This!](https://www.meetup.com/AnalyzeThis/) hosted a competition on something rare in the area - deep learning. More specifically, the competition was on image classification of Yaroslav Bulatov's [notMNIST dataset](http://yaroslavvb.blogspot.com/2011/09/notmnist-dataset.html) (pictured in the header photo). This dataset is very similar to Yann LeCun's [MNIST dataset](http://yann.lecun.com/exdb/mnist/) of handwritten digits, the "iris dataset of deep learning", but with less structure and more noise.
+A few months ago, the twin cities meetup group [Analyze This!](https://www.meetup.com/AnalyzeThis/) hosted a competition on something rare in the area - deep learning. More specifically, the competition was on image classification of Yaroslav Bulatov's [notMNIST dataset](http://yaroslavvb.blogspot.com/2011/09/notmnist-dataset.html) (a few samples pictured in the header photo). This dataset is very similar to Yann LeCun's [MNIST dataset](http://yann.lecun.com/exdb/mnist/) of handwritten digits, the "Iris dataset of deep learning", but with less structure and more noise.
 
 The script is at the bottom of the page, and here is a brief overview and explanation of what I did for this competition.
 
 ## Methodology
 
-For this competition, I prototyped architectures in [Keras](https://keras.io/) due to the ability of quickly creating and modifying architectures without worrying about things like graphs, sessions, weights, or placeholder variables. Since the competition required submissions to be done in TensorFlow, I re-created the best performing architecture in TensorFlow after finishing testing in Keras.
+For this competition, I prototyped different neural network architectures in [Keras](https://keras.io/) due to the ability of quickly creating and modifying architectures without worrying about things like graphs, sessions, weights, or placeholder variables. Since the competition required submissions to be done in TensorFlow, I re-created the best performing architecture in TensorFlow after finishing testing in Keras.
 
 ### Data Preparation
 
@@ -30,11 +30,11 @@ You will notice that there is no scaling or normalizing in the script. This is b
 
 #### Data Augmentation
 
-Since our samples vary greatly within class, I wanted to produce additional training samples to help our network further learn and generalize. I initially looked into [generative adversarial networks (GANs)](https://en.wikipedia.org/wiki/Generative_adversarial_network) to generate new training samples. This works by pitting two networks, a generator to generate the images from random noise and a discriminator to detect the fake images, against each other in order to cause the generator to become good enough at creating fake images that it fools the discriminator:
+Since our samples vary greatly within class, I wanted to produce additional training samples to help our network further learn and generalize. I initially looked into [generative adversarial networks (GANs)](https://en.wikipedia.org/wiki/Generative_adversarial_network) to generate new training samples. This works by pitting two networks, a generator to generate the images from random noise and a discriminator to detect the fake images, against each other in order to cause the generator to become good enough at creating fake images that it can fool the discriminator:
 
 <img style="width: 650px;" src="https://www.kdnuggets.com/wp-content/uploads/generative-adversarial-network.png">
 
-This is a very popular concept today, and I agree that it's an interesting and creative concept. However, it is also computationally costly, and thus time consuming.
+This is a very popular concept today, and I agree that it's extremely interesting and creative. However, it is computationally expensive, and thus time consuming. Due to time constraints from working full time and often traveling for work, I had to cut a few corners that had the potential to improve the overall performance.
 
 Favoring simplicity, I ended up using [data augmentation](http://cs231n.stanford.edu/reports/2017/pdfs/300.pdf), a technique that creates additional training samples by using one or more of the following techniques:
 
@@ -43,13 +43,16 @@ Favoring simplicity, I ended up using [data augmentation](http://cs231n.stanford
 - Zooming in
 - Stretching images (ex. horizontally or vertically)
 - Adding noise
+  - <img src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/assets/images/imageNoise.png?raw=true">
+  - *Credit to [Ray Phan](https://stackoverflow.com/questions/26701604/how-to-add-and-remove-noise-from-an-image) for the image*
+
 - Elastic transformation 
   - <img style="width: 650px;" src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/assets/images/elasticTransform.png?raw=true">
   - *Credit to [Bruno G. do Amaral](https://www.kaggle.com/bguberfain/elastic-transform-for-data-augmentation) for the image*
 
 The idea is that these modified images will make the model more robust by both having additional training samples (reducing chances of underfitting) and due to having more noise and variation in the training set (reducing chances of overfitting).
 
-For this competition, I stuck with image rotation and shifting. Elastic deformation would've likely helped with performance, but I didn't implement it due to time constraints.
+For this competition, I used image rotation and shifting. Elastic deformation would've likely helped with performance, but I didn't implement it due to time constraints.
 
 ### Neural Network
 
