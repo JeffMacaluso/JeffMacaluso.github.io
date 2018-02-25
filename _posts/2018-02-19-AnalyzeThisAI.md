@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  "Competition: Analyze This! does AI"
+title:  "Competition: Analyze This! AI Innovation Challenge"
 excerpt: "The winning script for a local competition on image classification with TensorFlow"
 date:   2018-02-19 21:04:11 -0500
 categories: post
