@@ -2,7 +2,7 @@
 permalink: /cookbook/
 title: Cookbook
 
-layout: splash
+layout: archive
 author_profile: true
 ---
 
