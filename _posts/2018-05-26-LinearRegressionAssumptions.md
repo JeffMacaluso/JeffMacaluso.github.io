@@ -450,11 +450,6 @@ plt.title('Distributions of linear variables')
 
 
 
-    <matplotlib.text.Text at 0x24dc7e95f60>
-
-
-
-
 ![png](output_20_1.png)
 
 
@@ -491,9 +486,6 @@ multivariate_normal_assumption(boston_model, boston.data, boston.target,
     
     Assumption not satisfied
     
-
-    C:\Anaconda3\lib\site-packages\statsmodels\stats\_adnorm.py:66: RuntimeWarning: divide by zero encountered in log
-      S = np.sum((2*i[sl1]-1.0)/N*(np.log(z)+np.log(1-z[sl2])), axis=axis)
     
 
 Not a single variable passed the test. Let's plot a few to see why:
@@ -508,9 +500,6 @@ plt.title('Distributions of Misc. Boston Variables')
 ```
 
 
-
-
-    <matplotlib.text.Text at 0x24dc758a860>
 
 
 
