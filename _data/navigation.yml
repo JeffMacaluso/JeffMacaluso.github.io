@@ -3,7 +3,7 @@ main:
     url: /post/
   # - title: "Portfolio"
   #   url: /portfolio/
-  - title: "About"
-    url: /about/
   - title: "Cookbook"
     url: /cookbook/
+  - title: "About"
+    url: /about/
