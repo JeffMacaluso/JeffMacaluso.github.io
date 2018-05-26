@@ -6,8 +6,6 @@ layout: archive
 author_profile: true
 ---
 
-# Cookbook
-
 Personal reference scripts for commonly used code
 
 - **[Machine Learning](https://github.com/JeffMacaluso/Cookbook/tree/master/MachineLearning):** A folder containing scripts for commonly used machine learning code
