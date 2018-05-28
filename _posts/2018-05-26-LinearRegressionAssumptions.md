@@ -565,7 +565,7 @@ multicollinearity_assumption(linear_model, linear_X, linear_y, linear_feature_na
     
 
 
-<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_29_1.png" width="400">
+<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_29_1.png" width="600">
 
 
     Variance Inflation Factors (VIF)
@@ -603,7 +603,7 @@ multicollinearity_assumption(boston_model, boston.data, boston.target, boston.fe
     
 
 
-<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_31_1.png" width="400">
+<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_31_1.png" width="600">
 
 
     Variance Inflation Factors (VIF)
