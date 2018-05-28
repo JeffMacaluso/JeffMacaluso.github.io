@@ -330,7 +330,7 @@ linear_assumption(linear_model, linear_X, linear_y)
     
 
 
-<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_11_1.png">
+<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_11_1.png" width="400">
 
 
 We can see a relatively even spread around the diagonal line.
@@ -348,7 +348,7 @@ linear_assumption(boston_model, boston.data, boston.target)
     
 
 
-<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_13_1.png">
+<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_13_1.png" width="400">
 
 
 We can see in this case that there is not a perfect linear relationship. Our predictions are biased towards lower values in both the lower end (around 5-10) and especially at the higher values (above 40).
@@ -498,7 +498,7 @@ plt.title('Distributions of Misc. Boston Variables')
 
 
 
-<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_24_1.png">
+<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_24_1.png" width="400">
 
 
 It's pretty clear that we're having violations of the normality assumption here.
@@ -565,7 +565,7 @@ multicollinearity_assumption(linear_model, linear_X, linear_y, linear_feature_na
     
 
 
-<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_29_1.png">
+<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_29_1.png" width="400">
 
 
     Variance Inflation Factors (VIF)
@@ -603,7 +603,7 @@ multicollinearity_assumption(boston_model, boston.data, boston.target, boston.fe
     
 
 
-<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_31_1.png">
+<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_31_1.png" width="400">
 
 
     Variance Inflation Factors (VIF)
@@ -759,7 +759,7 @@ homoscedasticity_assumption(linear_model, linear_X, linear_y)
     Residuals should have relative constant variance
     
 
-<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_43_1.png">
+<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_43_1.png" width="400">
 
 
 There don't appear to be any obvious problems with that.
@@ -777,7 +777,7 @@ homoscedasticity_assumption(boston_model, boston.data, boston.target)
     
 
 
-<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_45_1.png">
+<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_45_1.png" width="400">
 
 
 We can't see a uniform variance across our residuals, so this could potentially be problematic.
