@@ -6,7 +6,7 @@ date:   2018-05-26 21:04:11 -0500
 categories: post
 classes: wide
 header:
-    image: /assets/images/assumptions.jpg
+    image: /assets/images/assumptionPainting.jpg
 ---
 
 
@@ -18,7 +18,6 @@ header:
 
 ### To:Do
 
-- Change banner image
 - Check & ensure consistency
 - Proof read for typos
 - Add note about assuming outliers are already accounted for
