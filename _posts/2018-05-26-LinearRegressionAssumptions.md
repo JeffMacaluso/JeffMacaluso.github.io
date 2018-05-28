@@ -7,11 +7,7 @@ categories: post
 classes: wide
 header:
     image: /assets/images/assumptionPainting.jpg
----
-
-
-# Checking Linear Regression Assumptions
-
+    caption: "Photo credit: [Antonio Gisbert](https://en.wikipedia.org/wiki/Antonio_Gisbert#/media/File:Fusilamiento_de_Torrijos_(Gisbert).jpg)"
 ---
 
 ## Note: This is a draft that is still in progress
