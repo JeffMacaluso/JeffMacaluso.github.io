@@ -444,7 +444,7 @@ plt.title('Distributions of linear variables')
 
 
 
-<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_20_1.png">
+<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_20_1.png", width="600">
 
 
 While these two failed the normality test, they don't violate it egregiously.
