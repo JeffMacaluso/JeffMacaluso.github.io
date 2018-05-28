@@ -498,7 +498,7 @@ plt.title('Distributions of Misc. Boston Variables')
 
 
 
-<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_24_1.png" width="400">
+<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_24_1.png" width="600">
 
 
 It's pretty clear that we're having violations of the normality assumption here.
