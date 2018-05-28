@@ -22,7 +22,7 @@ Personal reference scripts for commonly used code
         - [Ensemble Model's Feature Importance](https://github.com/JeffMacaluso/Cookbook/blob/master/MachineLearning/EvaluationPlots.py#L122)
     - **[Miscellaneous](https://github.com/JeffMacaluso/Cookbook/blob/master/MachineLearning/Miscellaneous.py):** Relevant code that doesn't belong in the other sections
         - [Assumption Testing](https://github.com/JeffMacaluso/Cookbook/blob/master/MachineLearning/Miscellaneous.py#L25)
-        - [Initial Model Performance Testing](https://github.com/JeffMacaluso/Cookbook/blob/master/MachineLearning/Miscellaneous.py#L219)
+        - [Initial Model Performance Testing](https://github.com/JeffMacaluso/Cookbook/blob/master/MachineLearning/Miscellaneous.py#L241)
     - **[Spark ML](https://github.com/JeffMacaluso/Cookbook/blob/master/MachineLearning/SparkML.py):** Building spark.ml models
         - [Data Prepartion](https://github.com/JeffMacaluso/Cookbook/blob/master/MachineLearning/SparkML.py#L9)
         - [Cross Validation](https://github.com/JeffMacaluso/Cookbook/blob/master/MachineLearning/SparkML.py#L60)
@@ -32,6 +32,7 @@ Personal reference scripts for commonly used code
     - [EDA Report](https://github.com/JeffMacaluso/Cookbook/blob/master/EDA%26Preprocessing.py#L23)
     - [Missing Values](https://github.com/JeffMacaluso/Cookbook/blob/master/EDA%26Preprocessing.py#L32)
     - [Pre-processing](https://github.com/JeffMacaluso/Cookbook/blob/master/EDA%26Preprocessing.py#L148)
+    - [Principal Component Analysis (PCA)](https://github.com/JeffMacaluso/Cookbook/blob/master/EDA%26Preprocessing.py#L162)
 - **[Natural Language Processing](https://github.com/JeffMacaluso/Cookbook/blob/master/NLP.py):** NLTK natural language processing tasks
     - [Tokenizing](https://github.com/JeffMacaluso/Cookbook/blob/master/NLP.py#L11)
     - [Lemmatizing (similar to Stemming)](https://github.com/JeffMacaluso/Cookbook/blob/master/NLP.py#L25)
