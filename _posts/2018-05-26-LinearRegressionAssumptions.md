@@ -357,7 +357,7 @@ We can see in this case that there is not a perfect linear relationship. Our pre
 
 ## II) Normality of the Error Terms
 
-More specifically, this assumes that the error terms of the model are normally distributed. Linear regressions other than (Ordinary Least Squares \(OLS\))[https://en.wikipedia.org/wiki/Ordinary_least_squares] may also assume normality of the predictors or the label, but that is not the case here.
+More specifically, this assumes that the error terms of the model are normally distributed. Linear regressions other than (Ordinary Least Squares)[https://en.wikipedia.org/wiki/Ordinary_least_squares] (commonly referred to as OLS) may also assume normality of the predictors or the label, but that is not the case here.
 
 **Why it can happen:** This can actually happen if either the predictors or the label are significantly non-normal. Other potential reasons could include the linearity assumption being violated or outliers affecting our model.
 
