@@ -10,25 +10,19 @@ header:
     caption: "Photo credit: [Antonio Gisbert](https://en.wikipedia.org/wiki/Antonio_Gisbert#/media/File:Fusilamiento_de_Torrijos_(Gisbert).jpg)"
 ---
 
-## Note: This is a draft that is still in progress
-
-### To:Do
-
-- Check & ensure consistency
-- Proof read for typos
-- Add note about assuming outliers are already accounted for
-
----
-
-Checking model assumptions is like commenting code. Everybody should be doing it often, but it sometimes ends up being looked over in reality. A failure to do either can result in a lot of time being confused, going down rabbit holes, and can have pretty serious consequences from not being interpreted correctly. 
+Checking model assumptions is like commenting code. Everybody should be doing it often, but it sometimes ends up being overlooked in reality. A failure to do either can result in a lot of time being confused, going down rabbit holes, and can have pretty serious consequences from not being interpreted correctly. 
 
 Linear regression is a fundamental tool that has distinct advantages over other regression algorithms. Due to its simplicity, it's an exceptionally quick algorithm to train which typically makes it a good baseline algorithm for common regression scenarios. More importantly, models trained with linear regression are the most interpretable kind of regression models available - meaning it's easier to take action from the results of a linear regression model. However, if the assumptions are not satisfied, the interpretation of the results are not valid. This can be very dangerous depending on the application.
 
 This post contains code for tests on the assumptions of linear regression and examples with both a real-world dataset and a toy dataset.
 
-## The Data
+# The Data
 
-Here are the variable descriptions straight from [the documentation](https://www.cs.toronto.edu/~delve/data/boston/bostonDetail.html):
+For our real-world dataset, I'm going to use the [Boston house prices dataset](http://lib.stat.cmu.edu/datasets/boston) from the late 1970's. The toy dataset will be created using [scikit-learn's make_regression function](http://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_regression.html) which creates a dataset that should perfectly satisfy all of our assumptions.
+
+One thing to note is that I'm assuming outliers have been removed in this blog post. This is an important part of any exploratory data analysis (which isn't being performed in this post to keep it short) that should happen in real world scenarios, and outliers in particular will cause issues with linear regression. See [Anscombe's Quartet](https://en.wikipedia.org/wiki/Anscombe%27s_quartet) for examples of outliers causing issues with fitting linear regression models.
+
+Here are the variable descriptions for the Boston housing dataset straight from [the documentation](https://www.cs.toronto.edu/~delve/data/boston/bostonDetail.html):
 
 - **CRIM:** Per capita crime rate by town
 
@@ -44,7 +38,7 @@ Here are the variable descriptions straight from [the documentation](https://www
 
 - **AGE:** Proportion of owner-occupied units built prior to 1940
 
-- **DIS:** Weighted distances to five Boston employment centres
+- **DIS:** Weighted distances to five Boston employment centers
 
 - **RAD:** Index of accessibility to radial highways
 
@@ -83,7 +77,7 @@ boston = datasets.load_boston()
 
 
 """
-Artificial linear data uaing the same number of features and observations as the
+Artificial linear data using the same number of features and observations as the
 Boston housing prices dataset for assumption test comparison
 """
 linear_X, linear_y = datasets.make_regression(n_samples=boston.data.shape[0],
@@ -233,11 +227,11 @@ df.head()
 
 
 
-### Initial Setup
+## Initial Setup
 
-Before we test the assumptions, we'll need to run the linear regressions themselves. My master function for performing all of the tests at the bottom does this automatically, but to abstract the assumption tests out to view them independently we'll have to re-write the individual tests to take the trained model as a parameter. 
+Before we test the assumptions, we'll need to fit our linear regression models. I have a master function for performing all of the assumption testing at the bottom of this post that does this automatically, but to abstract the assumption tests out to view them independently we'll have to re-write the individual tests to take the trained model as a parameter. 
 
-Additionally, a few of the tests use residuals, so we'll write a quick function to calculate residuals. These are calculated once in the master function, but this extra function is to adhere to [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) typing for the individual tests that use residuals.
+Additionally, a few of the tests use residuals, so we'll write a quick function to calculate residuals. These are also calculated once in the master function at the bottom of the page, but this extra function is to adhere to [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) typing for the individual tests that use residuals.
 
 
 ```python
@@ -282,13 +276,15 @@ def calculate_residuals(model, features, label):
     return df_results
 ```
 
-## Assumptions
+We're all set, so onto the assumption testing!
 
-### I) Linearity
+# Assumptions
 
-This assumes that there is a linear relationship between the predictors (e.g. independent variables or features) and the response variable (e.g. dependent variable or label). An accompanying assumption is that the predictors are additive.
+## I) Linearity
 
-**Why it can happen:** There may not just be a linear relationship among the data. Modeling is about trying to estimate a function that explains a process, and linear regression would not be a good estimate if there is no linear relationship. 
+This assumes that there is a linear relationship between the predictors (e.g. independent variables or features) and the response variable (e.g. dependent variable or label). This also assumes that the predictors are additive.
+
+**Why it can happen:** There may not just be a linear relationship among the data. Modeling is about trying to estimate a function that explains a process, and linear regression would not be a good estimator if there is no linear relationship. 
 
 **What it will affect:** The predictions will be extremely inaccurate. This is a serious violation that should not be ignored.
 
@@ -304,10 +300,10 @@ def linear_assumption(model, features, label):
                the response variable. If not, either a quadratic term or another
                algorithm should be used.
     """
-    print('Assumption 1: Linear Relationship between the Target and the Feature')
-    print()
+    print('Assumption 1: Linear Relationship between the Target and the Feature', '\n')
         
-    print('Checking with a scatter plot of actual vs. predicted. Predictions should follow the diagonal line.')
+    print('Checking with a scatter plot of actual vs. predicted.',
+           'Predictions should follow the diagonal line.')
     
     # Calculating residuals for the plot
     df_results = calculate_residuals(model, features, label)
@@ -359,9 +355,9 @@ linear_assumption(boston_model, boston.data, boston.target)
 
 We can see in this case that there is not a perfect linear relationship. Our predictions are biased towards lower values in both the lower end (around 5-10) and especially at the higher values (above 40).
 
-### II) Normality of the Error Terms
+## II) Normality of the Error Terms
 
-More specifically, this assumes that the error terms of the model are normally distributed. Linear regressions other than OLS may also assume normality of the predictors or the label, but that is not the case here.
+More specifically, this assumes that the error terms of the model are normally distributed. Linear regressions other than (Ordinary Least Squares (OLS))[https://en.wikipedia.org/wiki/Ordinary_least_squares] may also assume normality of the predictors or the label, but that is not the case here.
 
 **Why it can happen:** This can actually happen if either the predictors or the label are significantly non-normal. Other potential reasons could include the linearity assumption being violated or outliers affecting our model.
 
@@ -369,7 +365,7 @@ More specifically, this assumes that the error terms of the model are normally d
 
 **How to detect it:** There are a variety of ways to do so, but we'll look at both a histogram and the p-value from the Anderson-Darling test for normality.
 
-**How to fix it:** It depends on the root cause, but there are a few options. Nonlinear transformations of the variables, removing long-tailed variables, excluding specific variables, or removing outliers may solve this problem.
+**How to fix it:** It depends on the root cause, but there are a few options. Nonlinear transformations of the variables, excluding specific variables (such as long-tailed variables), or removing outliers may solve this problem.
 
 
 ```python
@@ -381,8 +377,7 @@ def normal_errors_assumption(model, features, label, p_value_thresh=0.05):
     This assumption being violated primarily causes issues with the confidence intervals
     """
     from statsmodels.stats.diagnostic import normal_ad
-    print('Assumption 2: The error terms are normally distributed')
-    print()
+    print('Assumption 2: The error terms are normally distributed', '\n')
     
     # Calculating residuals for the Anderson-Darling test
     df_results = calculate_residuals(model, features, label)
@@ -463,13 +458,13 @@ normal_errors_assumption(boston_model, boston.data, boston.target)
     Try performing nonlinear transformations on variables
     
 
-### III) No Multicollinearity
+## III) No Multicollinearity among Predictors
 
-This assumes that the predictors used in the regression are not correlated with each other. This won't render our model unusable if violated, but it will cause issues with the interpretability.
+This assumes that the predictors used in the regression are not correlated with each other. This won't render our model unusable if violated, but it will cause issues with the interpretability of the model.
 
 **Why it can happen:** A lot of data is just naturally correlated. For example, if trying to predict a house price with square footage, the number of bedrooms, and the number of bathrooms, we can expect to see correlation between those three variables because bedrooms and bathrooms make up a portion of square footage.
 
-**What it will affect:** Multicollinearity causes issues with the interpretation of the coefficients. Specifically, you can interpret a coefficient as "An increase of 1 in this predictor results in a change of (coefficient) in the response variable holding all other predictors constant." This becomes problematic when multicollinearity is present because you can't hold correlated predictors constant. Additionally, it increases the standard error of the coefficients, which results in them potentially showing as statistically insignificant when they might actually be significant. 
+**What it will affect:** Multicollinearity causes issues with the interpretation of the coefficients. Specifically, you can interpret a coefficient as "an increase of 1 in this predictor results in a change of (coefficient) in the response variable holding all other predictors constant." This becomes problematic when multicollinearity is present because you can't hold correlated predictors constant. Additionally, it increases the standard error of the coefficients, which results in them potentially showing as statistically insignificant when they might actually be significant. 
 
 **How to detect it:** There are a few ways, but we will use a heatmap of the correlation as a visual aid and examine the [variance inflation factor (VIF)](https://en.wikipedia.org/wiki/Variance_inflation_factor).
 
@@ -610,15 +605,15 @@ multicollinearity_assumption(boston_model, boston.data, boston.target, boston.fe
 
 This isn't quite as egregious as our normality assumption violation, but there is possible multicollinearity for most of the variables in this dataset.
 
-### IV) No Autocorrelation of the Error Terms
+## IV) No Autocorrelation of the Error Terms
 
 This assumes no autocorrelation of the error terms. Autocorrelation being present typically indicates that we are missing some information that should be captured by the model.
 
-**Why it can happen:** In a time series scenario, there could be information about the past that we aren't capturing. In a non time series scenario, our model could be systematically biased by either under or over predicting in certain conditions. Lastly, this could be a result of a violation of the linearity assumption.
+**Why it can happen:** In a time series scenario, there could be information about the past that we aren't capturing. In a non-time series scenario, our model could be systematically biased by either under or over predicting in certain conditions. Lastly, this could be a result of a violation of the linearity assumption.
 
 **What it will affect:** This will impact our model estimates.
 
-**How to detect it:** We will perform a [Durbin-Watson test](https://en.wikipedia.org/wiki/Durbin%E2%80%93Watson_statistic) to determine if either positive or negative correlation is present. Creating plots of residual autocorrelations is an alternative.
+**How to detect it:** We will perform a [Durbin-Watson test](https://en.wikipedia.org/wiki/Durbin%E2%80%93Watson_statistic) to determine if either positive or negative correlation is present. Alternatively, you could create plots of residual autocorrelations.
 
 **How to fix it:** A simple fix of adding lag variables can fix this problem. Alternatively, interaction terms, additional variables, or additional transformations may fix this.
 
@@ -633,8 +628,7 @@ def autocorrelation_assumption(model, features, label):
                      variable or some of the predictors.
     """
     from statsmodels.stats.stattools import durbin_watson
-    print('Assumption 4: No Autocorrelation')
-    print()
+    print('Assumption 4: No Autocorrelation', '\n')
     
     # Calculating residuals for the Durbin Watson-tests
     df_results = calculate_residuals(model, features, label)
@@ -699,11 +693,11 @@ autocorrelation_assumption(boston_model, boston.data, boston.target)
     Assumption not satisfied
     
 
-We're having signs of positive autocorrelation here. Adding lag variables could potentially fix this.
+We're having signs of positive autocorrelation here. Since this isn't a time series dataset, lag variables aren't possible. Instead, we should look into either interaction terms or additional transformations.
 
-### V) Homoscedasticity 
+## V) Homoscedasticity 
 
-This assumes homoscedasticity, which is the same variance within our error terms. Heteroscedasticity, the violation of homoscedasticity, occurs when we don't have an even variance within the error terms.
+This assumes homoscedasticity, which is the same variance within our error terms. Heteroscedasticity, the violation of homoscedasticity, occurs when we don't have an even variance across the error terms.
 
 **Why it can happen:** Our model may be giving too much weight to a subset of the data, particularly where the error variance was the largest.
 
@@ -719,8 +713,7 @@ def homoscedasticity_assumption(model, features, label):
     """
     Homoscedasticity: Assumes that the errors exhibit constant variance
     """
-    print('Assumption 5: Homoscedasticity of Error Terms')
-    print()
+    print('Assumption 5: Homoscedasticity of Error Terms', '\n')
     
     print('Residuals should have relative constant variance')
         
@@ -772,14 +765,17 @@ homoscedasticity_assumption(boston_model, boston.data, boston.target)
 <img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/40_1.png">
 
 
-We can't see a uniform variance across our residuals, so this could potentially be problematic.
+We can't see a fully uniform variance across our residuals, so this could potentially be problematic. 
 
-And there we have it! We can clearly see that a linear regression on the Boston dataset violates a number of assumptions which cause significant problems with the interpretation of the model itself. It's not uncommon for assumptions to be violated on real-world data, but it's important to check them so we can either fix them and/or be aware of the flaws in the model.
+# Conclusion
 
-Here is a function for performing all of these assumption tests on a dataset:
+We can clearly see that a linear regression model on the Boston dataset violates a number of assumptions which cause significant problems with the interpretation of the model itself. It's not uncommon for assumptions to be violated on real-world data, but it's important to check them so we can either fix them and/or be aware of the flaws in the model for the presentation of the results or the decision making process. 
 
-## Code for full function
+It is dangerous to make decisions on a model that has violated assumptions because those decisions are effectively being formulated on made-up numbers. Not only that, but it also provides a false sense of security due to trying to be empirical in the decision making process. Empiricism requires due diligence, which is why these assumptions exist and are stated up front. Hopefully this code can help with making the due diligence process less painful!
 
+# Code for the Master Function
+
+This function performs all of the assumption tests listed in this blog post:
 
 ```python
 def linear_regression_assumptions(features, label, feature_names=None):
