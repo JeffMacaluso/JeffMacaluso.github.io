@@ -10,17 +10,17 @@ header:
     caption: "Painting credit: [Antonio Gisbert](https://en.wikipedia.org/wiki/Antonio_Gisbert#/media/File:Fusilamiento_de_Torrijos_(Gisbert).jpg)"
 ---
 
-Checking model assumptions is like commenting code. Everybody should be doing it often, but it sometimes ends up being overlooked in reality. A failure to do either can result in a lot of time being confused, going down rabbit holes, and can have pretty serious consequences from not being interpreted correctly. 
+Checking model assumptions is like commenting code. Everybody should be doing it often, but it sometimes ends up being overlooked in reality. A failure to do either can result in a lot of time being confused, going down rabbit holes, and can have pretty serious consequences from the model not being interpreted correctly. 
 
-Linear regression is a fundamental tool that has distinct advantages over other regression algorithms. Due to its simplicity, it's an exceptionally quick algorithm to train which typically makes it a good baseline algorithm for common regression scenarios. More importantly, models trained with linear regression are the most interpretable kind of regression models available - meaning it's easier to take action from the results of a linear regression model. However, if the assumptions are not satisfied, the interpretation of the results are not valid. This can be very dangerous depending on the application.
+Linear regression is a fundamental tool that has distinct advantages over other regression algorithms. Due to its simplicity, it's an exceptionally quick algorithm to train, thus typically makes it a good baseline algorithm for common regression scenarios. More importantly, models trained with linear regression are the most interpretable kind of regression models available - meaning it's easier to take action from the results of a linear regression model. However, if the assumptions are not satisfied, the interpretation of the results will not always be valid. This can be very dangerous depending on the application.
 
 This post contains code for tests on the assumptions of linear regression and examples with both a real-world dataset and a toy dataset.
 
 # The Data
 
-For our real-world dataset, I'm going to use the [Boston house prices dataset](http://lib.stat.cmu.edu/datasets/boston) from the late 1970's. The toy dataset will be created using [scikit-learn's make_regression function](http://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_regression.html) which creates a dataset that should perfectly satisfy all of our assumptions.
+For our real-world dataset, we'll use the [Boston house prices dataset](http://lib.stat.cmu.edu/datasets/boston) from the late 1970's. The toy dataset will be created using [scikit-learn's make_regression function](http://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_regression.html) which creates a dataset that should perfectly satisfy all of our assumptions.
 
-One thing to note is that I'm assuming outliers have been removed in this blog post. This is an important part of any exploratory data analysis (which isn't being performed in this post to keep it short) that should happen in real world scenarios, and outliers in particular will cause issues with linear regression. See [Anscombe's Quartet](https://en.wikipedia.org/wiki/Anscombe%27s_quartet) for examples of outliers causing issues with fitting linear regression models.
+One thing to note is that I'm assuming outliers have been removed in this blog post. This is an important part of any exploratory data analysis (which isn't being performed in this post in order to keep it short) that should happen in real world scenarios, and outliers in particular will cause significant issues with linear regression. See [Anscombe's Quartet](https://en.wikipedia.org/wiki/Anscombe%27s_quartet) for examples of outliers causing issues with fitting linear regression models.
 
 Here are the variable descriptions for the Boston housing dataset straight from [the documentation](https://www.cs.toronto.edu/~delve/data/boston/bostonDetail.html):
 
@@ -284,9 +284,9 @@ We're all set, so onto the assumption testing!
 
 This assumes that there is a linear relationship between the predictors (e.g. independent variables or features) and the response variable (e.g. dependent variable or label). This also assumes that the predictors are additive.
 
-**Why it can happen:** There may not just be a linear relationship among the data. Modeling is about trying to estimate a function that explains a process, and linear regression would not be a good estimator if there is no linear relationship. 
+**Why it can happen:** There may not just be a linear relationship among the data. Modeling is about trying to estimate a function that explains a process, and linear regression would not be a fitting estimator (pun intended) if there is no linear relationship. 
 
-**What it will affect:** The predictions will be extremely inaccurate. This is a serious violation that should not be ignored.
+**What it will affect:** The predictions will be extremely inaccurate because our model is [underfitting](https://cdn-images-1.medium.com/max/1125/1*_7OPgojau8hkiPUiHoGK_w.png). This is a serious violation that should not be ignored.
 
 **How to detect it:** If there is only one predictor, this is pretty easy to test with a scatter plot. Most cases aren't so simple, so we'll have to modify this by using a scatter plot to see our predicted values versus the actual values (in other words, view the residuals). Ideally, the points should lie on or around a diagonal line on the scatter plot.
 
@@ -357,7 +357,7 @@ We can see in this case that there is not a perfect linear relationship. Our pre
 
 ## II) Normality of the Error Terms
 
-More specifically, this assumes that the error terms of the model are normally distributed. Linear regressions other than (Ordinary Least Squares (OLS))[https://en.wikipedia.org/wiki/Ordinary_least_squares] may also assume normality of the predictors or the label, but that is not the case here.
+More specifically, this assumes that the error terms of the model are normally distributed. Linear regressions other than (Ordinary Least Squares \(OLS\))[https://en.wikipedia.org/wiki/Ordinary_least_squares] may also assume normality of the predictors or the label, but that is not the case here.
 
 **Why it can happen:** This can actually happen if either the predictors or the label are significantly non-normal. Other potential reasons could include the linearity assumption being violated or outliers affecting our model.
 
@@ -457,6 +457,7 @@ normal_errors_assumption(boston_model, boston.data, boston.target)
     Confidence intervals will likely be affected
     Try performing nonlinear transformations on variables
     
+This isn't ideal, and we can see that our model is biasing towards under-estimating. 
 
 ## III) No Multicollinearity among Predictors
 
@@ -464,7 +465,7 @@ This assumes that the predictors used in the regression are not correlated with 
 
 **Why it can happen:** A lot of data is just naturally correlated. For example, if trying to predict a house price with square footage, the number of bedrooms, and the number of bathrooms, we can expect to see correlation between those three variables because bedrooms and bathrooms make up a portion of square footage.
 
-**What it will affect:** Multicollinearity causes issues with the interpretation of the coefficients. Specifically, you can interpret a coefficient as "an increase of 1 in this predictor results in a change of (coefficient) in the response variable holding all other predictors constant." This becomes problematic when multicollinearity is present because you can't hold correlated predictors constant. Additionally, it increases the standard error of the coefficients, which results in them potentially showing as statistically insignificant when they might actually be significant. 
+**What it will affect:** Multicollinearity causes issues with the interpretation of the coefficients. Specifically, you can interpret a coefficient as "an increase of 1 in this predictor results in a change of (coefficient) in the response variable, holding all other predictors constant." This becomes problematic when multicollinearity is present because we can't hold correlated predictors constant. Additionally, it increases the standard error of the coefficients, which results in them potentially showing as statistically insignificant when they might actually be significant. 
 
 **How to detect it:** There are a few ways, but we will use a heatmap of the correlation as a visual aid and examine the [variance inflation factor (VIF)](https://en.wikipedia.org/wiki/Variance_inflation_factor).
 
@@ -693,7 +694,7 @@ autocorrelation_assumption(boston_model, boston.data, boston.target)
     Assumption not satisfied
     
 
-We're having signs of positive autocorrelation here. Since this isn't a time series dataset, lag variables aren't possible. Instead, we should look into either interaction terms or additional transformations.
+We're having signs of positive autocorrelation here, but we should expect this since we know our model is consistently under-predicting and our linearity assumption is being violated. Since this isn't a time series dataset, lag variables aren't possible. Instead, we should look into either interaction terms or additional transformations.
 
 ## V) Homoscedasticity 
 
@@ -705,7 +706,7 @@ This assumes homoscedasticity, which is the same variance within our error terms
 
 **How to detect it:** Plot the residuals and see if the variance appears to be uniform.
 
-**How to fix it:** Heteroscedasticity (can you tell I like the *scedasticity* words?) can be solved either by using [weighted least squares regression](https://en.wikipedia.org/wiki/Least_squares#Weighted_least_squares) instead of the standard OLS or transforming either the dependent or highly skewed variables. Alternatively, a log transformation of the label may fix it.
+**How to fix it:** Heteroscedasticity (can you tell I like the *scedasticity* words?) can be solved either by using [weighted least squares regression](https://en.wikipedia.org/wiki/Least_squares#Weighted_least_squares) instead of the standard OLS or transforming either the dependent or highly skewed variables. Performing a log transformation on the dependent variable is not a bad place to start.
 
 
 ```python
@@ -765,13 +766,13 @@ homoscedasticity_assumption(boston_model, boston.data, boston.target)
 <img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/40_1.png">
 
 
-We can't see a fully uniform variance across our residuals, so this could potentially be problematic. 
+We can't see a fully uniform variance across our residuals, so this is potentially problematic. However, we know from our other tests that our model has several issues and is under predicting in many cases.
 
 # Conclusion
 
 We can clearly see that a linear regression model on the Boston dataset violates a number of assumptions which cause significant problems with the interpretation of the model itself. It's not uncommon for assumptions to be violated on real-world data, but it's important to check them so we can either fix them and/or be aware of the flaws in the model for the presentation of the results or the decision making process. 
 
-It is dangerous to make decisions on a model that has violated assumptions because those decisions are effectively being formulated on made-up numbers. Not only that, but it also provides a false sense of security due to trying to be empirical in the decision making process. Empiricism requires due diligence, which is why these assumptions exist and are stated up front. Hopefully this code can help with making the due diligence process less painful!
+It is dangerous to make decisions on a model that has violated assumptions because those decisions are effectively being formulated on made-up numbers. Not only that, but it also provides a false sense of security due to trying to be empirical in the decision making process. Empiricism requires due diligence, which is why these assumptions exist and are stated up front. Hopefully this code can help ease the due diligence process and make it less painful.
 
 # Code for the Master Function
 
