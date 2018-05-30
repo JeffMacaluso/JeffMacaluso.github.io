@@ -1,7 +1,7 @@
 ---
 layout: single
-title:  "Linear Regression Assumptions"
-excerpt: "Testing linear regression assumptions in Python"
+title:  "Testing Linear Regression Assumptions in Python"
+excerpt: "Automating assumption testing with a script to perform assumption testing and plot visualizations"
 date:   2018-05-26 21:04:11 -0500
 categories: post
 classes: wide
