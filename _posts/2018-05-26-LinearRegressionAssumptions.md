@@ -7,7 +7,7 @@ categories: post
 classes: wide
 header:
     image: /assets/images/assumptionPainting.jpg
-    caption: "Photo credit: [Antonio Gisbert](https://en.wikipedia.org/wiki/Antonio_Gisbert#/media/File:Fusilamiento_de_Torrijos_(Gisbert).jpg)"
+    caption: "Painting credit: [Antonio Gisbert](https://en.wikipedia.org/wiki/Antonio_Gisbert#/media/File:Fusilamiento_de_Torrijos_(Gisbert).jpg)"
 ---
 
 Checking model assumptions is like commenting code. Everybody should be doing it often, but it sometimes ends up being overlooked in reality. A failure to do either can result in a lot of time being confused, going down rabbit holes, and can have pretty serious consequences from not being interpreted correctly. 
