@@ -336,7 +336,7 @@ linear_assumption(linear_model, linear_X, linear_y)
     
 
 
-<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_11_1.png">
+<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/11_1.png">
 
 
 We can see a relatively even spread around the diagonal line.
@@ -354,7 +354,7 @@ linear_assumption(boston_model, boston.data, boston.target)
     
 
 
-<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_13_1.png">
+<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/13_1.png">
 
 
 We can see in this case that there is not a perfect linear relationship. Our predictions are biased towards lower values in both the lower end (around 5-10) and especially at the higher values (above 40).
@@ -431,7 +431,7 @@ normal_errors_assumption(linear_model, linear_X, linear_y)
     
 
 
-<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_18_2.png">
+<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/18_2.png">
 
 
     
@@ -453,7 +453,7 @@ normal_errors_assumption(boston_model, boston.data, boston.target)
     
 
 
-<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_20_1.png">
+<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/20_1.png">
 
 
     
@@ -540,7 +540,7 @@ multicollinearity_assumption(linear_model, linear_X, linear_y, linear_feature_na
     
 
 
-<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_24_1.png">
+<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/24_1.png">
 
 
     Variance Inflation Factors (VIF)
@@ -578,7 +578,7 @@ multicollinearity_assumption(boston_model, boston.data, boston.target, boston.fe
     
 
 
-<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_26_1.png">
+<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/26_1.png">
 
 
     Variance Inflation Factors (VIF)
@@ -647,14 +647,14 @@ def autocorrelation_assumption(model, features, label):
     durbinWatson = durbin_watson(df_results['Residuals'])
     print('Durbin-Watson:', durbinWatson)
     if durbinWatson < 1.5:
-        print('Signs of positive autocorrelation')
-        print('\nAssumption not satisfied')
+        print('Signs of positive autocorrelation', '\n')
+        print('Assumption not satisfied')
     elif durbinWatson > 2.5:
-        print('Signs of negative autocorrelation')
-        print('\nAssumption not satisfied')
+        print('Signs of negative autocorrelation', '\n')
+        print('Assumption not satisfied')
     else:
-        print('Little to no autocorrelation')
-        print('\nAssumption satisfied')
+        print('Little to no autocorrelation', '\n')
+        print('Assumption satisfied')
 ```
 
 Testing with our ideal dataset:
@@ -751,7 +751,7 @@ homoscedasticity_assumption(linear_model, linear_X, linear_y)
     
 
 
-<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_38_1.png">
+<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/38_1.png">
 
 
 There don't appear to be any obvious problems with that.
@@ -769,7 +769,7 @@ homoscedasticity_assumption(boston_model, boston.data, boston.target)
     
 
 
-<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_40_1.png">
+<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/40_1.png">
 
 
 We can't see a uniform variance across our residuals, so this could potentially be problematic.
