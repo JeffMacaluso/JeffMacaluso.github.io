@@ -266,7 +266,7 @@ linear_r2 = linear_model.score(linear_X, linear_y)
 print('R^2: {0}'.format(linear_r2))
 ```
 
-    R^2: 0.849848829621323
+    R^2: 0.873743725796525
     
 
 
@@ -286,9 +286,15 @@ def calculate_residuals(model, features, label):
 
 ### I) Linearity
 
-This assumes that there is a linear relationship between the predictors and the response variable. If this assumption is violated, it may be resolved by either adding polynomial terms of some of the predictors or by adding additional variables to help capture the relationship between the predictors and the label.
+This assumes that there is a linear relationship between the predictors (e.g. independent variables or features) and the response variable (e.g. dependent variable or label). An accompanying assumption is that the predictors are additive.
 
-If there is only one predictor, this is pretty easy to test with a scatter plot. Most cases aren't so we'll have to modify this by using a scatter plot to see our predicted values versus the actual values (in other words, view the residuals). Ideally, the points should lie on or around a diagonal line on the scatter plot.
+**Why it can happen:** There may not just be a linear relationship among the data. Modeling is about trying to estimate a function that explains a process, and linear regression would not be a good estimate if there is no linear relationship. 
+
+**What it will affect:** The predictions will be extremely inaccurate. This is a serious violation that should not be ignored.
+
+**How to detect it:** If there is only one predictor, this is pretty easy to test with a scatter plot. Most cases aren't so simple, so we'll have to modify this by using a scatter plot to see our predicted values versus the actual values (in other words, view the residuals). Ideally, the points should lie on or around a diagonal line on the scatter plot.
+
+**How to fix it:** Either adding polynomial terms to some of the predictors or applying nonlinear transformations . If those do not work, try adding additional variables to help capture the relationship between the predictors and the label.
 
 
 ```python
@@ -307,7 +313,7 @@ def linear_assumption(model, features, label):
     df_results = calculate_residuals(model, features, label)
     
     # Plotting the actual vs predicted values
-    sns.lmplot(x='Actual', y='Predicted', data=df_results, fit_reg=False, size=5)
+    sns.lmplot(x='Actual', y='Predicted', data=df_results, fit_reg=False, size=7)
         
     # Plotting the diagonal line
     line_coords = np.arange(df_results.min().min(), df_results.max().max())
@@ -330,7 +336,7 @@ linear_assumption(linear_model, linear_X, linear_y)
     
 
 
-<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_11_1.png" width="400">
+<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_11_1.png">
 
 
 We can see a relatively even spread around the diagonal line.
@@ -348,212 +354,179 @@ linear_assumption(boston_model, boston.data, boston.target)
     
 
 
-<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_13_1.png" width="400">
+<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_13_1.png">
 
 
 We can see in this case that there is not a perfect linear relationship. Our predictions are biased towards lower values in both the lower end (around 5-10) and especially at the higher values (above 40).
 
-### II) Normality
+### II) Normality of the Error Terms
 
-This assumes that the predictors 
+More specifically, this assumes that the error terms of the model are normally distributed. Linear regressions other than OLS may also assume normality of the predictors or the label, but that is not the case here.
 
-**TO DO:** Explain why this is important and what to do to fix it
+**Why it can happen:** This can actually happen if either the predictors or the label are significantly non-normal. Other potential reasons could include the linearity assumption being violated or outliers affecting our model.
+
+**What it will affect:** A violation of this assumption could cause issues with either shrinking or inflating our confidence intervals. 
+
+**How to detect it:** There are a variety of ways to do so, but we'll look at both a histogram and the p-value from the Anderson-Darling test for normality.
+
+**How to fix it:** It depends on the root cause, but there are a few options. Nonlinear transformations of the variables, removing long-tailed variables, excluding specific variables, or removing outliers may solve this problem.
 
 
 ```python
-def multivariate_normal_assumption(model, features, label, feature_names=None, p_value_thresh=0.05):
+def normal_errors_assumption(model, features, label, p_value_thresh=0.05):
     """
-    Normality: Assumes that the predictors have normal distributions. If they are not normal,
-               a non-linear transformation like a log transformation or box-cox transformation
-               can be performed on the non-normal variable.
+    Normality: Assumes that the error terms are normally distributed. If they are not,
+    nonlinear transformations of variables may solve this.
+               
+    This assumption being violated primarily causes issues with the confidence intervals
     """
     from statsmodels.stats.diagnostic import normal_ad
-    print('Assumption 2: All variables are multivariate normal')
+    print('Assumption 2: The error terms are normally distributed')
     print()
     
+    # Calculating residuals for the Anderson-Darling test
+    df_results = calculate_residuals(model, features, label)
+    
     print('Using the Anderson-Darling test for normal distribution')
-    print('p-values from the test - below 0.05 generally means non-normal:')
-    print()
-    non_normal_variables = 0
-        
-    # Performing the Anderson-Darling test on each variable to test for normality
-    for feature in range(features.shape[1]):
-        p_value = normal_ad(features[:, feature])[1]
-            
-        # Adding to total count of non-normality if p-value exceeds threshold
-        if p_value < p_value_thresh:
-            non_normal_variables += 1
-            
-        # Printing p-values from the test
-        print('{0}: {1}'.format(feature_names[feature], p_value))
-                    
-    print('\n{0} non-normal variables'.format(non_normal_variables))
-    print()
 
-    if non_normal_variables == 0:
+    # Performing the test on the residuals
+    p_value = normal_ad(df_results['Residuals'])[1]
+    print('p-value from the test - below 0.05 generally means non-normal:', p_value)
+    
+    # Reporting the normality of the residuals
+    if p_value < p_value_thresh:
+        print('Residuals are not normally distributed')
+    else:
+        print('Residuals are normally distributed')
+    
+    # Plotting the residuals distribution
+    plt.subplots(figsize=(12, 6))
+    plt.title('Distribution of Residuals')
+    sns.distplot(df_results['Residuals'])
+    plt.show()
+    
+    print()
+    if p_value > p_value_thresh:
         print('Assumption satisfied')
     else:
         print('Assumption not satisfied')
+        print()
+        print('Confidence intervals will likely be affected')
+        print('Try performing nonlinear transformations on variables')
 ```
 
 As with our previous assumption, we'll start with the linear dataset:
 
 
 ```python
-multivariate_normal_assumption(linear_model, linear_X, linear_y,
-                               feature_names=linear_feature_names)
+normal_errors_assumption(linear_model, linear_X, linear_y)
 ```
+    
 
-    Assumption 2: All variables are multivariate normal
+    Assumption 2: The error terms are normally distributed
     
     Using the Anderson-Darling test for normal distribution
-    p-values from the test - below 0.05 generally means non-normal:
-    
-    X1: 0.25800777524419044
-    X2: 0.26112460545161537
-    X3: 0.8397275309140688
-    X4: 0.3280033132782176
-    X5: 0.9347585904836029
-    X6: 0.5514823178829662
-    X7: 0.44063138327372103
-    X8: 0.5409575811996296
-    X9: 0.006039124306500998
-    X10: 0.04704501213363774
-    X11: 0.8810382690276023
-    X12: 0.9276013770608211
-    X13: 0.1386892103377878
-    
-    2 non-normal variables
-    
-    Assumption not satisfied
+    p-value from the test - below 0.05 generally means non-normal: 0.335066045847
+    Residuals are normally distributed
     
 
-Interestingly, not all of our features for the linear data set are normally distributed:
+
+<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_18_2.png">
 
 
-```python
-import seaborn as sns
-%matplotlib inline
-
-# Plotting histograms & kernel density estimates
-sns.distplot(linear_X[:, 11], label='Normal')
-sns.distplot(linear_X[:, 8], label='X7')
-sns.distplot(linear_X[:, 9], label='X8')
-plt.legend()
-plt.title('Distributions of linear variables')
-```
-
-
-
-
-<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_20_1.png" width="600">
-
-
-While these two failed the normality test, they don't violate it egregiously.
+    
+    Assumption satisfied
+    
 
 Now let's run the same test on the Boston dataset:
 
 
 ```python
-multivariate_normal_assumption(boston_model, boston.data, boston.target,
-                               feature_names=boston.feature_names)
+normal_errors_assumption(boston_model, boston.data, boston.target)
 ```
 
-    Assumption 2: All variables are multivariate normal
+    Assumption 2: The error terms are normally distributed
     
     Using the Anderson-Darling test for normal distribution
-    p-values from the test - below 0.05 generally means non-normal:
+    p-value from the test - below 0.05 generally means non-normal: 7.78748286642e-25
+    Residuals are not normally distributed
     
-    CRIM: 0.0
-    ZN: 0.0
-    INDUS: 0.0
-    CHAS: 0.0
-    NOX: 2.631393323760771e-20
-    RM: 4.72343897192116e-15
-    AGE: 0.0
-    DIS: 0.0
-    RAD: 0.0
-    TAX: 0.0
-    PTRATIO: 0.0
-    B: 0.0
-    LSTAT: 2.5860442633430127e-19
-    
-    13 non-normal variables
+
+
+<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_20_1.png">
+
+
     
     Assumption not satisfied
     
+    Confidence intervals will likely be affected
+    Try performing nonlinear transformations on variables
     
 
-Not a single variable passed the test. Let's plot a few to see why:
+### III) No Multicollinearity
 
+This assumes that the predictors used in the regression are not correlated with each other. This won't render our model unusable if violated, but it will cause issues with the interpretability.
 
-```python
-sns.distplot(boston.data[:, 0], label='CRIM')
-sns.distplot(boston.data[:, 1], label='ZN')
-sns.distplot(boston.data[:, 2], label='INDUS')
-plt.legend()
-plt.title('Distributions of Misc. Boston Variables')
-```
+**Why it can happen:** A lot of data is just naturally correlated. For example, if trying to predict a house price with square footage, the number of bedrooms, and the number of bathrooms, we can expect to see correlation between those three variables because bedrooms and bathrooms make up a portion of square footage.
 
+**What it will affect:** Multicollinearity causes issues with the interpretation of the coefficients. Specifically, you can interpret a coefficient as "An increase of 1 in this predictor results in a change of (coefficient) in the response variable holding all other predictors constant." This becomes problematic when multicollinearity is present because you can't hold correlated predictors constant. Additionally, it increases the standard error of the coefficients, which results in them potentially showing as statistically insignificant when they might actually be significant. 
 
+**How to detect it:** There are a few ways, but we will use a heatmap of the correlation as a visual aid and examine the [variance inflation factor (VIF)](https://en.wikipedia.org/wiki/Variance_inflation_factor).
 
-
-
-
-<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_24_1.png" width="600">
-
-
-It's pretty clear that we're having violations of the normality assumption here.
-
-### III) Multicollinearity
-
-This assumes that the predictors used in the regression are not correlated with each other. Multicollinearity causes issues with the interpretation of the coefficients. Specifically, you can interpret a coefficient as "An increase of 1 in this predictor results in a change of (coefficient) in the response variable holding all other predictors constant." This becomes problematic when multicollinearity is present because you can't hold correlated predictors constant.
-
-The other problem with multicollinearity is that it increases the standard error of the coefficients, which means that they may be shown as statistically insignificant even though they really are.
-
-This can be fixed by other removing predictors with a high variance inflation factor (VIF) or performing dimensionality reduction.
+**How to fix it:** This can be fixed by other removing predictors with a high variance inflation factor (VIF) or performing dimensionality reduction.
 
 
 ```python
 def multicollinearity_assumption(model, features, label, feature_names=None):
-        """
-        Multicollinearity: Assumes that predictors are not correlated with each other. If there is
-                           correlation among the predictors, then either remove prepdictors with high
-                           Variance Inflation Factor (VIF) values or perform dimensionality reduction
-        """
-        from statsmodels.stats.outliers_influence import variance_inflation_factor
-        print('Assumption 3: Little to no multicollinearity among predictors')
+    """
+    Multicollinearity: Assumes that predictors are not correlated with each other. If there is
+                       correlation among the predictors, then either remove prepdictors with high
+                       Variance Inflation Factor (VIF) values or perform dimensionality reduction
+                           
+                       This assumption being violated causes issues with interpretability of the 
+                       coefficients and the standard errors of the coefficients.
+    """
+    from statsmodels.stats.outliers_influence import variance_inflation_factor
+    print('Assumption 3: Little to no multicollinearity among predictors')
         
-        # Plotting the heatmap
-        ax = plt.subplot(111)
-        sns.heatmap(pd.DataFrame(features, columns=feature_names).corr())
-        plt.show()
+    # Plotting the heatmap
+    plt.figure(figsize = (10,8))
+    sns.heatmap(pd.DataFrame(features, columns=feature_names).corr(), annot=True)
+    plt.title('Correlation of Variables')
+    plt.show()
         
-        print('Variance Inflation Factors (VIF)')
-        print('> 10: An indication that multicollinearity may be present')
-        print('> 100: Certain multicollinearity among the variables')
-        print('-------------------------------------')
+    print('Variance Inflation Factors (VIF)')
+    print('> 10: An indication that multicollinearity may be present')
+    print('> 100: Certain multicollinearity among the variables')
+    print('-------------------------------------')
        
-        # Gathering the VIF for each variable
-        VIF = [variance_inflation_factor(features, i) for i in range(features.shape[1])]
-        for idx, vif in enumerate(VIF):
-            print('{0}: {1}'.format(feature_names[idx], vif))
+    # Gathering the VIF for each variable
+    VIF = [variance_inflation_factor(features, i) for i in range(features.shape[1])]
+    for idx, vif in enumerate(VIF):
+        print('{0}: {1}'.format(feature_names[idx], vif))
         
-        # Gathering and printing total cases of possible or definite multicollinearity
-        possible_multicollinearity = sum([1 for vif in VIF if vif > 10])
-        definite_multicollinearity = sum([1 for vif in VIF if vif > 100])
-        print()
-        print('{0} cases of possible multicollinearity'.format(possible_multicollinearity))
-        print('{0} cases of definite multicollinearity'.format(definite_multicollinearity))
-        print()
+    # Gathering and printing total cases of possible or definite multicollinearity
+    possible_multicollinearity = sum([1 for vif in VIF if vif > 10])
+    definite_multicollinearity = sum([1 for vif in VIF if vif > 100])
+    print()
+    print('{0} cases of possible multicollinearity'.format(possible_multicollinearity))
+    print('{0} cases of definite multicollinearity'.format(definite_multicollinearity))
+    print()
 
-        if definite_multicollinearity == 0:
-            if possible_multicollinearity == 0:
-                print('Assumption satisfied')
-            else:
-                print('Assumption possibly satisfied')
+    if definite_multicollinearity == 0:
+        if possible_multicollinearity == 0:
+            print('Assumption satisfied')
         else:
-            print('Assumption not satisfied')
+            print('Assumption possibly satisfied')
+            print()
+            print('Coefficient interpretability may be problematic')
+            print('Consider removing variables with a high Variance Inflation Factor (VIF)')
+
+    else:
+        print('Assumption not satisfied')
+        print()
+        print('Coefficient interpretability will be problematic')
+        print('Consider removing variables with a high Variance Inflation Factor (VIF)')
 ```
 
 Starting with the linear dataset:
@@ -567,26 +540,26 @@ multicollinearity_assumption(linear_model, linear_X, linear_y, linear_feature_na
     
 
 
-<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_29_1.png" width="500">
+<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_24_1.png">
 
 
     Variance Inflation Factors (VIF)
     > 10: An indication that multicollinearity may be present
     > 100: Certain multicollinearity among the variables
     -------------------------------------
-    X1: 1.022266152680125
-    X2: 1.0225722553296535
-    X3: 1.0310378514903915
-    X4: 1.0133709178960577
-    X5: 1.013079198380822
-    X6: 1.019699482579504
-    X7: 1.029942022560231
-    X8: 1.033255775873013
-    X9: 1.0249832417949483
-    X10: 1.0136517315424105
-    X11: 1.0177291796546448
-    X12: 1.033627615412328
-    X13: 1.0128771415883007
+    X1: 1.030931170297102
+    X2: 1.0457176802992108
+    X3: 1.0418076962011933
+    X4: 1.0269600632251443
+    X5: 1.0199882018822783
+    X6: 1.0404194675991594
+    X7: 1.0670847781889177
+    X8: 1.0229686036798158
+    X9: 1.0292923730360835
+    X10: 1.0289003332516535
+    X11: 1.052043220821624
+    X12: 1.0336719449364813
+    X13: 1.0140788728975834
     
     0 cases of possible multicollinearity
     0 cases of definite multicollinearity
@@ -605,7 +578,7 @@ multicollinearity_assumption(boston_model, boston.data, boston.target, boston.fe
     
 
 
-<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_31_1.png" width="500">
+<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_26_1.png">
 
 
     Variance Inflation Factors (VIF)
@@ -631,14 +604,23 @@ multicollinearity_assumption(boston_model, boston.data, boston.target, boston.fe
     
     Assumption possibly satisfied
     
+    Coefficient interpretability may be problematic
+    Consider removing variables with a high Variance Inflation Factor (VIF)
+    
 
 This isn't quite as egregious as our normality assumption violation, but there is possible multicollinearity for most of the variables in this dataset.
 
-### IV) No Autocorrelation of the error terms
+### IV) No Autocorrelation of the Error Terms
 
 This assumes no autocorrelation of the error terms. Autocorrelation being present typically indicates that we are missing some information that should be captured by the model.
 
-A simple fix of adding lag variables can fix this problem.
+**Why it can happen:** In a time series scenario, there could be information about the past that we aren't capturing. In a non time series scenario, our model could be systematically biased by either under or over predicting in certain conditions. Lastly, this could be a result of a violation of the linearity assumption.
+
+**What it will affect:** This will impact our model estimates.
+
+**How to detect it:** We will perform a [Durbin-Watson test](https://en.wikipedia.org/wiki/Durbin%E2%80%93Watson_statistic) to determine if either positive or negative correlation is present. Creating plots of residual autocorrelations is an alternative.
+
+**How to fix it:** A simple fix of adding lag variables can fix this problem. Alternatively, interaction terms, additional variables, or additional transformations may fix this.
 
 
 ```python
@@ -690,7 +672,7 @@ autocorrelation_assumption(linear_model, linear_X, linear_y)
     0 to 2< is positive autocorrelation
     >2 to 4 is negative autocorrelation
     -------------------------------------
-    Durbin-Watson: 1.94882623697
+    Durbin-Watson: 2.00345051385
     Little to no autocorrelation
     
     Assumption satisfied
@@ -721,9 +703,15 @@ We're having signs of positive autocorrelation here. Adding lag variables could 
 
 ### V) Homoscedasticity 
 
-This assumes homoscedasticity, or the same variance within our error terms. Heteroscedasticity, the violation of homoscedasticity, occurs when we don't have an even variance within the error terms. This is problematic because it means the standard errors are biased, therefore causing issues with the significance tests for coefficients. 
+This assumes homoscedasticity, which is the same variance within our error terms. Heteroscedasticity, the violation of homoscedasticity, occurs when we don't have an even variance within the error terms.
 
-Heteroscedasticity (can you tell I like the *scedasticity* words?) can be solved either by using [weighted least squares regression](https://en.wikipedia.org/wiki/Least_squares#Weighted_least_squares) instead of the standard OLS or transforming either the dependent or highly skewed variables.
+**Why it can happen:** Our model may be giving too much weight to a subset of the data, particularly where the error variance was the largest.
+
+**What it will affect:** Significance tests for coefficients due to the standard errors being biased. Additionally, the confidence intervals will be either too wide or too narrow.
+
+**How to detect it:** Plot the residuals and see if the variance appears to be uniform.
+
+**How to fix it:** Heteroscedasticity (can you tell I like the *scedasticity* words?) can be solved either by using [weighted least squares regression](https://en.wikipedia.org/wiki/Least_squares#Weighted_least_squares) instead of the standard OLS or transforming either the dependent or highly skewed variables. Alternatively, a log transformation of the label may fix it.
 
 
 ```python
@@ -740,7 +728,8 @@ def homoscedasticity_assumption(model, features, label):
     df_results = calculate_residuals(model, features, label)
 
     # Plotting the residuals
-    ax = plt.subplot(111)
+    plt.subplots(figsize=(12, 6))
+    ax = plt.subplot(111)  # To remove spines
     plt.scatter(x=df_results.index, y=df_results.Residuals, alpha=0.5)
     plt.plot(np.repeat(0, df_results.index.max()), color='darkorange', linestyle='--')
     ax.spines['right'].set_visible(False)  # Removing the right spine
@@ -761,7 +750,8 @@ homoscedasticity_assumption(linear_model, linear_X, linear_y)
     Residuals should have relative constant variance
     
 
-<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_43_1.png" width="400">
+
+<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_38_1.png">
 
 
 There don't appear to be any obvious problems with that.
@@ -779,7 +769,7 @@ homoscedasticity_assumption(boston_model, boston.data, boston.target)
     
 
 
-<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_45_1.png" width="400">
+<img src="https://raw.githubusercontent.com/JeffMacaluso/JeffMacaluso.github.io/master/_posts/LinearRegressionAssumptions_files/output_40_1.png">
 
 
 We can't see a uniform variance across our residuals, so this could potentially be problematic.
@@ -813,8 +803,9 @@ def linear_regression_assumptions(features, label, feature_names=None):
     
     # Returning linear regression R^2 and coefficients before performing diagnostics
     r2 = model.score(features, label)
-    print('\nR^2:', r2)
-    print('\nCoefficients')
+    print()
+    print('R^2:', r2, '\n')
+    print('Coefficients')
     print('-------------------------------------')
     print('Intercept:', model.intercept_)
     
@@ -832,7 +823,7 @@ def linear_regression_assumptions(features, label, feature_names=None):
     def linear_assumption():
         """
         Linearity: Assumes there is a linear relationship between the predictors and
-                   the response variable. If not, either a quadratic term or another
+                   the response variable. If not, either a polynomial term or another
                    algorithm should be used.
         """
         print('\n=======================================================================================')
@@ -841,7 +832,7 @@ def linear_regression_assumptions(features, label, feature_names=None):
         print('Checking with a scatter plot of actual vs. predicted. Predictions should follow the diagonal line.')
         
         # Plotting the actual vs predicted values
-        sns.lmplot(x='Actual', y='Predicted', data=df_results, fit_reg=False, size=5)
+        sns.lmplot(x='Actual', y='Predicted', data=df_results, fit_reg=False, size=7)
         
         # Plotting the diagonal line
         line_coords = np.arange(df_results.min().min(), df_results.max().max())
@@ -849,60 +840,47 @@ def linear_regression_assumptions(features, label, feature_names=None):
                  color='darkorange', linestyle='--')
         plt.title('Actual vs. Predicted')
         plt.show()
+        print('If non-linearity is apparent, consider adding a polynomial term')
         
         
-    def multivariate_normal_assumption(p_value_thresh=0.05):
+    def normal_errors_assumption(p_value_thresh=0.05):
         """
-        Normality: Assumes that the predictors have normal distributions. If they are not normal,
-                   a non-linear transformation like a log transformation or box-cox transformation
-                   can be performed on the non-normal variable.
+        Normality: Assumes that the error terms are normally distributed. If they are not,
+        nonlinear transformations of variables may solve this.
+               
+        This assumption being violated primarily causes issues with the confidence intervals
         """
         from statsmodels.stats.diagnostic import normal_ad
-        print('Assumption 2: All variables are multivariate normal')
+        print('\n=======================================================================================')
+        print('Assumption 2: The error terms are normally distributed')
         print()
-    
-        # Calculating residuals for the Anderson-Darling test
-        df_results = calculate_residuals(model, features, label)
     
         print('Using the Anderson-Darling test for normal distribution')
-        print('p-values from the test - below 0.05 generally means non-normal:')
-        print()
-        non_normal_variables = 0
-        
-        # Performing the Anderson-Darling test on each variable to test for normality
-        for feature in range(features.shape[1]):
-            p_value = normal_ad(features[:, feature])[1]
-            
-            # Adding to total count of non-normality if p-value exceeds threshold
-            if p_value < p_value_thresh:
-                non_normal_variables += 1
-            
-            # Printing p-values from the test
-            print('{0}: {1}'.format(feature_names[feature], p_value))
-    
-        # Performing the test on the label
-        p_value = normal_ad(label)[1]
-        if p_value < p_value_thresh:
-            non_normal_variables += 1
-        print('Label: {0}'.format(p_value))
 
         # Performing the test on the residuals
-        residuals_p_value = normal_ad(df_results['Residuals'])[1]
-        print('Residuals: {0}'.format(residuals_p_value))
-    
-        print('\n{0} non-normal variables'.format(non_normal_variables))
+        p_value = normal_ad(df_results['Residuals'])[1]
+        print('p-value from the test - below 0.05 generally means non-normal:', p_value)
     
         # Reporting the normality of the residuals
-        if residuals_p_value < p_value_thresh:
+        if p_value < p_value_thresh:
             print('Residuals are not normally distributed')
         else:
             print('Residuals are normally distributed')
     
+        # Plotting the residuals distribution
+        plt.subplots(figsize=(12, 6))
+        plt.title('Distribution of Residuals')
+        sns.distplot(df_results['Residuals'])
+        plt.show()
+    
         print()
-        if non_normal_variables == 0 and residuals_p_value > p_value_thresh:
+        if p_value > p_value_thresh:
             print('Assumption satisfied')
         else:
             print('Assumption not satisfied')
+            print()
+            print('Confidence intervals will likely be affected')
+            print('Try performing nonlinear transformations on variables')
         
         
     def multicollinearity_assumption():
@@ -910,14 +888,18 @@ def linear_regression_assumptions(features, label, feature_names=None):
         Multicollinearity: Assumes that predictors are not correlated with each other. If there is
                            correlation among the predictors, then either remove prepdictors with high
                            Variance Inflation Factor (VIF) values or perform dimensionality reduction
+                           
+                           This assumption being violated causes issues with interpretability of the 
+                           coefficients and the standard errors of the coefficients.
         """
         from statsmodels.stats.outliers_influence import variance_inflation_factor
         print('\n=======================================================================================')
         print('Assumption 3: Little to no multicollinearity among predictors')
         
         # Plotting the heatmap
-        ax = plt.subplot(111)
-        sns.heatmap(pd.DataFrame(features, columns=feature_names).corr())
+        plt.figure(figsize = (10,8))
+        sns.heatmap(pd.DataFrame(features, columns=feature_names).corr(), annot=True)
+        plt.title('Correlation of Variables')
         plt.show()
         
         print('Variance Inflation Factors (VIF)')
@@ -943,8 +925,14 @@ def linear_regression_assumptions(features, label, feature_names=None):
                 print('Assumption satisfied')
             else:
                 print('Assumption possibly satisfied')
+                print()
+                print('Coefficient interpretability may be problematic')
+                print('Consider removing variables with a high Variance Inflation Factor (VIF)')
         else:
             print('Assumption not satisfied')
+            print()
+            print('Coefficient interpretability will be problematic')
+            print('Consider removing variables with a high Variance Inflation Factor (VIF)')
         
         
     def autocorrelation_assumption():
@@ -966,222 +954,16 @@ def linear_regression_assumptions(features, label, feature_names=None):
         durbinWatson = durbin_watson(df_results['Residuals'])
         print('Durbin-Watson:', durbinWatson)
         if durbinWatson < 1.5:
-            print('Signs of positive autocorrelation')
-            print('\nAssumption not satisfied')
+            print('Signs of positive autocorrelation', '\n')
+            print('Assumption not satisfied', '\n')
+            print('Consider adding lag variables')
         elif durbinWatson > 2.5:
-            print('Signs of negative autocorrelation')
-            print('\nAssumption not satisfied')
+            print('Signs of negative autocorrelation', '\n')
+            print('Assumption not satisfied', '\n')
+            print('Consider adding lag variables')
         else:
-            print('Little to no autocorrelation')
-            print('\nAssumption satisfied')
-
-            
-    def homoscedasticity_assumption():
-        """
-        Homoscedasticity: Assumes that the errors exhibit constant variance
-        """
-        print('\n=======================================================================================')
-        print('Assumption 5: Homoscedasticity of Error Terms')
-        print('Residuals should have relative constant variance')
-        
-        # Plotting the residuals
-        ax = plt.subplot(111)
-        plt.scatter(x=df_results.index, y=df_results.Residuals, alpha=0.5)
-        plt.plot(np.repeat(0, df_results.index.max()), color='darkorange', linestyle='--')
-        ax.spines['right'].set_visible(False)  # Removing the right spine
-        ax.spines['top'].set_visible(False)  # Removing the top spine
-        plt.title('Residuals')
-        plt.show()  
-        
-        
-    linear_assumption()
-    multivariate_normal_assumption()
-    multicollinearity_assumption()
-    autocorrelation_assumption()
-    homoscedasticity_assumption()
-    
-linear_regression_assumptions(boston.data, boston.target, feature_names=boston.feature_names)def linear_regression_assumptions(features, label, feature_names=None):
-    """
-    Tests a linear regression on the model to see if assumptions are being met
-    """
-    from sklearn.linear_model import LinearRegression
-    
-    # Setting feature names to x1, x2, x3, etc. if they are not defined
-    if feature_names is None:
-        feature_names = ['X'+str(feature+1) for feature in range(features.shape[1])]
-    
-    print('Fitting linear regression')
-    # Multi-threading if the dataset is a size where doing so is beneficial
-    if features.shape[0] < 100000:
-        model = LinearRegression(n_jobs=-1)
-    else:
-        model = LinearRegression()
-        
-    model.fit(features, label)
-    
-    # Returning linear regression R^2 and coefficients before performing diagnostics
-    r2 = model.score(features, label)
-    print('\nR^2:', r2)
-    print('\nCoefficients')
-    print('-------------------------------------')
-    print('Intercept:', model.intercept_)
-    
-    for feature in range(len(model.coef_)):
-        print('{0}: {1}'.format(feature_names[feature], model.coef_[feature]))
-
-    print('\nPerforming linear regression assumption testing')
-    
-    # Creating predictions and calculating residuals for assumption tests
-    predictions = model.predict(features)
-    df_results = pd.DataFrame({'Actual': label, 'Predicted': predictions})
-    df_results['Residuals'] = abs(df_results['Actual']) - abs(df_results['Predicted'])
-
-    
-    def linear_assumption():
-        """
-        Linearity: Assumes there is a linear relationship between the predictors and
-                   the response variable. If not, either a quadratic term or another
-                   algorithm should be used.
-        """
-        print('\n=======================================================================================')
-        print('Assumption 1: Linear Relationship between the Target and the Features')
-        
-        print('Checking with a scatter plot of actual vs. predicted. Predictions should follow the diagonal line.')
-        
-        # Plotting the actual vs predicted values
-        sns.lmplot(x='Actual', y='Predicted', data=df_results, fit_reg=False, size=5)
-        
-        # Plotting the diagonal line
-        line_coords = np.arange(df_results.min().min(), df_results.max().max())
-        plt.plot(line_coords, line_coords,  # X and y points
-                 color='darkorange', linestyle='--')
-        plt.title('Actual vs. Predicted')
-        plt.show()
-        
-        
-    def multivariate_normal_assumption(p_value_thresh=0.05):
-        """
-        Normality: Assumes that the predictors have normal distributions. If they are not normal,
-                   a non-linear transformation like a log transformation or box-cox transformation
-                   can be performed on the non-normal variable.
-        """
-        from statsmodels.stats.diagnostic import normal_ad
-        print('Assumption 2: All variables are multivariate normal')
-        print()
-    
-        # Calculating residuals for the Anderson-Darling test
-        df_results = calculate_residuals(model, features, label)
-    
-        print('Using the Anderson-Darling test for normal distribution')
-        print('p-values from the test - below 0.05 generally means non-normal:')
-        print()
-        non_normal_variables = 0
-        
-        # Performing the Anderson-Darling test on each variable to test for normality
-        for feature in range(features.shape[1]):
-            p_value = normal_ad(features[:, feature])[1]
-            
-            # Adding to total count of non-normality if p-value exceeds threshold
-            if p_value < p_value_thresh:
-                non_normal_variables += 1
-            
-            # Printing p-values from the test
-            print('{0}: {1}'.format(feature_names[feature], p_value))
-    
-        # Performing the test on the label
-        p_value = normal_ad(label)[1]
-        if p_value < p_value_thresh:
-            non_normal_variables += 1
-        print('Label: {0}'.format(p_value))
-
-        # Performing the test on the residuals
-        residuals_p_value = normal_ad(df_results['Residuals'])[1]
-        print('Residuals: {0}'.format(residuals_p_value))
-    
-        print('\n{0} non-normal variables'.format(non_normal_variables))
-    
-        # Reporting the normality of the residuals
-        if residuals_p_value < p_value_thresh:
-            print('Residuals are not normally distributed')
-        else:
-            print('Residuals are normally distributed')
-    
-        print()
-        if non_normal_variables == 0 and residuals_p_value > p_value_thresh:
+            print('Little to no autocorrelation', '\n')
             print('Assumption satisfied')
-        else:
-            print('Assumption not satisfied')
-        
-        
-    def multicollinearity_assumption():
-        """
-        Multicollinearity: Assumes that predictors are not correlated with each other. If there is
-                           correlation among the predictors, then either remove prepdictors with high
-                           Variance Inflation Factor (VIF) values or perform dimensionality reduction
-        """
-        from statsmodels.stats.outliers_influence import variance_inflation_factor
-        print('\n=======================================================================================')
-        print('Assumption 3: Little to no multicollinearity among predictors')
-        
-        # Plotting the heatmap
-        ax = plt.subplot(111)
-        sns.heatmap(pd.DataFrame(features, columns=feature_names).corr())
-        plt.show()
-        
-        print('Variance Inflation Factors (VIF)')
-        print('> 10: An indication that multicollinearity may be present')
-        print('> 100: Certain multicollinearity among the variables')
-        print('-------------------------------------')
-       
-        # Gathering the VIF for each variable
-        VIF = [variance_inflation_factor(features, i) for i in range(features.shape[1])]
-        for idx, vif in enumerate(VIF):
-            print('{0}: {1}'.format(feature_names[idx], vif))
-        
-        # Gathering and printing total cases of possible or definite multicollinearity
-        possible_multicollinearity = sum([1 for vif in VIF if vif > 10])
-        definite_multicollinearity = sum([1 for vif in VIF if vif > 100])
-        print()
-        print('{0} cases of possible multicollinearity'.format(possible_multicollinearity))
-        print('{0} cases of definite multicollinearity'.format(definite_multicollinearity))
-        print()
-
-        if definite_multicollinearity == 0:
-            if possible_multicollinearity == 0:
-                print('Assumption satisfied')
-            else:
-                print('Assumption possibly satisfied')
-        else:
-            print('Assumption not satisfied')
-        
-        
-    def autocorrelation_assumption():
-        """
-        Autocorrelation: Assumes that there is no autocorrelation in the residuals. If there is
-                         autocorrelation, then there is a pattern that is not explained due to
-                         the current value being dependent on the previous value.
-                         This may be resolved by adding a lag variable of either the dependent
-                         variable or some of the predictors.
-        """
-        from statsmodels.stats.stattools import durbin_watson
-        print('\n=======================================================================================')
-        print('Assumption 4: No Autocorrelation')
-        print('\nPerforming Durbin-Watson Test')
-        print('Values of 1.5 < d < 2.5 generally show that there is no autocorrelation in the data')
-        print('0 to 2< is positive autocorrelation')
-        print('>2 to 4 is negative autocorrelation')
-        print('-------------------------------------')
-        durbinWatson = durbin_watson(df_results['Residuals'])
-        print('Durbin-Watson:', durbinWatson)
-        if durbinWatson < 1.5:
-            print('Signs of positive autocorrelation')
-            print('\nAssumption not satisfied')
-        elif durbinWatson > 2.5:
-            print('Signs of negative autocorrelation')
-            print('\nAssumption not satisfied')
-        else:
-            print('Little to no autocorrelation')
-            print('\nAssumption satisfied')
 
             
     def homoscedasticity_assumption():
@@ -1193,17 +975,19 @@ linear_regression_assumptions(boston.data, boston.target, feature_names=boston.f
         print('Residuals should have relative constant variance')
         
         # Plotting the residuals
-        ax = plt.subplot(111)
+        plt.subplots(figsize=(12, 6))
+        ax = plt.subplot(111)  # To remove spines
         plt.scatter(x=df_results.index, y=df_results.Residuals, alpha=0.5)
         plt.plot(np.repeat(0, df_results.index.max()), color='darkorange', linestyle='--')
         ax.spines['right'].set_visible(False)  # Removing the right spine
         ax.spines['top'].set_visible(False)  # Removing the top spine
         plt.title('Residuals')
-        plt.show()  
+        plt.show() 
+        print('If heteroscedasticity is apparent, confidence intervals and predictions will be affected')
         
         
     linear_assumption()
-    multivariate_normal_assumption()
+    normal_errors_assumption()
     multicollinearity_assumption()
     autocorrelation_assumption()
     homoscedasticity_assumption()
