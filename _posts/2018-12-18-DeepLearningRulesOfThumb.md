@@ -120,7 +120,7 @@ Below are the more practical notes that I have taken throughout reading [Deep Le
     -   Weight initialization can be treated as hyperparameter: initial scale and if sparse or dense <sub>(pg. 296)</sub>
         -   Look at the range or standard deviation of activations or gradients on one minibatch for picking the scale <sub>(pg. 296)</sub>
 -   There is no one clear optimization algorithm that outperforms the others, it depends on familiarity for hyperparameter tuning <sub>(pg. 302)</sub>
-    -   Stochastic gradient descent (SGD), SGD with momentum, RMSProp, RMSprop w/ momentum, AdaDelta, and Adam are all popular choices <sub>(pg. 302)</sub>
+    -   Stochastic gradient descent (SGD), SGD with momentum, RMSProp, RMSprop with momentum, AdaDelta, and Adam are all popular choices <sub>(pg. 302)</sub>
         -   RMSProp is an improved version of AdaGrad (pg. 299) and is currently one of the go-to optimization methods for deep learning practitioners <sub>(pg. 301)</sub>
             -   RMSProp may have high bias early in training <sub>(pg. 302)</sub>
         -   Common values for the \alpha hyperparameter for momentum are 0.5, 0.9, and 0.99 <sub>(pg. 290)</sub>
@@ -151,7 +151,7 @@ Below are the more practical notes that I have taken throughout reading [Deep Le
     -   Using SGD on LSTMs typically takes care of using second-order optimization methods to prevent second derivatives vanishing with the first derivatives <sub>(pg. 401)</sub>
 -   It is often much easier to design a model that is easier to optimize than it is to design a more powerful algorithm <sub>(pg. 401)</sub>
 -   Regularization parameters encourage “information flow” and prevent vanishing gradients need gradient clipping to work for RNNs <sub>(pg. 404)</sub>
-    -   This is not very effective for LSTMs w/ a lot of data, e.g. language modeling <sub>(pg. 404)</sub>
+    -   This is not very effective for LSTMs with a lot of data, e.g. language modeling <sub>(pg. 404)</sub>
 
 ### 11. Practical Methodology
 -   It can be useful to have a model refuse to make a decision if it is not confident, but there is a tradeoff <sub>(pg. 412)</sub>
@@ -226,7 +226,7 @@ Below are the more practical notes that I have taken throughout reading [Deep Le
 ### 15. Representation Learning
 -   In machine learning, a good representation is one that makes a subsequent learning task easier <sub>(pg. 517)</sub>
     -   Ex. supervised feed forward networks: each layer learns better representations for the classifier from the last layer <sub>(pg. 518)</sub>
--   Greedy layer-wise unsupervised training can help w/ classification test error, but not many other tasks <sub>(pg. 520)</sub>
+-   Greedy layer-wise unsupervised training can help with classification test error, but not many other tasks <sub>(pg. 520)</sub>
     -   Is not useful with image classification, but very important in NLP (ex. word embedding) because of a poor initial representation <sub>(pg. 523)</sub>
     -   From a regularizer perspective, it’s most effective when the number of labeled examples are very small or the number of unlabeled examples are very large <sub>(pg. 523)</sub>
     -   Likely to be most useful when the function to be learned is extremely complicated <sub>(pg. 523)</sub>
@@ -260,8 +260,8 @@ Below are the more practical notes that I have taken throughout reading [Deep Le
 -   Deep belief networks are rarely used today due to being outperformed by other algorithms, but are studied for their historical significance <sub>(pg. 651)</sub>
     -    While deep belief networks are generative models, the weights from a trained DBN can be used to initialize the weights for a MLP for classification as an example of discriminative fine tuning <sub>(pg .653)</sub>
 -   Deep Boltzmann machines have been applied to a variety of tasks, including document modeling <sub>(pg. 654)</sub>
--   Deep Boltzmann machines trained w/ a stochastic maximum likelihood often result in failure when initialized with random weights. The most popular way to overcome this is greedy layer-wise pre-training. Specifically, train each layer in isolation as an RBM, with the first layer on the input data and each subsequent layer as an RBM on samples from the previous layer’s RBM’s posterior distribution <sub>(pg. 660)</sub>
-    -   The DBM is then trained w/ PCD, which typically only makes small changes in the parameters and model performance <sub>(pg. 661)</sub>
+-   Deep Boltzmann machines trained with a stochastic maximum likelihood often result in failure when initialized with random weights. The most popular way to overcome this is greedy layer-wise pre-training. Specifically, train each layer in isolation as an RBM, with the first layer on the input data and each subsequent layer as an RBM on samples from the previous layer’s RBM’s posterior distribution <sub>(pg. 660)</sub>
+    -   The DBM is then trained with PCD, which typically only makes small changes in the parameters and model performance <sub>(pg. 661)</sub>
     -   Modifications for state of the art results for a DBM (write these b/c they were too long to write) <sub>(pg. 662)</sub>
     -   Two ways to get around this procedure <sub>(pg. 664)</sub>:
         1.  Centered Deep Boltzmann Machine: Reparametrizing the model to make the Hessian of the cost function better conditioned at the beginning of the learning process
