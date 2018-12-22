@@ -18,40 +18,39 @@ Below are the more practical notes that I have taken throughout reading [Deep Le
 # TL:DR
 
 -   Use transfer learning if possible. If not, and working on a problem that’s been studied extensively, copy the architecture.
-o   Network architecture should always be ultimately decided with experimentation and determined by the validation error
-o   Deeper, thinner networks are more difficult to optimize but tend to yield better generalization error
+    -   Network architecture should always be ultimately decided with experimentation and determined by the validation error
+    - Deeper, thinner networks are more difficult to optimize but tend to yield better generalization error
 -   Always use early stopping
-o   Two early stopping methods:
-I)  Re-train the model again with new parameters on the entire dataset, and stop when hitting same number of training steps as the previous model at the early stopping point
-II) Keep the parameters obtained at the early stop, continue training with all the data, and stop when the average training error falls below the training error at the previous early stopping point
+    -   Two early stopping methods:
+        1.  Re-train the model again with new parameters on the entire dataset, and stop when hitting same number of training steps as the previous model at the early stopping point
+        2. Keep the parameters obtained at the early stop, continue training with all the data, and stop when the average training error falls below the training error at the previous early stopping point
 -   It’s probably a good idea to use dropout
-o   0.8 keep probability on the input layers, 0.5 for hidden layers
-o   Dropout may require larger networks and trained with more iterations
+    -   0.8 keep probability on the input layers, 0.5 for hidden layers
+    -   Dropout may require larger networks and trained with more iterations
 -   ReLUs are the ideal activation function. They have flaws, so using leaky or noisy ReLUs could yield performance gains at the cost of having more parameters to tune.
 -   You need at least 5,000 observations per category for acceptable performance (>=10 million for human performance or better)
-o   Use k-folds cross validation instead of train/validation/test split if you have less than 100,000 observations
+    -   Use $k$-folds cross validation instead of train/validation/test split if you have less than 100,000 observations
 -   Use as large of a batch size as your GPU’s memory can handle
-o   Try different batch sizes by increasing in powers of 2 starting with 32 (or 16 for really large models) and going up to 256
+    -   Try different batch sizes by increasing in powers of 2 starting with 32 (or 16 for really large models) and going up to 256
 -   Stochastic gradient descent with momentum and a decaying learning rate is a good optimization algorithm to start with
-o   Common values for the \alpha hyperparameter for momentum are 0.5, 0.9, and 0.99. It can be adapted over time, starting with a small value and raising to larger values
-o   Alternatively, use ADAM or RMSProp
-o   Use asynchronous SGD if doing distributed deep learning
+    -   Common values for the \alpha hyperparameter for momentum are 0.5, 0.9, and 0.99. It can be adapted over time, starting with a small value and raising to larger values
+    -   Alternatively, use ADAM or RMSProp
+    -   Use asynchronous SGD if doing distributed deep learning
 -   The learning rate is the most important hyperpameter. If bound by time, focus on tuning it.
-o   The learning rate can be picked by monitoring learning curves that plot the objective function over time
-o   The optimal learning rate is typically higher than the learning rate that yields the best performance after the first ~100 iterations, but not so high that it causes instability.
+    -   The learning rate can be picked by monitoring learning curves that plot the objective function over time
+    -   The optimal learning rate is typically higher than the learning rate that yields the best performance after the first ~100 iterations, but not so high that it causes instability.
 -   For computer vision:
-o   Use data augmentation as long as flipping the images doesn’t fundamentally change it. Contrast normalization is another safe pre-processing step.
-o   Batch normalization, pooling, and padding are common tools to use with convolutional neural networks. Batch normalization may make dropout redundant.
+    -   Use data augmentation as long as flipping the images doesn’t fundamentally change it. Contrast normalization is another safe pre-processing step.
+    -   Batch normalization, pooling, and padding are common tools to use with convolutional neural networks. Batch normalization may make dropout redundant.
 -   For natural language processing:
-o   Long short term memory (LSTM) networks typically outperform other neural networks
-o   Pre-trained word embeddings (ex. word2vec, word2glove, etc.) are powerful 
+    -   Long short term memory (LSTM) networks typically outperform other neural networks
+    -   Pre-trained word embeddings (ex. word2vec, word2glove, etc.) are powerful 
 -   Random search typically converges to good hyperparameters faster than grid search
 -   Debugging strategies:
-o   Visualize the model in action: Look at samples of images and what the model detects. This helps determine if the quantitative performance numbers are reasonable
-o   Visualize the worst mistakes: This can reveal problems with pre-processing or labeling
-o   Fit a tiny dataset when the training error is high. This helps determine genuine underfitting vs. software defects 
-o   Monitor a histogram of activations and gradients: Do this for about one epoch. This tells us if the units saturate and how often. The gradient should be about 1% of the parameter.
--   
+    -   Visualize the model in action: Look at samples of images and what the model detects. This helps determine if the quantitative performance numbers are reasonable
+    -   Visualize the worst mistakes: This can reveal problems with pre-processing or labeling
+    -   Fit a tiny dataset when the training error is high. This helps determine genuine underfitting vs. software defects 
+    -   Monitor a histogram of activations and gradients: Do this for about one epoch. This tells us if the units saturate and how often. The gradient should be about 1% of the parameter.
 
 
 # Full comprehensive notes
