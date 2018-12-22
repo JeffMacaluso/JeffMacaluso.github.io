@@ -204,8 +204,8 @@ Below are the more practical notes that I have taken throughout reading [Deep Le
 -   Contrast normalization is often a safe computer vision preprocessing step <sub>(pg. 442)</sub>
     -   Global contrast normalization (GCN) is one way to do this, but it can reduce edge detection within lower contrast areas (ex. within the dark section of an image) <sub>(pg. 442 & 444)</sub>
         -   Scaling parameters can either be set to 1 or chosen to make each individual pixel have a standard deviation across examples close to 1 <sub>(pg. 443)</sub>
-        -   Datasets with closely cropped images can safely have \lambda = 0 and \epsilon = 10^-8 <sub>(pg. 443)</sub>
-        -   Datasets with small randomly cropped images need higher regularization. Ex. \lambda = 10 and \epsilon = 0 <sub>(pg. 443)</sub>
+        -   Datasets with closely cropped images can safely have <img src="https://latex.codecogs.com/gif.latex?\lambda&space;=&space;0" title="\lambda = 0" /> and <img src="https://latex.codecogs.com/gif.latex?\epsilon&space;=&space;10^-8" title="\epsilon = 10^-8" /> <sub>(pg. 443)</sub>
+        -   Datasets with small randomly cropped images need higher regularization. Ex. <img src="https://latex.codecogs.com/gif.latex?\lambda&space;=&space;10" title="\lambda = 10" /> and <img src="https://latex.codecogs.com/gif.latex?\epsilon&space;=&space;0" title="\epsilon = 0" /> <sub>(pg. 443)</sub>
     -   Local contrast normalization can usually be implemented effectively by using separable convolution to compute feature maps of local means/standard deviations, then using element-wise subtraction/division on different feature maps <sub>(pg. 444)</sub>
         -   These typically highlight edges more than global contrast normalization <sub>(pg. 445)</sub>
 -   In NLP, hierarchical softmax tends to give worse test results than sampling-based methods in practice <sub>(pg. 457)</sub>
