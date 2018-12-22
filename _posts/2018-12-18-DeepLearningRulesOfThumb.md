@@ -58,8 +58,8 @@ Below are the more practical notes that I have taken throughout reading [Deep Le
 ## I) Applied Math and Machine Learning Basics
 
 ### 1. Introduction
--   5,000 observations per category for acceptable performance <sub>(pg. 20)</sub>
-    -   \>= 10,000,000 observations per category for human performance or better <sub>(pg. 20)</sub>
+-   At least 5,000 observations per category are typically required for acceptable performance <sub>(pg. 20)</sub>
+    -   More than 10,000,000 observations per category are typically required for human performance or better <sub>(pg. 20)</sub>
 
 ### 4. Numerical Computation
 -   In deep learning we typically settle for local minima rather than the global minima because of complexity and non-convex problems <sub>(pg. 81)</sub>
@@ -198,7 +198,7 @@ Below are the more practical notes that I have taken throughout reading [Deep Le
 
 ### 12. Applications
 -   When using a distributed system, use asynchronous SGD. The average improvement of each step is lower, but the increased rate of production of steps causes this to be faster overall <sub>(pg. 435)</sub>
--   Cascade classifiers is an efficient approach for object detection. One classifier with high recall -> another with high precision. Ex. locate street sign -> transcribe address <sub>(pg. 437)</sub>
+-   Cascade classifiers is an efficient approach for object detection. One classifier with high recall <img src="https://latex.codecogs.com/gif.latex?\rightarrow" title="\rightarrow" /> another with high precision. Ex. locate street sign <img src="https://latex.codecogs.com/gif.latex?\rightarrow" title="\rightarrow" /> transcribe address <sub>(pg. 437)</sub>
 -   One way to reduce inference time in an ensemble approach is to train a “gater” that selects which specialized network should make the inference <sub>(pg. 438)</sub>
 -   Standardizing pixel ranges is the only strict preprocessing required for computer vision <sub>(pg. 441)</sub>
 -   Contrast normalization is often a safe computer vision preprocessing step <sub>(pg. 442)</sub>
