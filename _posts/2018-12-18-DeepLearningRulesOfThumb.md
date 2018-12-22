@@ -29,7 +29,7 @@ Below are the more practical notes that I have taken throughout reading [Deep Le
     -   Dropout may require larger networks and trained with more iterations
 -   ReLUs are the ideal activation function. They have flaws, so using leaky or noisy ReLUs could yield performance gains at the cost of having more parameters to tune.
 -   You need at least 5,000 observations per category for acceptable performance (>=10 million for human performance or better)
-    -   Use $k$-folds cross validation instead of train/validation/test split if you have less than 100,000 observations
+    -   Use k-folds cross validation instead of train/validation/test split if you have less than 100,000 observations
 -   Use as large of a batch size as your GPU’s memory can handle
     -   Try different batch sizes by increasing in powers of 2 starting with 32 (or 16 for really large models) and going up to 256
 -   Stochastic gradient descent with momentum and a decaying learning rate is a good optimization algorithm to start with
@@ -58,8 +58,8 @@ Below are the more practical notes that I have taken throughout reading [Deep Le
 ## I) Applied Math and Machine Learning Basics
 
 ### 1. Introduction
--   5,000 observations per category for acceptable performance (pg. 20)
-    -   >= 10,000,000 observations per category for human performance or better (pg. 20)
+-   5,000 observations per category for acceptable performance <sub>(pg. 20)</sub>
+    -   \>= 10,000,000 observations per category for human performance or better <sub>(pg. 20)</sub>
 
 ### 4. Numerical Computation
 -   In deep learning we typically settle for local minima rather than the global minima because of complexity and non-convex problems (pg. 81)
