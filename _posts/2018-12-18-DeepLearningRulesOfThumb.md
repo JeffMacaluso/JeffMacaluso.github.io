@@ -11,45 +11,47 @@ header:
 
 # Note: This is an initial draft and not the final version
 
-When I first learned about neural networks in grad school, I asked my professor if there were any rules of thumb for choosing architectures and hyperparameters. I half expected his reply of “well, kind of, but not really” – there are a lot more choices for neural networks than there are machine learning algorithms after all! I kept thinking about this when reading through [Ian Goodfellow, Yoshua Bengio, and Aaaron Courville’s Deep Learning]( https://www.deeplearningbook.org/) book, and decided to compile a list of rules of thumbs listed throughout this book. As it turns out, there are a lot of them (since there are a lot of tasks and types of neural networks). The funny thing is that a lot of them aren’t very heavily established – deep learning is still a relatively new active area of research, so a lot of ones listed below are just things that researchers recently came up with. Beyond that, there are a lot of areas in this book where the authors will either state (in more academic terms) “we don’t really know why this works, but we can see that it does” or “we know this isn’t the best way, but it is an active area of research and we don’t know any better ways at the moment”. 
+When I first learned about neural networks in grad school, I asked my professor if there were any rules of thumb for choosing architectures and hyperparameters. I half expected his reply of “well, kind of, but not really” – there are a lot more choices for neural networks than there are for other machine learning algorithms after all! I kept thinking about this when reading through [Ian Goodfellow, Yoshua Bengio, and Aaaron Courville’s Deep Learning](https://www.deeplearningbook.org/) book, and decided to compile a list of rules of thumbs listed throughout this book. As it turns out, there are a lot of them (especially since there are a lot of types of neural networks and tasks they can accomplish). The funny thing is that a lot of these rules of thumb aren’t very heavily established – deep learning is still a relatively new active area of research, so a lot of ones listed below are just things that researchers may have recently discovered. Beyond that, there are a lot of areas in this book where the authors will either state (in more academic terms) “we don’t really know why this works, but we can see that it does” or “we know this isn’t the best way, but it is an active area of research and we don’t know any better ways at the moment”. 
 
-Below are the more practical notes that I have taken throughout reading [Deep Learning](https://www.deeplearningbook.org/). I included a TL:DR at the top to hit on the most important points, and I’d recommend skipping to Section 10: Practical Methodology for some of the more important parts. This isn’t a book review for [Deep Learning](https://www.deeplearningbook.org/), but I would personally recommend it if you’re looking to learn more in depth understanding on the more established methodologies as well as the active areas of research (at the time of its publishing). Jeremy Howard of [fast.ai]( https://course.fast.ai/) (an excellent source for learning the practical side of deep learning) criticized it by focusing too much on the math and theory, but I found that it did a good job explaining the intuition behind concepts and practical methodologies in addition to all of the math formulas that I skipped over. 
+Below are the more practical notes that I have taken throughout reading [Deep Learning](https://www.deeplearningbook.org/). I included a TL:DR at the top to hit on the most important points, and I’d recommend skipping to **Section 10: Practical Methodology** for some of the more important parts. 
+
+This isn’t a book review for [Deep LearningA](https://www.deeplearningbook.org/), but I would personally recommend it if you’re looking to learn a more in depth understanding of the more established methodologies as well as the active areas of research (at the time of its publishing). Jeremy Howard of [fast.ai](https://course.fast.ai/) (an excellent source for learning the practical side of deep learning) criticized this book due to focusing too much on the math and theory, but I found that it did a good job explaining the intuition behind concepts and practical methodologies in addition to all of the math formulas that I skipped over. 
 
 # TL:DR
 
--   Use transfer learning if possible. If not, and working on a problem that’s been studied extensively, copy the architecture.
-    -   Network architecture should always be ultimately decided with experimentation and determined by the validation error
-    - Deeper, thinner networks are more difficult to optimize but tend to yield better generalization error
--   Always use early stopping
+-   Use transfer learning if possible. If not, and working on a problem that’s been studied extensively, start by copying the architecture.
+    -   Network architecture should always be ultimately decided with experimentation and determined by the validation error.
+    - Deeper (more layers), thinner (smaller layers) networks are more difficult to optimize but tend to yield better generalization error.
+-   Always use early stopping.
     -   Two early stopping methods:
-        1.  Re-train the model again with new parameters on the entire dataset, and stop when hitting same number of training steps as the previous model at the early stopping point
-        2. Keep the parameters obtained at the early stop, continue training with all the data, and stop when the average training error falls below the training error at the previous early stopping point
--   It’s probably a good idea to use dropout
-    -   0.8 keep probability on the input layers, 0.5 for hidden layers
-    -   Dropout may require larger networks and trained with more iterations
--   ReLUs are the ideal activation function. They have flaws, so using leaky or noisy ReLUs could yield performance gains at the cost of having more parameters to tune.
--   You need at least 5,000 observations per category for acceptable performance (>=10 million for human performance or better)
-    -   Use k-folds cross validation instead of train/validation/test split if you have less than 100,000 observations
--   Use as large of a batch size as your GPU’s memory can handle
-    -   Try different batch sizes by increasing in powers of 2 starting with 32 (or 16 for really large models) and going up to 256
--   Stochastic gradient descent with momentum and a decaying learning rate is a good optimization algorithm to start with
-    -   Common values for the \alpha hyperparameter for momentum are 0.5, 0.9, and 0.99. It can be adapted over time, starting with a small value and raising to larger values
-    -   Alternatively, use ADAM or RMSProp
-    -   Use asynchronous SGD if doing distributed deep learning
+        1.  Re-train the model again with new parameters on the entire dataset, and stop when hitting same number of training steps as the previous model at the early stopping point.
+        2. Keep the parameters obtained at the early stop, continue training with all the data, and stop when the average training error falls below the training error at the previous early stopping point.
+-   It’s probably a good idea to use dropout.
+    -   Use a 0.8 keep probability on the input layers and 0.5 for hidden layers.
+    -   Dropout may require larger networks that need to be trained with more iterations.
+-   ReLUs are the ideal activation function. They have flaws, so using leaky or noisy ReLUs could yield performance gains at the cost of having more parameters to tune..
+-   You need at least 5,000 observations per category for acceptable performance (>=10 million for human performance or better).
+    -   Use k-folds cross validation instead of train/validation/test split if you have less than 100,000 observations.
+-   Use as large of a batch size as your GPU’s memory can handle.
+    -   Try different batch sizes by increasing in powers of 2 starting with 32 (or 16 for really large models) and going up to 256.
+-   Stochastic gradient descent with momentum and a decaying learning rate is a good optimization algorithm to start with.
+    -   Common values for the  <img src="https://latex.codecogs.com/gif.latex?\alpha" title="\alpha" /> hyperparameter for momentum are 0.5, 0.9, and 0.99. It can be adapted over time, starting with a small value and raising to larger values.
+    -   Alternatively, use ADAM or RMSProp.
+    -   Use asynchronous SGD if doing distributed deep learning.
 -   The learning rate is the most important hyperpameter. If bound by time, focus on tuning it.
-    -   The learning rate can be picked by monitoring learning curves that plot the objective function over time
-    -   The optimal learning rate is typically higher than the learning rate that yields the best performance after the first ~100 iterations, but not so high that it causes instability.
+    -   The learning rate can be picked by monitoring learning curves that plot the objective function over time.
+    -   The optimal learning rate is typically higher than the learning rate that yields the best performance after the first ~100 iterations, but not so high that it causes instability..
 -   For computer vision:
-    -   Use data augmentation as long as flipping the images doesn’t fundamentally change it. Contrast normalization is another safe pre-processing step.
+    -   Use data augmentation as long as flipping the images doesn’t fundamentally change it. Contrast normalization is another safe pre-processing ste.
     -   Batch normalization, pooling, and padding are common tools to use with convolutional neural networks. Batch normalization may make dropout redundant.
 -   For natural language processing:
-    -   Long short term memory (LSTM) networks typically outperform other neural networks
-    -   Pre-trained word embeddings (ex. word2vec, word2glove, etc.) are powerful 
--   Random search typically converges to good hyperparameters faster than grid search
+    -   Long short term memory (LSTM) networks typically outperform other neural networks.
+    -   Pre-trained word embeddings (ex. word2vec, word2glove, etc.) are powerful.
+-   Random search typically converges to good hyperparameters faster than grid search.
 -   Debugging strategies:
-    -   Visualize the model in action: Look at samples of images and what the model detects. This helps determine if the quantitative performance numbers are reasonable
-    -   Visualize the worst mistakes: This can reveal problems with pre-processing or labeling
-    -   Fit a tiny dataset when the training error is high. This helps determine genuine underfitting vs. software defects 
+    -   Visualize the model in action: Look at samples of images and what the model detects. This helps determine if the quantitative performance numbers are reasonable.
+    -   Visualize the worst mistakes: This can reveal problems with pre-processing or labeling.
+    -   Fit a tiny dataset when the training error is high. This helps determine genuine underfitting vs. software defects .
     -   Monitor a histogram of activations and gradients: Do this for about one epoch. This tells us if the units saturate and how often. The gradient should be about 1% of the parameter.
 
 
