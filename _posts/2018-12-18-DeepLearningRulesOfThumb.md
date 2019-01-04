@@ -105,42 +105,42 @@ This isn’t a book review for [Deep LearningA](https://www.deeplearningbook.org
         -   Batch normalization also adds noise which has a regularizing effect and may make dropout unnecessary. <sub>(pg. 261)</sub>
 
 ### 8. Optimization for Training Deep Models
--   Mini-batch sizes (i.e. batch size): Larger batch size offers better gradients, but are typically limited by memory <sub>(pg. 272)</sub>
-    -   E.g. make your batch size as high as your memory can handle <sub>(pg. 272)</sub>
-    -   With GPUs, increase the batch size by a power of 2, from 32 to 256, and maybe down to 16 for larger models <sub>(pg. 272)</sub>
-    -   Small batch sizes can have a regularizing effect due to noise, but at the cost of adding to the total run time. These require smaller learning rates for increase stability. <sub>(pg. 272)</sub>
+-   **Mini-batch size (i.e. batch size):** Larger batch sizes offers better gradients, but are typically limited by memory. <sub>(pg. 272)</sub>
+    -   I.e. make your batch size as high as your memory can handle. <sub>(pg. 272)</sub>
+    -   With GPUs, increase the batch size by a power of 2, from 32 to 256. Try starting with a batch size of 16 for larger models. <sub>(pg. 272)</sub>
+    -   Small batch sizes can have a regularizing effect due to noise, but at the cost of adding to the total run time. These cases require smaller learning rates for increase stability. <sub>(pg. 272)</sub>
 -   Deep learning models have multiple local minima, but it’s ok because they all have the same cost. The main problem is if the cost at the local minima is much greater than the cost at the global minima. <sub>(pg. 277)</sub>
-    -   You can test for problems from local minima by plotting the norm of the gradient and seeing if it shrinks to an extremely small value over time <sub>(pg. 278)</sub>
-    -   Saddle points are much more common than local minima in high dimensional non-convex functions <sub>(pg. 278)</sub>
-    -   Gradient descent is relatively robust to saddle points <sub>(pg. 279)</sub>
--   Gradient clipping is used to stop exploding gradients, a common problem for recurrent neural networks (RNN) <sub>(pg. 281)</sub>
--   Pick learning rate by monitoring learning curves that plot the objective function over time <sub>(pg. 287)</sub>
--   Optimal learning rate is higher than the learning rate that yields the best performance after the first ~100 iterations <sub>(pg. 287)</sub>
-    -   Monitor the first few iterations and go higher than the best performing one, but with no instability <sub>(pg. 287)</sub>
--   Doesn’t seem to matter much if initial variables are randomly selected from Gaussian or uniform <sub>(pg. 293)</sub>
-    -   The scale does. Larger initial weights help avoid redundant units, but too large has a detrimental effect. <sub>(pg. 294)</sub>
-    -   Weight initialization can be treated as hyperparameter: initial scale and if sparse or dense <sub>(pg. 296)</sub>
-        -   Look at the range or standard deviation of activations or gradients on one minibatch for picking the scale <sub>(pg. 296)</sub>
--   There is no one clear optimization algorithm that outperforms the others, it depends on familiarity for hyperparameter tuning <sub>(pg. 302)</sub>
-    -   Stochastic gradient descent (SGD), SGD with momentum, RMSProp, RMSprop with momentum, AdaDelta, and Adam are all popular choices <sub>(pg. 302)</sub>
-        -   RMSProp is an improved version of AdaGrad (pg. 299) and is currently one of the go-to optimization methods for deep learning practitioners <sub>(pg. 301)</sub>
-            -   RMSProp may have high bias early in training <sub>(pg. 302)</sub>
-        -   Common values for the \alpha hyperparameter for momentum are 0.5, 0.9, and 0.99 <sub>(pg. 290)</sub>
-            -   This hyperparameter can be adapted over time, starting with a small value and raising to larger values <sub>(pg. 290)</sub>
-        -   Adam is generally regarded as being fairly robust to the choice of hyperparameters <sub>(pg. 302)</sub>
-            -   The learning rate may need to be changed from the suggested default <sub>(pg. 302)</sub>
--   Apply batch norm to the transformed values rather than the input. Omit the bias term if including \beta learnable parameter <sub>(pg. 312)</sub>
-    -   Apply range normalization in and at every spatial location for convolutional neural networks (CNNs) <sub>(pg. 312)</sub>
--   Thinner and deeper networks are ¬more difficult to train, but have better generalization error <sub>(pg. 317)</sub>
--   It is more important to choose a model family that is easy to optimize than a powerful optimization algorithm <sub>(pg. 317)</sub>
+    -   You can test for problems from local minima by plotting the norm of the gradient and seeing if it shrinks to an extremely small value over time. <sub>(pg. 278)</sub>
+    -   Saddle points are much more common than local minima in high dimensional non-convex functions. <sub>(pg. 278)</sub>
+        -   Gradient descent is relatively robust to saddle points. <sub>(pg. 279)</sub>
+-   Gradient clipping is used to stop exploding gradients. This is a common problem for recurrent neural networks (RNNs). <sub>(pg. 281)</sub>
+-   Pick learning rate by monitoring learning curves that plot the objective function over time. <sub>(pg. 287)</sub>
+-   Optimal learning rate is higher than the learning rate that yields the best performance after the first ~100 iterations. <sub>(pg. 287)</sub>
+    -   Monitor the first few iterations and go higher than the best performing learning rate while avoiding instability. <sub>(pg. 287)</sub>
+-   It doesn’t seem to matter much if initial variables are randomly selected from a Gaussian or uniform distribution. <sub>(pg. 293)</sub>
+    -   However, the scale does. Larger initial weights help avoid redundant units, but initial weights that are too large have a detrimental effect. <sub>(pg. 294)</sub>
+    -   Weight initialization can be treated as hyperparameter - specifically the initial scale and if they are sparse or dense. <sub>(pg. 296)</sub>
+        -   Look at the range or standard deviation of activations or gradients on one minibatch for picking the scale. <sub>(pg. 296)</sub>
+-   There is no one clear optimization algorithm that outperforms the others - it primarily depends on user familiarity of hyperparameter tuning. <sub>(pg. 302)</sub>
+    -   Stochastic gradient descent (SGD), SGD with momentum, RMSProp, RMSprop with momentum, AdaDelta, and Adam are all popular choices. <sub>(pg. 302)</sub>
+        -   RMSProp is an improved version of AdaGrad (pg. 299) and is currently one of the go-to optimization methods for deep learning practitioners. <sub>(pg. 301)</sub>
+            -   *Note:* RMSProp may have high bias early in training. <sub>(pg. 302)</sub>
+        -   Common values for the  <img src="https://latex.codecogs.com/gif.latex?\alpha" title="\alpha" /> hyperparameter for momentum are 0.5, 0.9, and 0.99. <sub>(pg. 290)</sub>
+            -   This hyperparameter can be adapted over time, starting with a small value and raising to larger values. <sub>(pg. 290)</sub>
+        -   Adam is generally regarded as being fairly robust to the choice of hyperparameters. <sub>(pg. 302)</sub>
+            -   However, the learning rate may need to be changed from the suggested default. <sub>(pg. 302)</sub>
+-   Apply batch normalization to the transformed values rather than the input. Omit the bias term if including  <img src="https://latex.codecogs.com/gif.latex?\beta" title="\beta" /> learnable parameter. <sub>(pg. 312)</sub>
+    -   Apply range normalization in and at every spatial location for convolutional neural networks (CNNs). <sub>(pg. 312)</sub>
+-   Networks that are more thin and deep are more difficult to train, but they have better generalization error. <sub>(pg. 317)</sub>
+-   It is more important to choose a model family that is easy to optimize than a powerful optimization algorithm. <sub>(pg. 317)</sub>
 
 ### 9. Convolutional Networks
--   Pooling is essential for handling inputs of varying size <sub>(pg. 338)</sub>
--   Zero padding allows us to control the kernel width and output size independently to stop shrinkage, which would be a limiting factor <sub>(pg. 338)</sub>
+-   Pooling is essential for handling inputs of varying size. <sub>(pg. 338)</sub>
+-   Zero padding allows us to control the kernel width and output size independently to stop shrinkage, which would be a limiting factor. <sub>(pg. 338)</sub>
 -   The optimal amount of zero padding for test set accuracy usually lies between:
-    1.  “Valid convolutions” where no zero padding is used, the kernel is always entirely in the image, but output shrinks every layer <sub>(pg. 338)</sub>
-    2. “Same convolutions” where enough zero padding is used to keep the size of the output equal to the size of the input <sub>(pg. 338)</sub>
--   One potential way to evaluate convolutional architectures is to use randomized weights and only train the last layer <sub>(pg. 352)</sub>
+    **1.**  “Valid convolutions” where no zero padding is used, the kernel is always entirely in the image, but output shrinks every layer. <sub>(pg. 338)</sub>
+    **2.** “Same convolutions” where enough zero padding is used to keep the size of the output equal to the size of the input. <sub>(pg. 338)</sub>
+-   One potential way to evaluate convolutional architectures is to use randomized weights and only train the last layer. <sub>(pg. 352)</sub>
 
 ### 10. Sequence Modeling: Recurrent and Recursive Nets
 -   Bidirectional RNNs have been extremely successful in handwriting recognition, speech recognition, and bioinformatics <sub>(pg. 383)</sub>
