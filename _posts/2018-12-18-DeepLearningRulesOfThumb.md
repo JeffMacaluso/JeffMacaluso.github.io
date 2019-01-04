@@ -42,17 +42,17 @@ This isn’t a book review for [Deep LearningA](https://www.deeplearningbook.org
     -   The learning rate can be picked by monitoring learning curves that plot the objective function over time.
     -   The optimal learning rate is typically higher than the learning rate that yields the best performance after the first ~100 iterations, but not so high that it causes instability..
 -   For computer vision:
-    -   Use data augmentation as long as flipping the images doesn’t fundamentally change it. Contrast normalization is another safe pre-processing ste.
+    -   Use data augmentation as long as flipping the images doesn’t fundamentally change the image. Contrast normalization is another safe pre-processing step.
     -   Batch normalization, pooling, and padding are common tools to use with convolutional neural networks. Batch normalization may make dropout redundant.
 -   For natural language processing:
     -   Long short term memory (LSTM) networks typically outperform other neural networks.
     -   Pre-trained word embeddings (ex. word2vec, word2glove, etc.) are powerful.
 -   Random search typically converges to good hyperparameters faster than grid search.
 -   Debugging strategies:
-    -   Visualize the model in action: Look at samples of images and what the model detects. This helps determine if the quantitative performance numbers are reasonable.
-    -   Visualize the worst mistakes: This can reveal problems with pre-processing or labeling.
-    -   Fit a tiny dataset when the training error is high. This helps determine genuine underfitting vs. software defects .
-    -   Monitor a histogram of activations and gradients: Do this for about one epoch. This tells us if the units saturate and how often. The gradient should be about 1% of the parameter.
+    -   __Visualize the model in action:__ Look at samples of images and what the model detects. This helps determine if the quantitative performance numbers are reasonable.
+    -   __Visualize the worst mistakes:__ This can reveal problems with pre-processing or labeling.
+    -   __Fit a tiny dataset when the training error is high:__ This helps determine genuine underfitting vs. software defects .
+    -   __Monitor a histogram of activations and gradients:__ Do this for about one epoch. This tells us if the units saturate and how often. The gradient should be about 1% of the parameter.
 
 
 # Full comprehensive notes
@@ -60,49 +60,49 @@ This isn’t a book review for [Deep LearningA](https://www.deeplearningbook.org
 ## I) Applied Math and Machine Learning Basics
 
 ### 1. Introduction
--   At least 5,000 observations per category are typically required for acceptable performance <sub>(pg. 20)</sub>
-    -   More than 10,000,000 observations per category are typically required for human performance or better <sub>(pg. 20)</sub>
+-   At least 5,000 observations per category are typically required for acceptable performance. <sub>(pg. 20)</sub>
+    -   More than 10,000,000 observations per category are typically required for human performance or better. <sub>(pg. 20)</sub>
 
 ### 4. Numerical Computation
--   In deep learning we typically settle for local minima rather than the global minima because of complexity and non-convex problems <sub>(pg. 81)</sub>
+-   In deep learning we typically settle for local minima rather than the global minima because of complexity and non-convex problems. <sub>(pg. 81)</sub>
 
 ### 5. Machine Learning Basics 
--   If your model is at optimal capacity and there is still a gap between training and testing error, gather more data <sub>(pg. 113)</sub>
--   20% of a training set is typically used for the validation set <sub>(pg. 118)</sub>
--   Use k-folds cross validation instead of a train/test split if the dataset has less than 100,000 observations <sub>(pg. 119)</sub>
--   When using mean squared error (MSE), increasing capacity lowers bias but raises variance <sub>(pg. 126)</sub>
--   Bayesian methods typically generalize much better when limited training data is available, but typically suffer from high computational cost when the number of training examples is large <sub>(pg. 133)</sub>
--   The most common cost function is the negative log-likelihood, so that minimizing the cost function causes maximum likelihood estimation <sub>(pg. 150)</sub>
+-   If your model is at optimal capacity and there is still a gap between training and testing error, gather more data. <sub>(pg. 113)</sub>
+-   20% of a training set is typically used for the validation set. <sub>(pg. 118)</sub>
+-   Use k-folds cross validation instead of a train/test split if the dataset has less than 100,000 observations. <sub>(pg. 119)</sub>
+-   When using mean squared error (MSE), increasing capacity lowers bias but raises variance. <sub>(pg. 126)</sub>
+-   Bayesian methods typically generalize much better when limited training data is available, but they typically suffer from high computational cost when the number of training examples is large. <sub>(pg. 133)</sub>
+-   The most common cost function is the negative log-likelihood. As a result, minimizing the cost function causes maximum likelihood estimation. <sub>(pg. 150)</sub>
 
 ## II) Deep Networks: Modern Practices 
 
 ### 6. Deep Feedforward Networks
 -   Rectified linear units (ReLU) are the default activation function for feed forward neural networks. <sub>(note: not explicitly stated, but alluded to)</sub>
-    -   They are based on the principle that models are easier to optimize if their behavior is closer to linear <sub>(pg. 188)</sub>
-    -   Sigmoidal activations should be used when ReLUs aren’t possible. Ex. RNNs, many probabilistic models, and some autoencoders <sub>(pg. 190)</sub>
--   Cross entropy is preferred over mean squared error (MSE) or mean absolute error (MAE) in gradient based optimization because of vanishing gradients double check this one <sub>(citation needed) </sub>
--   ReLU advantages: Reduced likelihood of vanishing gradients, sparsity, and reduced computation <sub>(pg. 187)</sub>
-    -   ReLU disadvantages: Dying ReLU (leaky or noisy ReLUs avoid this, but introduce additional parameters) <sub>(pg. 187)</sub>
--   Large gradients help with learning faster, but arbitrarily large gradients result in instability <sub>(citation needed)</sub>
--   Network architectures should ultimately be found via experimentation guided by monitoring the validation set error <sub>(pg. 192)</sub>
--   Deeper models reduce the number of units required to represent the function and reduce generalization error <sub>(pg. 193)</sub>
-    -   Intuitively, models with deeper layers are preferred because we are learning a series of functions on the overall function <sub>(pg. 195)</sub>
+    -   They are based on the principle that models are easier to optimize if their behavior is closer to linear. <sub>(pg. 188)</sub>
+    -   Sigmoidal activations should be used when ReLUs aren’t possible. Ex. RNNs, many probabilistic models, and some autoencoders. <sub>(pg. 190)</sub>
+-   Cross entropy is preferred over mean squared error (MSE) or mean absolute error (MAE) in gradient based optimization because of vanishing gradients. **double check this one** <sub>(citation needed) </sub>
+-   **ReLU advantages:** Reduced likelihood of vanishing gradients, sparsity, and reduced computation. <sub>(pg. 187)</sub>
+    -   **ReLU disadvantages:** Dying ReLU (leaky or noisy ReLUs avoid this, but introduce additional parameters that need to be tuned). <sub>(pg. 187)</sub>
+-   Large gradients help with learning faster, but arbitrarily large gradients result in instability. <sub>(citation needed)</sub>
+-   Network architectures should ultimately be found via experimentation guided by monitoring the validation set error. <sub>(pg. 192)</sub>
+-   Deeper models reduce the number of units required to represent the function and reduce generalization error. <sub>(pg. 193)</sub>
+    -   Intuitively, models with deeper layers are preferred because we are learning a series of functions on the overall function. <sub>(pg. 195)</sub>
 
 ### 7. Regularization for Deep Learning
--   It’s optimal to use different regularization coefficients at each layer, but use the same weight decay for all layers check if this should be reworded <sub>(citation needed)</sub>
--   Use early stopping. It’s an efficient hyperparameter to tune, and will prevent unnecessary computations <sub>(pg. 241)</sub>
+-   It’s optimal to use different regularization coefficients at each layer, but use the same weight decay for all layers. **check if this should be reworded** <sub>(citation needed)</sub>
+-   Use early stopping. It’s an efficient hyperparameter to tune, and it will prevent unnecessary computations. <sub>(pg. 241)</sub>
     -   Two methods for early stopping:
-        1.    Re-train the model again with new parameters on the entire dataset, and stop when hitting same number of training steps as the previous model at the early stopping point <sub>(pg. 241)</sub>
-        2. Keep the parameters obtained at the early stop, continue training with all the data, and stop when the average training error falls below the training error at the previous early stopping point <sub>(pg. 242)</sub>
--   Model averaging (bagging, boosting, etc.) almost always increase predictive performance at the cost of computational power <sub>(pg. 249)</sub>
-    -   Averaging works because different models will usually not make all the same errors on the test set <sub>(pg. 249)</sub>
-    -   Dropout is effectively a way of bagging by creating sub-networks <sub>(pg. 251)</sub>
-    -   Dropout works better on wide layers because it reduces the chances of dropping all paths from the input to the output <sub>(pg. 252)</sub>
-    -   Common dropout probabilities for keeping a node are 0.8 for the input layer and 0.5 for the hidden layers <sub>(pg. 253)</sub>
-    -   Models with dropout need to be larger and need to be trained with more iterations <sub>(pg. 258)</sub>
-    -   If a dataset is large enough, dropout likely won’t help too much <sub>(pg. 258)</sub>
-        -   Additionally, dropout is not very effective with a very limited number of training samples (ex. <5,000) <sub>(pg. 258)</sub>
-    -   Batch normalization also adds noise which has a regularizing effect and may make dropout unnecessary <sub>(pg. 261)</sub>
+        1.    Re-train the model again with new parameters on the entire dataset, and stop when hitting same number of training steps as the previous model at the early stopping point. <sub>(pg. 241)</sub>
+        2. Keep the parameters obtained at the early stop, continue training with all the data, and stop when the average training error falls below the training error at the previous early stopping point. <sub>(pg. 242)</sub>
+-   Model averaging (bagging, boosting, etc.) almost always increase predictive performance at the cost of computational power. <sub>(pg. 249)</sub>
+    -   Averaging tends to work well because different models will usually not make all the same errors on the test set. <sub>(pg. 249)</sub>
+    -   Dropout is effectively a way of bagging by creating sub-networks. <sub>(pg. 251)</sub>
+        -   Dropout works better on wide layers because it reduces the chances of removing all of the paths from the input to the output. <sub>(pg. 252)</sub>
+        -   Common dropout probabilities for keeping a node are 0.8 for the input layer and 0.5 for the hidden layers. <sub>(pg. 253)</sub>
+        -   Models with dropout need to be larger and need to be trained with more iterations. <sub>(pg. 258)</sub>
+        -   If a dataset is large enough, dropout likely won’t help too much. <sub>(pg. 258)</sub>
+            -   Additionally, dropout is not very effective with a very limited number of training samples (ex. <5,000). <sub>(pg. 258)</sub>
+        -   Batch normalization also adds noise which has a regularizing effect and may make dropout unnecessary. <sub>(pg. 261)</sub>
 
 ### 8. Optimization for Training Deep Models
 -   Mini-batch sizes (i.e. batch size): Larger batch size offers better gradients, but are typically limited by memory <sub>(pg. 272)</sub>
