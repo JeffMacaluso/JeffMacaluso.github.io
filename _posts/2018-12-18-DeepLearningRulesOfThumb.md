@@ -125,11 +125,11 @@ This isn’t a book review for [Deep LearningA](https://www.deeplearningbook.org
     -   Stochastic gradient descent (SGD), SGD with momentum, RMSProp, RMSprop with momentum, AdaDelta, and Adam are all popular choices. <sub>(pg. 302)</sub>
         -   RMSProp is an improved version of AdaGrad (pg. 299) and is currently one of the go-to optimization methods for deep learning practitioners. <sub>(pg. 301)</sub>
             -   *Note:* RMSProp may have high bias early in training. <sub>(pg. 302)</sub>
-        -   Common values for the  <img src="https://latex.codecogs.com/gif.latex?\alpha" title="\alpha" /> hyperparameter for momentum are 0.5, 0.9, and 0.99. <sub>(pg. 290)</sub>
+        -   Common values for the <img src="https://latex.codecogs.com/gif.latex?\alpha" title="\alpha" /> hyperparameter for momentum are 0.5, 0.9, and 0.99. <sub>(pg. 290)</sub>
             -   This hyperparameter can be adapted over time, starting with a small value and raising to larger values. <sub>(pg. 290)</sub>
         -   Adam is generally regarded as being fairly robust to the choice of hyperparameters. <sub>(pg. 302)</sub>
             -   However, the learning rate may need to be changed from the suggested default. <sub>(pg. 302)</sub>
--   Apply batch normalization to the transformed values rather than the input. Omit the bias term if including  <img src="https://latex.codecogs.com/gif.latex?\beta" title="\beta" /> learnable parameter. <sub>(pg. 312)</sub>
+-   Apply batch normalization to the transformed values rather than the input. Omit the bias term if including the <img src="https://latex.codecogs.com/gif.latex?\beta" title="\beta" /> learnable parameter. <sub>(pg. 312)</sub>
     -   Apply range normalization in and at every spatial location for convolutional neural networks (CNNs). <sub>(pg. 312)</sub>
 -   Networks that are more thin and deep are more difficult to train, but they have better generalization error. <sub>(pg. 317)</sub>
 -   It is more important to choose a model family that is easy to optimize than a powerful optimization algorithm. <sub>(pg. 317)</sub>
@@ -138,8 +138,8 @@ This isn’t a book review for [Deep LearningA](https://www.deeplearningbook.org
 -   Pooling is essential for handling inputs of varying size. <sub>(pg. 338)</sub>
 -   Zero padding allows us to control the kernel width and output size independently to stop shrinkage, which would be a limiting factor. <sub>(pg. 338)</sub>
 -   The optimal amount of zero padding for test set accuracy usually lies between:
-    **1.**  “Valid convolutions” where no zero padding is used, the kernel is always entirely in the image, but output shrinks every layer. <sub>(pg. 338)</sub>
-    **2.** “Same convolutions” where enough zero padding is used to keep the size of the output equal to the size of the input. <sub>(pg. 338)</sub>
+    1.  “Valid convolutions” where no zero padding is used, the kernel is always entirely in the image, but output shrinks every layer. <sub>(pg. 338)</sub>
+    2. “Same convolutions” where enough zero padding is used to keep the size of the output equal to the size of the input. <sub>(pg. 338)</sub>
 -   One potential way to evaluate convolutional architectures is to use randomized weights and only train the last layer. <sub>(pg. 352)</sub>
 
 ### 10. Sequence Modeling: Recurrent and Recursive Nets
