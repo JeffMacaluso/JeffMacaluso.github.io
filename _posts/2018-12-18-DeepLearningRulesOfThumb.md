@@ -143,60 +143,60 @@ This isn’t a book review for [Deep LearningA](https://www.deeplearningbook.org
 -   One potential way to evaluate convolutional architectures is to use randomized weights and only train the last layer. <sub>(pg. 352)</sub>
 
 ### 10. Sequence Modeling: Recurrent and Recursive Nets
--   Bidirectional RNNs have been extremely successful in handwriting recognition, speech recognition, and bioinformatics <sub>(pg. 383)</sub>
--   Compared to CNNs, RNNs applied to images are typically more expensive but allow for long-range lateral interactions between features in the same feature map <sub>(pg. 384)</sub>
--    Whenever a RNN has to represent long-term dependencies, the long term interactions gradients have an exponentially smaller magnitude than the gradients of the short term interactions <sub>(pg. 392)</sub>
--   The technologies used to set the weights in echo state networks could be used to initialize weights in a fully trainable RNN – initial spectral radius of 1.2 and sparse initialization perform well <sub>(pg. 395)</sub>
--   The most effective sequence models in practice are gated RNNs – including LSTMs and gated current units <sub>(pg. 397)</sub>
-    -   LSTMs learn long-term dependencies more easily than simple RNNs <sub>(pg. 400)</sub>
-    -   Adding a bias of 1 to the forget gate makes the LSTM as strong as GRN variants <sub>(pg. 401)</sub>
-    -   Using SGD on LSTMs typically takes care of using second-order optimization methods to prevent second derivatives vanishing with the first derivatives <sub>(pg. 401)</sub>
--   It is often much easier to design a model that is easier to optimize than it is to design a more powerful algorithm <sub>(pg. 401)</sub>
--   Regularization parameters encourage “information flow” and prevent vanishing gradients need gradient clipping to work for RNNs <sub>(pg. 404)</sub>
-    -   This is not very effective for LSTMs with a lot of data, e.g. language modeling <sub>(pg. 404)</sub>
+-   Bidirectional RNNs have been extremely successful in handwriting recognition, speech recognition, and bioinformatics. <sub>(pg. 383)</sub>
+-   Compared to CNNs, RNNs applied to images are typically more expensive but allow for long-range lateral interactions between features in the same feature map. <sub>(pg. 384)</sub>
+-    Whenever a RNN has to represent long-term dependencies, the long term interactions gradients have an exponentially smaller magnitude than the gradients of the short term interactions. <sub>(pg. 392)</sub>
+-   The technologies used to set the weights in echo state networks could be used to initialize weights in a fully trainable RNN – an initial spectral radius of 1.2 and sparse initialization perform well. <sub>(pg. 395)</sub>
+-   The most effective sequence models in practice are gated RNNs – including long short-term memory units (LSTMs) and gated recurrent units <sub>(pg. 397)</sub>
+    -   LSTMs learn long-term dependencies more easily than simple RNNs. <sub>(pg. 400)</sub>
+    -   Adding a bias of 1 to the forget gate makes the LSTM as strong as gated recurrent network (GRN) variants. <sub>(pg. 401)</sub>
+    -   Using SGD on LSTMs typically takes care of using second-order optimization methods to prevent second derivatives vanishing with the first derivatives. <sub>(pg. 401)</sub>
+-   It is often much easier to design a model that is easier to optimize than it is to design a more powerful algorithm. <sub>(pg. 401)</sub>
+-   Regularization parameters encourage “information flow” and prevents vanishing gradients. However, gradient clipping is needed for RNNs to also prevent gradient explosion (which would prevent learning from succeeding). <sub>(pg. 404)</sub>
+    -   However, this is not very effective for LSTMs with a lot of data, e.g. language modeling. <sub>(pg. 404)</sub>
 
 ### 11. Practical Methodology
--   It can be useful to have a model refuse to make a decision if it is not confident, but there is a tradeoff <sub>(pg. 412)</sub>
-    -   Coverage is the fraction of samples for which the machine learning sample is able to produce a response for, and is a tradeoff with accuracy <sub>(pg. 412)</sub>
--   ReLUs and their variants are the ideal activation functions for baseline models <sub>(pg. 413)</sub>
--   A good choice of a baseline optimization algorithm is SGD with momentum and a decaying learning rate. <sub>(pg. 413) </sub>
+-   It can be useful to have a model refuse to make a decision if it is not confident, but there is a tradeoff. <sub>(pg. 412)</sub>
+    -   Coverage is the fraction of samples for which the machine learning sample is able to produce a response for, and it is a tradeoff with accuracy. <sub>(pg. 412)</sub>
+-   ReLUs and their variants are the ideal activation functions for baseline models. <sub>(pg. 413)</sub>
+-   A good choice for a baseline optimization algorithm is SGD with momentum and a decaying learning rate. <sub>(pg. 413)</sub>
     -   Decay schemes include:
-        -   Linear decay until fixed minimum learning rate
-        -   Exponential decay
-        -   Decreasing by a factor of 2 to 10 each time the validation error plateaus
--   Another good baseline optimization algorithm is ADAM <sub>(pg. 413)</sub>
--   If considering batch normalization, introduce it ASAP if optimization appears problematic <sub>(pg. 413)</sub>
--   If training set samples <10 million, include mild regularization from the start <sub>(pg. 413)</sub>
-    -   Almost always use early stopping <sub>(pg. 413)</sub>
-    -   Dropout is a good choice that works well with most architectures. Batch normalization is a possible alternative <sub>(pg. 413)</sub>
--   If working on a problem similar to one that’s been extensively studied, it may be a good idea to copy that architecture, and maybe even copy the trained model <sub>(pg. 414)</sub>
--   If unsupervised learning is known to be important to your application (ex. word embedding in NLP) then include in baseline <sub>(pg. 414)</sub>
--   Determining when to gather more data:
-    -   If training performance is poor, try increasing the size of the model and adjusting the learning algorithm <sub>(pg. 414)</sub>
-        -   If it is still poor after this, it is a data quality problem. Start over and collect cleaner data or more rich features
-    -   If training performance is good but testing performance is bad, gather more data if it is feasible and inexpensive. Else, try reducing the size of the model or improve regularization. If these don’t help, then you need more data <sub>(pg. 415) </sub>
-        -   If you can’t gather more data, the only remaining alternative is improving the learning algorithm
-        -   Use learning curves on a logarithmic scale to determine how much more data to gather
--   The learning rate is the most important hyperparameter because it controls the effective model capacity in a more complicated way than other hyperparameters. If bound by time, tune this one <sub>(pg. 417)</sub>
-    -   Tuning other hyperpameters requires monitoring both training and testing error for over/under fitting <sub>(pg. 417)</sub>
-        -   If training error is higher than the target error, increase capacity. If not using regularization and are confident that the optimization algorithm is working properly, add more layers/hidden units <sub>(pg. 417)</sub>
-        -   If testing error is higher than the target error, regularize. Best performance is usually found on large models that have been regularized well <sub>(pg. 418)</sub>
--   As long as your training error is low, you can always decrease generalization error by collecting more training data <sub>(pg. 418)</sub>
--   Grid search: Commonly selected when tuning <4 hyperpameters <sub>(pg. 420)</sub>
-    -   It’s typically best to select values on a logarithmic scale and use it repeatedly to narrow down values <sub>(pg. 421)</sub>
-    -   Computational cost is exponential with the number of hyperparameters, so even parallelization may not help out adequately <sub>(pg. 422)</sub>
--   Random search: Simpler to use and converges to good hyperparameters much quicker than grid search <sub>(pg. 422)</sub>
-    -   Random search can be exponentially more efficient than grid search when there are several hyperparameters that don’t strongly affect the performance measure <sub>(pg. 422)</sub>
-    -   We may want to run repeated versions of it to refine the search based off of previous results <sub>(pg. 422)</sub>
-    -   Random search is faster than grid search because it doesn’t waste experimental runs <sub>(pg. 422)</sub>
--   Model based hyperparameter tuning isn’t universally recommended because it rarely outperforms humans and can catastrophically fail <sub>(pg. 423)</sub>
--   Debugging strategies:
-    -   Visualize the model in action. Ex. look at samples of images and what the model detects. This helps determine if the quantitative performance numbers are reasonable <sub>(pg. 425)</sub>
-    -   Visualize the worst mistakes: This can reveal problems with pre-processing or labeling <sub>(pg. 425)</sub>
-    -   Fit a tiny dataset when the training error is high. This helps determine genuine underfitting vs. software defects <sub>(pg. 426)</sub>
-    -   Monitor a histogram of activations and gradients: Do this for about one epoch. This tells us if the units saturate and how often <sub>(pg. 427)</sub>
-        -   Compare magnitude of gradients to parameters. The gradient should be about ~1% of the parameter <sub>(pg. 427)</sub>
-            -   Sparse data (ex. NLP) have some parameters that are rarely updated. Keep this in mind <sub>(pg. 427)</sub>
+        -   Linear decay until fixed minimum learning rate <sub>(pg. 413)</sub>
+        -   Exponential decay <sub>(pg. 413)</sub>
+        -   Decreasing by a factor of 2 to 10 each time the validation error plateaus <sub>(pg. 413)</sub>
+-   Another good baseline optimization algorithm is ADAM. <sub>(pg. 413)</sub>
+-   If considering batch normalization, introduce it ASAP if optimization appears problematic. <sub>(pg. 413)</sub>
+-   If training set samples <10 million, include mild regularization from the start. <sub>(pg. 413)</sub>
+    -   Almost always use early stopping. <sub>(pg. 413)</sub>
+    -   Dropout is a good choice that works well with most architectures. Batch normalization is a possible alternative. <sub>(pg. 413)</sub>
+-   If working on a problem similar to one that’s been extensively studied, it may be a good idea to copy that architecture, and maybe even copy the trained model. <sub>(pg. 414)</sub>
+-   If unsupervised learning is known to be important to your application (e.g. word embedding in NLP) then include it in the baseline. <sub>(pg. 414)</sub>
+-   **Determining when to gather more data:**
+    -   If training performance is poor, try increasing the size of the model and adjusting the learning algorithm. <sub>(pg. 414)</sub>
+        -   If it is still poor after this, it is a data quality problem. Start over and collect cleaner data or more rich features. <sub>(pg. 414)</sub>
+    -   If training performance is good but testing performance is bad, gather more data if it is feasible and inexpensive. Else, try reducing the size of the model or improve regularization. If these don’t help, then you need more data. <sub>(pg. 415) </sub>
+        -   If you can’t gather more data, the only remaining alternative is to try to improve the learning algorithm. <sub>(pg. 415) </sub>
+        -   Use learning curves on a logarithmic scale to determine how much more data to gather. <sub>(pg. 415) </sub>
+-   The learning rate is the most important hyperparameter because it controls the effective model capacity in a more complicated way than other hyperparameters. If bound by time, tune this one. <sub>(pg. 417)</sub>
+    -   Tuning other hyperpameters requires monitoring both training and testing error for over/under fitting. <sub>(pg. 417)</sub>
+        -   If training error is higher than the target error, increase capacity. If not using regularization and are confident that the optimization algorithm is working properly, add more layers/hidden units. <sub>(pg. 417)</sub>
+        -   If testing error is higher than the target error, regularize. Best performance is usually found on large models that have been regularized well. <sub>(pg. 418)</sub>
+-   As long as your training error is low, you can always decrease generalization error by collecting more training data. <sub>(pg. 418)</sub>
+-   **Grid search:** Commonly selected when tuning less than four hyperpameters. <sub>(pg. 420)</sub>
+    -   It’s typically best to select values on a logarithmic scale and use it repeatedly to narrow down values. <sub>(pg. 421)</sub>
+    -   Computational cost is exponential with the number of hyperparameters, so even parallelization may not help out adequately. <sub>(pg. 422)</sub>
+-   **Random search:** Simpler to use and converges to good hyperparameters much quicker than grid search. <sub>(pg. 422)</sub>
+    -   Random search can be exponentially more efficient than grid search when there are several hyperparameters that don’t strongly affect the performance measure. <sub>(pg. 422)</sub>
+    -   We may want to run repeated versions of it to refine the search based off of previous results. <sub>(pg. 422)</sub>
+    -   Random search is faster than grid search because it doesn’t waste experimental runs. <sub>(pg. 422)</sub>
+-   Model based hyperparameter tuning isn’t universally recommended because it rarely outperforms humans and can catastrophically fail. <sub>(pg. 423)</sub>
+-   **Debugging strategies:**
+    -   Visualize the model in action. I.e. look at samples of images and what the model detects. This helps determine if the quantitative performance numbers are reasonable. <sub>(pg. 425)</sub>
+    -   Visualize the worst mistakes. This can reveal problems with pre-processing or labeling. <sub>(pg. 425)</sub>
+    -   Fit a tiny dataset when the training error is high. This helps determine genuine underfitting vs. software defects. <sub>(pg. 426)</sub>
+    -   Monitor a histogram of activations and gradients: Do this for about one epoch. This tells us if the units saturate and how often. <sub>(pg. 427)</sub>
+        -   Compare magnitude of gradients to parameters. The gradient should be about ~1% of the parameter. <sub>(pg. 427)</sub>
+            -   Sparse data (e.g. NLP) have some parameters that are rarely updated. Keep this in mind. <sub>(pg. 427)</sub>
 
 ### 12. Applications
 -   When using a distributed system, use asynchronous SGD. The average improvement of each step is lower, but the increased rate of production of steps causes this to be faster overall <sub>(pg. 435)</sub>
