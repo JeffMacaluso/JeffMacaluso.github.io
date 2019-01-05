@@ -200,16 +200,16 @@ This isn’t a book review for [Deep LearningA](https://www.deeplearningbook.org
 
 ### 12. Applications
 -   When using a distributed system, use asynchronous SGD. The average improvement of each step is lower, but the increased rate of production of steps causes this to be faster overall. <sub>(pg. 435)</sub>
--   Cascade classifiers is an efficient approach for object detection. One classifier with high recall <img src="https://latex.codecogs.com/gif.latex?\rightarrow" title="\rightarrow" /> another with high precision. Ex. locate street sign <img src="https://latex.codecogs.com/gif.latex?\rightarrow" title="\rightarrow" /> transcribe address. <sub>(pg. 437)</sub>
+-   Cascade classifiers is an efficient approach for object detection. One classifier with high recall <img src="https://latex.codecogs.com/gif.latex?\rightarrow" title="\rightarrow" /> another with high precision. E.g. locate street sign <img src="https://latex.codecogs.com/gif.latex?\rightarrow" title="\rightarrow" /> transcribe address. <sub>(pg. 437)</sub>
 -   One way to reduce inference time in an ensemble approach is to train a “gater” that selects which specialized network should make the inference. <sub>(pg. 438)</sub>
 -   Standardizing pixel ranges is the only strict preprocessing required for computer vision. <sub>(pg. 441)</sub>
 -   Contrast normalization is often a safe computer vision preprocessing step. <sub>(pg. 442)</sub>
-    -   Global contrast normalization (GCN) is one way to do this, but it can reduce edge detection within lower contrast areas (ex. within the dark section of an image). <sub>(pg. 442 & 444)</sub>
+    -   Global contrast normalization (GCN) is one way to do this, but it can reduce edge detection within lower contrast areas (e.g. within the dark section of an image). <sub>(pg. 442 & 444)</sub>
         -   Scaling parameters can either be set to 1 or chosen to make each individual pixel have a standard deviation across examples close to 1. <sub>(pg. 443)</sub>
         -   Datasets with closely cropped images can safely have <img src="https://latex.codecogs.com/gif.latex?\lambda&space;=&space;0" title="\lambda = 0" /> and <img src="https://latex.codecogs.com/gif.latex?\epsilon&space;=&space;10^-8" title="\epsilon = 10^-8" />. <sub>(pg. 443)</sub>
-        -   Datasets with small randomly cropped images need higher regularization. Ex. <img src="https://latex.codecogs.com/gif.latex?\lambda&space;=&space;10" title="\lambda = 10" /> and <img src="https://latex.codecogs.com/gif.latex?\epsilon&space;=&space;0" title="\epsilon = 0" />. <sub>(pg. 443)</sub>
+        -   Datasets with small randomly cropped images need higher regularization. E.g. <img src="https://latex.codecogs.com/gif.latex?\lambda&space;=&space;10" title="\lambda = 10" /> and <img src="https://latex.codecogs.com/gif.latex?\epsilon&space;=&space;0" title="\epsilon = 0" />. <sub>(pg. 443)</sub>
     -   Local contrast normalization can usually be implemented effectively by using separable convolution to compute feature maps of local means/standard deviations, then using element-wise subtraction/division on different feature maps. <sub>(pg. 444)</sub>
-        -   These typically highlight edges more than global contrast normalization. <sub>(pg. 445)</sub>
+        -   This typically highlight edges more than global contrast normalization. <sub>(pg. 445)</sub>
 -   In NLP, hierarchical softmax tends to give worse test results than sampling-based methods in practice. <sub>(pg. 457)</sub>
 
 ## III) Deep Learning Research
