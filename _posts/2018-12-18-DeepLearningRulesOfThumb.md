@@ -9,8 +9,6 @@ header:
     image: /assets/images/deepLearningNotes.jpg
 ---
 
-# Note: This is an initial draft and not the final version
-
 When I first learned about neural networks in grad school, I asked my professor if there were any rules of thumb for choosing architectures and hyperparameters. I half expected his reply of “well, kind of, but not really” – there are a lot more choices for neural networks than there are for other machine learning algorithms after all! I kept thinking about this when reading through [Ian Goodfellow, Yoshua Bengio, and Aaaron Courville’s Deep Learning](https://www.deeplearningbook.org/) book, and decided to compile a list of rules of thumbs listed throughout this book. As it turns out, there are a lot of them (especially since there are a lot of types of neural networks and tasks they can accomplish). The funny thing is that a lot of these rules of thumb aren’t very heavily established – deep learning is still a relatively new active area of research, so a lot of ones listed below are just things that researchers may have recently discovered. Beyond that, there are a lot of areas in this book where the authors will either state (in more academic terms) “we don’t really know why this works, but we can see that it does” or “we know this isn’t the best way, but it is an active area of research and we don’t know any better ways at the moment”. 
 
 Below are the more practical notes that I have taken throughout reading [Deep Learning](https://www.deeplearningbook.org/). I included a TL:DR at the top to hit on the most important points, and I’d recommend skipping to **Section 10: Practical Methodology** for some of the more important parts. 
@@ -77,19 +75,19 @@ This isn’t a book review for [Deep LearningA](https://www.deeplearningbook.org
 ## II) Deep Networks: Modern Practices 
 
 ### 6. Deep Feedforward Networks
--   Rectified linear units (ReLU) are the default activation function for feed forward neural networks. <sub>(note: not explicitly stated, but alluded to)</sub>
+-   Rectified linear units (ReLU) are an excellent default choice for an activation function for feed forward neural networks. <sub>(pg. 186)</sub>
     -   They are based on the principle that models are easier to optimize if their behavior is closer to linear. <sub>(pg. 188)</sub>
     -   Sigmoidal activations should be used when ReLUs aren’t possible. Ex. RNNs, many probabilistic models, and some autoencoders. <sub>(pg. 190)</sub>
--   Cross entropy is preferred over mean squared error (MSE) or mean absolute error (MAE) in gradient based optimization because of vanishing gradients. **double check this one** <sub>(citation needed) </sub>
+-   Cross entropy is preferred over mean squared error (MSE) or mean absolute error (MAE) in gradient based optimization because of vanishing gradients. <sub>(pg. 178) </sub>
 -   **ReLU advantages:** Reduced likelihood of vanishing gradients, sparsity, and reduced computation. <sub>(pg. 187)</sub>
     -   **ReLU disadvantages:** Dying ReLU (leaky or noisy ReLUs avoid this, but introduce additional parameters that need to be tuned). <sub>(pg. 187)</sub>
--   Large gradients help with learning faster, but arbitrarily large gradients result in instability. <sub>(citation needed)</sub>
+-   Large gradients help with learning faster, but arbitrarily large gradients result in instability. <sub>(pg. 183)</sub>
 -   Network architectures should ultimately be found via experimentation guided by monitoring the validation set error. <sub>(pg. 192)</sub>
 -   Deeper models reduce the number of units required to represent the function and reduce generalization error. <sub>(pg. 193)</sub>
     -   Intuitively, models with deeper layers are preferred because we are learning a series of functions on the overall function. <sub>(pg. 195)</sub>
 
 ### 7. Regularization for Deep Learning
--   It’s optimal to use different regularization coefficients at each layer, but use the same weight decay for all layers. **check if this should be reworded** <sub>(citation needed)</sub>
+-   It’s optimal to use different regularization coefficients at each layer, but use the same weight decay at all layers. <sub>(pg. 223)</sub>
 -   Use early stopping. It’s an efficient hyperparameter to tune, and it will prevent unnecessary computations. <sub>(pg. 241)</sub>
     -   Two methods for early stopping:
         1.    Re-train the model again with new parameters on the entire dataset, and stop when hitting same number of training steps as the previous model at the early stopping point. <sub>(pg. 241)</sub>
