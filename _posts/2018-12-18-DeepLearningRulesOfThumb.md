@@ -215,44 +215,44 @@ This isn’t a book review for [Deep LearningA](https://www.deeplearningbook.org
 ## III) Deep Learning Research
 
 ### 13. Linear Factor Models
--   Linear factor models can be extended into autoencoders and deep probabilistic models that do the same tasks but are much more flexible and powerful <sub>(pg. 491)</sub>
+-   Linear factor models can be extended into autoencoders and deep probabilistic models that do the same tasks but are much more flexible and powerful. <sub>(pg. 491)</sub>
 
 ### 14. Autoencoders
--   Sparse autoencoders are good for learning features for other tasks such as classification <sub>(pg. 496)</sub>
--   Autoencoders are useful for learning which latent variables explain the input. They can also learn useful features <sub>(pg. 498)</sub>
--   While many autoencoders have one encoder/decoder layer, they can take the same advantages of depth as feedforward networks <sub>(pg. 499)</sub>
-    -   This especially applies when enforcing constraints such as sparsity <sub>(pg. 500)</sub>
-    -   Depth exponentially reduces computational cost and the amount of training data for representing some functions <sub>(pg. 500)</sub>
-    -   A common strategy for training a deep autoencoder is to greedily pre-train the deep architecture by training a stack of shallow autoencoders <sub>(pg. 500)</sub>
+-   Sparse autoencoders are good for learning features for other tasks such as classification. <sub>(pg. 496)</sub>
+-   Autoencoders are useful for learning which latent variables explain the input. They can also learn useful features. <sub>(pg. 498)</sub>
+-   While many autoencoders have one encoder/decoder layer, they can take the same advantages of depth as feedforward networks. <sub>(pg. 499)</sub>
+    -   This especially applies when enforcing constraints such as sparsity. <sub>(pg. 500)</sub>
+    -   Depth exponentially reduces computational cost and the amount of training data for representing some functions. <sub>(pg. 500)</sub>
+    -   A common strategy for training a deep autoencoder is to greedily pre-train the deep architecture by training a stack of shallow autoencoders. <sub>(pg. 500)</sub>
 
 ### 15. Representation Learning
--   In machine learning, a good representation is one that makes a subsequent learning task easier <sub>(pg. 517)</sub>
-    -   Ex. supervised feed forward networks: each layer learns better representations for the classifier from the last layer <sub>(pg. 518)</sub>
--   Greedy layer-wise unsupervised training can help with classification test error, but not many other tasks <sub>(pg. 520)</sub>
-    -   Is not useful with image classification, but very important in NLP (ex. word embedding) because of a poor initial representation <sub>(pg. 523)</sub>
-    -   From a regularizer perspective, it’s most effective when the number of labeled examples are very small or the number of unlabeled examples are very large <sub>(pg. 523)</sub>
-    -   Likely to be most useful when the function to be learned is extremely complicated <sub>(pg. 523)</sub>
-    -   Use the validation error from the supervised phase to select the hyperparameters of the pretraining phase <sub>(pg. 526)</sub>
-    -   Unsupervised pretraining has mostly been abandoned except for NLP <sub>(pg. 526)</sub>
--   Transfer learning, multitask learning, and domain adaptation can be achieved with representation learning when there are features useful for different tasks/settings corresponding to underlining factors appearing in multiple settings <sub>(pg. 527)</sub>
--   Distributed representations can have a statistical advantage to non-distributed representations when an already complicated structure can be compactly represented using a smaller number of parameters <sub>(pg. 540)</sub>
-    -   Some traditional non-distributed algorithms generalize because of the smoothness assumption, but this suffers from the curse of dimensionality <sub>(pg. 540)</sub>
+-   In machine learning, a good representation is one that makes a subsequent learning task easier. <sub>(pg. 517)</sub>
+    -   Ex. supervised feed forward networks: each layer learns better representations for the classifier from the last layer. <sub>(pg. 518)</sub>
+-   Greedy layer-wise unsupervised training can help with classification test error, but not many other tasks. <sub>(pg. 520)</sub>
+    -   It is not useful with image classification, but it is very important in NLP (e.g. word embedding) because of a poor initial representation. <sub>(pg. 523)</sub>
+    -   From a regularizer perspective, it’s most effective when the number of labeled examples are very small or the number of unlabeled examples are very large. <sub>(pg. 523)</sub>
+    -   It's likely to be most useful when the function to be learned is extremely complicated. <sub>(pg. 523)</sub>
+    -   Use the validation error from the supervised phase to select the hyperparameters of the pretraining phase. <sub>(pg. 526)</sub>
+    -   Unsupervised pretraining has mostly been abandoned except for use in NLP (e.g. word embedding). <sub>(pg. 526)</sub>
+-   Transfer learning, multitask learning, and domain adaptation can be achieved with representation learning when there are features useful for different tasks/settings corresponding to underlining factors appearing in multiple settings. <sub>(pg. 527)</sub>
+-   Distributed representations can have a statistical advantage to non-distributed representations when an already complicated structure can be compactly represented using a smaller number of parameters. <sub>(pg. 540)</sub>
+    -   Some traditional non-distributed algorithms generalize because of the smoothness assumption, but this suffers from the curse of dimensionality. <sub>(pg. 540)</sub>
 
 ### 16. Structured Probabilistic Models for Deep Learning
--   Structured probabilistic models provide a framework for modeling only direct interactions between random intervals, which allow the models to have significantly fewer parameters thus being estimated reliably from less data and having a reduced computational cost for storing the model, performing inference, and drawing samples <sub>(pg. 553)</sub>
--   Many generative models in deep learning have no latent variables or only use one layer of latent variables, but use deep computational graphs to define the conditional distributions within a model <sub>(pg. 575)</sub>
-    -   This is in contrast to most deep learning applications where there tend to be more latent variables than observed variables, of which are learned for nonlinear interactions <sub>(pg. 575)</sub>
--   Latent variables in deep learning are unconstrained but difficult to interpret outside of rough characterization via visualization <sub>(pg. 575)</sub>
--   Loopy belief propagation is almost never used in deep learning because most deep learning models are designed to make Gibbs sampling or variational inference algorithms efficient <sub>(pg. 576)</sub>
+-   Structured probabilistic models provide a framework for modeling only direct interactions between random intervals, which allow the models to have significantly fewer parameters. Because of this, they can be estimated reliably from less data and having a reduced computational cost for storing the model, performing inference, and drawing samples. <sub>(pg. 553)</sub>
+-   Many generative models in deep learning have either no latent variables or only use one layer of latent variables. These use deep computational graphs to define the conditional distributions within a model. <sub>(pg. 575)</sub>
+    -   This is in contrast to most deep learning applications where there tend to be more latent variables than observed variables. These are learned for nonlinear interactions. <sub>(pg. 575)</sub>
+-   Latent variables in deep learning are unconstrained but are difficult to interpret outside of rough characterization via visualization. <sub>(pg. 575)</sub>
+-   Loopy belief propagation is almost never used in deep learning because most deep learning models are designed to make Gibbs sampling or variational inference algorithms efficient. <sub>(pg. 576)</sub>
 
 ### 17. Monte Carlo Methods
--   Monte Carlo Markov Chains (MCMC) can be computationally expensive to use because of the time required to “burn in” the equilibrium distribution and to keep every n sample in order to assure your samples aren’t correlated <sub>(pg. 589)</sub>
--   When sampling from MCMC in deep learning, it is common to run a number of parallel markov chains that is equal to the number of samples in a minibatch, and then sample from these. 100 is a common number <sub>(pg. 589)</sub>
--   Markov chains will reach equilibrium, but we don’t know how long until it does or when it does. We can test if it has mixed with heuristics like manually inspecting samples or measuring correlation between successive samples <sub>(pg. 589)</sub>
--   While the Metropolis-Hastings algorithm is often used with Markov chains in other disciplines, Gibbs sampling is the de-facto method for deep learning <sub>(pg. 590)</sub>
+-   Monte Carlo Markov Chains (MCMC) can be computationally expensive to use because of the time required to “burn in” the equilibrium distribution and to keep every n sample in order to assure your samples aren’t correlated. <sub>(pg. 589)</sub>
+-   When sampling from MCMC in deep learning, it is common to run a number of parallel markov chains that is equal to the number of samples in a minibatch, and then sample from these. 100 is a common number to use. <sub>(pg. 589)</sub>
+-   Markov chains will reach equilibrium, but we don’t know how long until it does or when it does. We can test if it has mixed with heuristics like manually inspecting samples or measuring correlation between successive samples. <sub>(pg. 589)</sub>
+-   While the Metropolis-Hastings algorithm is often used with Markov chains in other disciplines, Gibbs sampling is the de-facto method for deep learning. <sub>(pg. 590)</sub>
 
 ### 19. Approximate Inference
--   Maximum a posteriori (MAP) inference is commonly used with a feature extractor and learning mechanism, primarily for sparse coding models <sub>(pg. 628)</sub>
+-   Maximum a posteriori (MAP) inference is commonly used with a feature extractor and learning mechanism, primarily for sparse coding models. <sub>(pg. 628)</sub>
 
 ### 20. Deep Generative Models
 -   Variants of the Boltzmann machine surpassed the popularity of the original long ago <sub>(pg. 645)</sub>
