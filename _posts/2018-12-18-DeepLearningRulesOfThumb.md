@@ -255,40 +255,40 @@ This isn’t a book review for [Deep LearningA](https://www.deeplearningbook.org
 -   Maximum a posteriori (MAP) inference is commonly used with a feature extractor and learning mechanism, primarily for sparse coding models. <sub>(pg. 628)</sub>
 
 ### 20. Deep Generative Models
--   Variants of the Boltzmann machine surpassed the popularity of the original long ago <sub>(pg. 645)</sub>
-    -   Boltzmann machines act as a linear estimator for observed variables, but are more powerful for unobserved variables <sub>(pg. 646)</sub>
--   When initializing a deep Boltzmann machine (DBM) from a stack of restricted Boltzmann machines (RBMs), it’s necessary to modify the parameters slightly <sub>(pg. 648)</sub>
-    -   Some kinds of DBMs may be trained without first training a set of RBMs <sub>(pg. 648)</sub>
--   Deep belief networks are rarely used today due to being outperformed by other algorithms, but are studied for their historical significance <sub>(pg. 651)</sub>
-    -    While deep belief networks are generative models, the weights from a trained DBN can be used to initialize the weights for a MLP for classification as an example of discriminative fine tuning <sub>(pg .653)</sub>
--   Deep Boltzmann machines have been applied to a variety of tasks, including document modeling <sub>(pg. 654)</sub>
--   Deep Boltzmann machines trained with a stochastic maximum likelihood often result in failure when initialized with random weights. The most popular way to overcome this is greedy layer-wise pre-training. Specifically, train each layer in isolation as an RBM, with the first layer on the input data and each subsequent layer as an RBM on samples from the previous layer’s RBM’s posterior distribution <sub>(pg. 660)</sub>
-    -   The DBM is then trained with PCD, which typically only makes small changes in the parameters and model performance <sub>(pg. 661)</sub>
-    -   Modifications for state of the art results for a DBM (write these b/c they were too long to write) <sub>(pg. 662)</sub>
-    -   Two ways to get around this procedure <sub>(pg. 664)</sub>:
-        1.  Centered Deep Boltzmann Machine: Reparametrizing the model to make the Hessian of the cost function better conditioned at the beginning of the learning process
-            -  These yield great samples, but the classification performance is not as good as an appropriately regularized MLP
-        2.  Multi Prediction Deep Boltzmann Machine: Uses an alternative training criterion that allows the use of the back-propagation algorithm which avoids problems with MCMC estimates of the gradient
-            -  These have superior classification performance, but do not yield very good samples
--   In the context of generative models, undirected graph models (DBM, DBN, RBM, etc.) have overshadowed directed graph models (GANs, Sigmoid Belief Networks, Variational Autoencoders, etc.) until roughly 2013 when directed graph models started showing promise <sub>(pg. 682)</sub>
--   While variational autoencoders (VAEs) are simple to implement, they often obtain excellent results, and are among the state-of-the-art for generative modeling, samples from VAEs training on images tend to be somewhat blurry, and the cause for this is not yet known <sub>(pg. 688)</sub>
--   Unlike Boltzmann machines, VAEs are easy to extend, and thus have several variants <sub>(pg. 688)</sub>
--   Non-convergence is a problem that causes GANS to underfit (one network reaches a local minima and the other reaches a local maxima), but the extent o this problem is not yet known <sub>(pg. 691)</sub>
--   For GANs, best results are typically obtained by re-formulating the generator to aim to increase the log-probability that a generator makes a mistake rather than decrease the log-probability that the generator makes the right prediction (pg. 692)</sub>
--   While GANs have an issue with stabilization, they typically perform very well with carefully a selected model architecture and hyperparameters <sub>(pg. 693)</sub>
--   One powerful variation of GANs, LAPGAN, start with a low-resolution image and add details to it. The output of this often fools humans <sub>(pg. 693)</sub>
--   In order to make sure the generator in a GAN doesn’t apply a zero probability to any point, add Gaussian noise to all images in the last layer <sub>(pg. 693)</sub>
--   Always use dropout in the discriminator of a GAN. Not doing so tends to yield poor results <sub>(pg. 693)</sub>
--   Visual samples from generative moment matching networks are disappointing, but can be improved by combining them with autoencoders <sub>(pg. 694)</sub>
--   When generating images, using the “transpose” of the convolution operator often yields more realistic images while using fewer parameters than using fully connected layers without parameter sharing <sub>(pg. 695)</sub>
--   Even though the assumptions for the “un-pooling” operation in convolutional generative networks are unrealistic, the samples generated by the model as a whole tend to be visually pleasing <sub>(pg. 696)</sub>
--   While there are several approaches to generating samples with generative models, MCMC sampling, ancestral sampling, or a mixture of the two are the most popular <sub>(pg. 706)</sub>
--   When comparing generative models, changes in preprocessing, even small and subtle ones, are completely unacceptable because it can change the distribution and fundamentally alters the task <sub>(pg. 708)</sub>
--   If evaluating a generative model by viewing the sample images, it is best to have this done by an experimental subject that doesn’t know the source of the samples <sub>(pg. 708)</sub>
-    -   Additionally, because a poor model can produce good looking samples, make sure the model isn’t just copying training images <sub>(pg. 708)</sub>
-        -   Check this with the nearest neighbor to images in the training set according to the Euclidean distance for some samples <sub>(pg. 708)</sub>
--   A better way to evaluate samples from a generative model is to evaluate the log-likelihood that the model assigns to the test data if it is computationally feasible to do so <sub>(pg. 709)</sub>
-    -   This method is still not perfect and has pitfalls. For example, constants in simple images (ex. blank backgrounds) will have a high likelihood <sub>(pg. 709)</sub>
--   There are many uses for generative models, so selecting the evaluation metric should depend on the intended use <sub>(pg. 709)</sub>
-    -   Ex. some generative models are better at assigning a high probability to the most realistic points, and others are better at rarely assigning high probabilities to unrealistic points <sub>(pg. 709)</sub>
-    -   Even when restricting metrics to the task it’s most suited for, all of the metrics currently in use have serious weaknesses <sub>(pg. 709)</sub>
+-   Variants of the Boltzmann machine surpassed the popularity of the original long ago. <sub>(pg. 645)</sub>
+    -   Boltzmann machines act as a linear estimator for observed variables, but are more powerful for unobserved variables. <sub>(pg. 646)</sub>
+-   When initializing a deep Boltzmann machine (DBM) from a stack of restricted Boltzmann machines (RBMs), it’s necessary to modify the parameters slightly. <sub>(pg. 648)</sub>
+    -   Some kinds of DBMs may be trained without first training a set of RBMs. <sub>(pg. 648)</sub>
+-   Deep belief networks are rarely used today due to being outperformed by other algorithms, but are studied for their historical significance. <sub>(pg. 651)</sub>
+    -    While deep belief networks are generative models, the weights from a trained DBN can be used to initialize the weights for a MLP for classification as an example of discriminative fine tuning. <sub>(pg .653)</sub>
+-   Deep Boltzmann machines have been applied to a variety of tasks, including document modeling. <sub>(pg. 654)</sub>
+-   Deep Boltzmann machines trained with a stochastic maximum likelihood often result in failure when initialized with random weights. The most popular way to overcome this is greedy layer-wise pre-training. Specifically, train each layer in isolation as an RBM, with the first layer on the input data and each subsequent layer as an RBM on samples from the previous layer’s RBM’s posterior distribution. <sub>(pg. 660)</sub>
+    -   The DBM is then trained with PCD, which typically only makes small changes in the parameters and model performance. <sub>(pg. 661)</sub>
+    -   Modifications for state of the art results for a DBM (write these b/c they were too long to write). <sub>(pg. 662)</sub>
+    -   Two ways to get around this procedure. <sub>(pg. 664)</sub>:
+        1.  Centered Deep Boltzmann Machine: Reparametrizing the model to make the Hessian of the cost function better conditioned at the beginning of the learning process. <sub>(pg. 664)</sub>:
+            -  These yield great samples, but the classification performance is not as good as an appropriately regularized MLP. <sub>(pg. 664)</sub>:
+        2.  Multi Prediction Deep Boltzmann Machine: Uses an alternative training criterion that allows the use of the back-propagation algorithm which avoids problems with MCMC estimates of the gradient. <sub>(pg. 664)</sub>:
+            -  These have superior classification performance, but do not yield very good samples. <sub>(pg. 664)</sub>:
+-   In the context of generative models, undirected graph models (DBM, DBN, RBM, etc.) have overshadowed directed graph models (GANs, Sigmoid Belief Networks, Variational Autoencoders, etc.) until roughly 2013 when directed graph models started showing promise. <sub>(pg. 682)</sub>
+-   While variational autoencoders (VAEs) are simple to implement, they often obtain excellent results, and are among the state-of-the-art for generative modeling, samples from VAEs training on images tend to be somewhat blurry, and the cause for this is not yet known. <sub>(pg. 688)</sub>
+-   Unlike Boltzmann machines, VAEs are easy to extend, and thus have several variants. <sub>(pg. 688)</sub>
+-   Non-convergence is a problem that causes GANS to underfit (one network reaches a local minima and the other reaches a local maxima), but the extent o this problem is not yet known. <sub>(pg. 691)</sub>
+-   For GANs, best results are typically obtained by re-formulating the generator to aim to increase the log-probability that a generator makes a mistake rather than decrease the log-probability that the generator makes the right prediction. (pg. 692)</sub>
+-   While GANs have an issue with stabilization, they typically perform very well with carefully a selected model architecture and hyperparameters. <sub>(pg. 693)</sub>
+-   One powerful variation of GANs, LAPGAN, start with a low-resolution image and add details to it. The output of this often fools humans. <sub>(pg. 693)</sub>
+-   In order to make sure the generator in a GAN doesn’t apply a zero probability to any point, add Gaussian noise to all images in the last layer. <sub>(pg. 693)</sub>
+-   Always use dropout in the discriminator of a GAN. Not doing so tends to yield poor results. <sub>(pg. 693)</sub>
+-   Visual samples from generative moment matching networks are disappointing, but can be improved by combining them with autoencoders. <sub>(pg. 694)</sub>
+-   When generating images, using the “transpose” of the convolution operator often yields more realistic images while using fewer parameters than using fully connected layers without parameter sharing. <sub>(pg. 695)</sub>
+-   Even though the assumptions for the “un-pooling” operation in convolutional generative networks are unrealistic, the samples generated by the model as a whole tend to be visually pleasing. <sub>(pg. 696)</sub>
+-   While there are several approaches to generating samples with generative models, MCMC sampling, ancestral sampling, or a mixture of the two are the most popular. <sub>(pg. 706)</sub>
+-   When comparing generative models, changes in preprocessing, even small and subtle ones, are completely unacceptable because it can change the distribution and fundamentally alters the task. <sub>(pg. 708)</sub>
+-   If evaluating a generative model by viewing the sample images, it is best to have this done by an experimental subject that doesn’t know the source of the samples. <sub>(pg. 708)</sub>
+    -   Additionally, because a poor model can produce good looking samples, make sure the model isn’t just copying training images. <sub>(pg. 708)</sub>
+        -   Check this with the nearest neighbor to images in the training set according to the Euclidean distance for some samples. <sub>(pg. 708)</sub>
+-   A better way to evaluate samples from a generative model is to evaluate the log-likelihood that the model assigns to the test data if it is computationally feasible to do so. <sub>(pg. 709)</sub>
+    -   This method is still not perfect and has pitfalls. For example, constants in simple images (ex. blank backgrounds) will have a high likelihood. <sub>(pg. 709)</sub>
+-   There are many uses for generative models, so selecting the evaluation metric should depend on the intended use. <sub>(pg. 709)</sub>
+    -   E.g. some generative models are better at assigning a high probability to the most realistic points, and others are better at rarely assigning high probabilities to unrealistic points. <sub>(pg. 709)</sub>
+    -   Even when restricting metrics to the task it’s most suited for, all of the metrics currently in use have serious weaknesses. <sub>(pg. 709)</sub>
