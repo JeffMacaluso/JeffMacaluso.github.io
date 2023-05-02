@@ -183,7 +183,7 @@ fig = px.bar(df, x='Date', y='NumUsers', color='MonthName',
 fig.show(renderer='svg')  # To render in notebooks on GitHub
 ```
 
-![svg](output_2_0.svg)
+<img src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/assets/images/metrics/output_2_0.svg">
 
 #### By calendar month
 
@@ -196,7 +196,7 @@ fig = px.bar(MAU_calendar_month, x='Month', y='NumUsers', title='Monthly active 
 fig.show('svg')
 ```
 
-![svg](output_4_0.svg)
+<img src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/assets/images/metrics/output_4_0.svg">
 
 That looks like quite a bit of variation. A natural question is to ask how much this is changing each month, so we'll calculate the percent change from the previous month. We'll make a function to do this since we'll be doing it a few times in this post.
 
@@ -218,7 +218,7 @@ fig.update_layout(margin=dict(r=30, b=30), yaxis_tickformat=".1%",)
 fig.show('svg')
 ```
 
-![svg](output_6_0.svg)
+<img src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/assets/images/metrics/output_6_0.svg">
 
 MAU is fluctuating by up to 11% - that's huge! From a naive cursory glance, it looks like something really bad happened in February and something really good happened in March. Obviously, this is not the case.
 
@@ -236,7 +236,7 @@ fig.show('svg')
 
     Intel(R) Extension for Scikit-learn* enabled (https://github.com/intel/scikit-learn-intelex)
 
-![svg](output_8_1.svg)
+<img src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/assets/images/metrics/output_8_1.svg">
 
 Yikes, that's a lot of variation! Praciticioners commonly use a z-score of +/- 3 to determine if something is an outlier, and February is very close to that threshold with a z-score of -2.8! It's a good idea to have anomaly detection algorithms running on metrics (looking at a dashboard every day often isn't valuable, knowing when a metric changed significantly is), and February may trigger an alert despite not actually being an anomaly.
 
@@ -258,7 +258,7 @@ fig.show('svg')
 df.drop(columns=['Rolling28DayMAU'], inplace=True)
 ```
 
-![svg](output_11_0.svg)
+<img src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/assets/images/metrics/output_11_0.svg">
 
 The first thing to point out is that we can't see the first 27 days because we're only including full 28 day periods. This is a common issue with rolling *n*-day periods, and it's why it's important to have a buffer of *n* days before you start reporting on metrics. This doesn't give us less information compared to tracking MAU by calendar month because the first full rolling 28 day MAU number would populate on January 29th (for January 1st-28th), and we would have to wait until February 1st to get the January MAU if using calendar months.
 
@@ -388,9 +388,8 @@ fig.update_layout(margin=dict(r=30, b=30), yaxis_tickformat=".1%",)
 fig.show('svg')
 ```
 
-![svg](output_16_0.svg)
-
-![svg](output_16_1.svg)
+<img src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/assets/images/metrics/output_16_0.svg">
+<img src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/assets/images/metrics/output_16_1.svg">
 
 There is enough variation between each month that it's difficult to see the increase starting in July without staring at this plot for a while and comparing the MAU of each month with each other. Even when we include the percent changes from month to month, it only looks like July was a good month (but not as good as March), but the the one-time change in July no longer shows up after that month.
 
@@ -405,7 +404,7 @@ fig = px.line(df_temp, x='Date', y='Rolling28DayMAU', title='Rolling 28 Day MAU 
 fig.show('svg')
 ```
 
-![svg](output_18_0.svg)
+<img src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/assets/images/metrics/output_18_0.svg">
 
 It's extremely obvious here. We start seeing the increase in MAU the day it happens, and we can see it more clearly with each day until July 28th where everyone in the rolling 28 day MAU appeared after the increase happened.
 
@@ -446,7 +445,7 @@ fig.update_layout(
 fig.show('svg')
 ```
 
-![svg](output_22_0.svg)
+<img src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/assets/images/metrics/output_22_0.svg">
 
 #### By calendar month
 
@@ -724,7 +723,7 @@ fig = px.bar(df.rename(columns={'NumRetainedUsers_calendar': 'NumRetainedUsers'}
 fig.show('svg')
 ```
 
-![svg](output_28_0.svg)
+<img src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/assets/images/metrics/output_28_0.svg">
 
 As you can see, there are far more users retaining that start using the app towards the end of the month. This combined with the varying number of days in each month will create monthly retention rates that are unreliable. Let's take a look!
 
@@ -740,7 +739,7 @@ fig.update_layout(margin=dict(r=30, b=30), yaxis_tickformat=".0%",)
 fig.show('svg')
 ```
 
-![svg](output_30_0.svg)
+<img src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/assets/images/metrics/output_30_0.svg">
 
 Oh dear, that's a lot of variation again! February especially stands out here. This is because February is the shortest month and March is one of the longest months, so users in February have fewer days before they can count as next-month retained while also having the largest window to return in order to count as retained. I saw this in the wild, and having to explain that was my motivation for writing this post :)
 
@@ -755,7 +754,7 @@ fig.update_layout(margin=dict(r=30, b=30), yaxis_tickformat=".0%",)
 fig.show('svg')
 ```
 
-![svg](output_32_0.svg)
+<img src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/assets/images/metrics/output_32_0.svg">
 
 As we saw with the percent changes in MAU, retention is changing by up to 8%! These are massive swings that would likely trigger an alert from an anomaly detection algorithm.
 
@@ -779,7 +778,7 @@ fig.update_layout(margin=dict(r=30, b=30), yaxis_tickformat=".1%",
 fig.show('svg')
 ```
 
-![svg](output_35_0.svg)
+<img src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/assets/images/metrics/output_35_0.svg">
 
 There is some fluctuation as expected, but it generally stays within an approx. ~0.5% range. This is far more stable than the retention rates by calendar month which would often change by more than 1% from month to month.
 
@@ -821,9 +820,9 @@ fig.update_layout(margin=dict(r=30, b=30), yaxis_tickformat=".1%",
 fig.show('svg')
 ```
 
-![svg](output_38_0.svg)
+<img src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/assets/images/metrics/output_38_0.svg">
 
-![svg](output_38_1.svg)
+<img src="https://github.com/JeffMacaluso/JeffMacaluso.github.io/blob/master/assets/images/metrics/output_38_1.svg">
 
 As expected, it's substantially more obvious with the rolling 28 day periods. The monthly retention rate for September actually doesn't change much from August, so from a naive perspective it looks like September is a very normal month.
 
